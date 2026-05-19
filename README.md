@@ -104,10 +104,12 @@ bash install.sh
 curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
 ```
 
-非交互一键卸干净（慎用）：
+若安装时改过目录，卸载时会提示输入**实际路径**（不会静默用错默认目录）；也可列出检测到的候选目录。
+
+非交互须**明确指定**安装目录（慎用）：
 
 ```bash
-MIRRORELF_YES=1 MIRRORELF_INSTALL_DIR=/www/mirrorelf \
+MIRRORELF_INSTALL_DIR=/www/mirrorelf MIRRORELF_YES=1 \
   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
 ```
 
@@ -220,10 +222,10 @@ Stops containers, **removes volumes** (database included), and optionally delete
 curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
 ```
 
-Non-interactive (destructive):
+If you used a custom install path, the script asks for it (and may list detected paths). Non-interactive requires `MIRRORELF_INSTALL_DIR`:
 
 ```bash
-MIRRORELF_YES=1 MIRRORELF_INSTALL_DIR=/www/mirrorelf \
+MIRRORELF_INSTALL_DIR=/www/mirrorelf MIRRORELF_YES=1 \
   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
 ```
 

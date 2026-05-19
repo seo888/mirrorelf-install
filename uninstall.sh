@@ -8,34 +8,88 @@
 #   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
 #
 # 可选环境变量：
-#   MIRRORELF_INSTALL_DIR   安装目录（设置后不再交互询问，默认 /www/mirrorelf）
-#   MIRRORELF_YES=1         非交互：全部按默认执行（完全卸载 + 删目录 + 删镜像）
+#   MIRRORELF_INSTALL_DIR   安装目录（与安装时一致；设置后不再交互询问）
+#   MIRRORELF_YES=1         非交互：须同时设置 MIRRORELF_INSTALL_DIR；全部按 Y 执行
 
 set -euo pipefail
 
 DEFAULT_INSTALL_DIR="/www/mirrorelf"
 DEFAULT_IMAGE="seo888/mirrorelf:latest"
 
+list_install_dir_candidates() {
+	local root dir
+	for root in /www /opt /data /root "${HOME:-/root}"; do
+		[[ -d "$root" ]] || continue
+		while IFS= read -r -d '' dir; do
+			printf '%s\n' "$(dirname "$dir")"
+		done < <(find "$root" -maxdepth 5 -name 'compose.hub.yml' -print0 2>/dev/null)
+	done | sort -u
+}
+
 resolve_install_dir() {
-	local d="" chosen=""
+	local d="" chosen="" candidates=()
+
 	if [[ -n "${MIRRORELF_INSTALL_DIR:-}" ]]; then
-		d="${MIRRORELF_INSTALL_DIR}"
-	elif [[ -t 0 ]]; then
+		d="${MIRRORELF_INSTALL_DIR%/}"
+		if [[ ! -d "$d" ]]; then
+			echo "目录不存在: $d" >&2
+			exit 1
+		fi
+		if [[ ! -f "$d/compose.hub.yml" ]]; then
+			echo "未找到 $d/compose.hub.yml，请检查 MIRRORELF_INSTALL_DIR。" >&2
+			exit 1
+		fi
+		(cd "$d" && pwd)
+		return 0
+	fi
+
+	if [[ ! -t 0 ]]; then
+		echo "非交互卸载请指定安装目录，例如：" >&2
+		echo "  MIRRORELF_INSTALL_DIR=/你的路径 MIRRORELF_YES=1 bash uninstall.sh" >&2
+		exit 1
+	fi
+
+	echo "请输入安装时选择的目录（若当时未用默认 ${DEFAULT_INSTALL_DIR}，请勿直接回车）。"
+	echo
+
+	while true; do
+		if [[ ! -f "${DEFAULT_INSTALL_DIR}/compose.hub.yml" ]]; then
+			mapfile -t candidates < <(list_install_dir_candidates || true)
+			if [[ ${#candidates[@]} -gt 0 ]]; then
+				echo "检测到可能的安装目录："
+				local i=1 c
+				for c in "${candidates[@]}"; do
+					echo "  [$i] $c"
+					i=$((i + 1))
+				done
+				echo "  也可直接输入完整路径。"
+				echo
+			fi
+		fi
+
 		read -r -p "安装目录 [${DEFAULT_INSTALL_DIR}]: " chosen
-		d="${chosen:-$DEFAULT_INSTALL_DIR}"
-	else
-		d="$DEFAULT_INSTALL_DIR"
-	fi
-	d="${d%/}"
-	if [[ -z "$d" ]]; then
-		echo "安装目录不能为空。" >&2
-		exit 1
-	fi
-	if [[ ! -d "$d" ]]; then
-		echo "目录不存在: $d" >&2
-		exit 1
-	fi
-	(cd "$d" && pwd)
+		if [[ -n "$chosen" ]]; then
+			d="${chosen%/}"
+		else
+			d="$DEFAULT_INSTALL_DIR"
+		fi
+
+		if [[ -z "$d" ]]; then
+			echo "安装目录不能为空，请重新输入。" >&2
+			continue
+		fi
+		if [[ ! -d "$d" ]]; then
+			echo "目录不存在: $d —— 请填写安装时实际使用的路径。" >&2
+			continue
+		fi
+		if [[ ! -f "$d/compose.hub.yml" ]]; then
+			echo "未找到 $d/compose.hub.yml —— 该目录不是 MirrorElf 安装位置，请重新输入。" >&2
+			continue
+		fi
+
+		(cd "$d" && pwd)
+		return 0
+	done
 }
 
 confirm_default_yes() {
@@ -59,11 +113,6 @@ WORKDIR="$(resolve_install_dir)"
 COMPOSE="$WORKDIR/compose.hub.yml"
 ENV_FILE="$WORKDIR/env.hub"
 
-if [[ ! -f "$COMPOSE" ]]; then
-	echo "未找到 $COMPOSE，请确认安装目录是否正确。" >&2
-	exit 1
-fi
-
 APP_IMAGE="$DEFAULT_IMAGE"
 if [[ -f "$ENV_FILE" ]]; then
 	# shellcheck disable=SC1090
@@ -80,6 +129,7 @@ if ! docker compose version >/dev/null 2>&1; then
 	exit 1
 fi
 
+echo
 echo "安装目录: $WORKDIR"
 echo
 echo "将执行：停止并删除 app / postgres / watchtower 容器及数据卷（数据库与配置不可恢复）。"
