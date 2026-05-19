@@ -1,0 +1,64 @@
+# MirrorElf Hub 部署（拉取 Docker Hub 镜像，不在本机构建）
+#
+# 在仓库目录：
+#   cp env.hub.example env.hub   # 首次
+#   docker compose -f compose.hub.yml --env-file env.hub up -d
+#
+# 一键安装：见 README 或 install.sh
+#
+# Watchtower（每 10 分钟检查 Hub 更新）：
+#   docker compose -f compose.hub.yml --env-file env.hub --profile watchtower up -d
+#
+# 管理后台：http://<主机>:18888/_/admin/  默认 admin / admin
+
+services:
+  postgres:
+    image: postgres:16-bookworm
+    shm_size: 256mb
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: mirrorelf
+      POSTGRES_DB: mirror
+    volumes:
+      - mirrorelf_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U postgres -d mirror']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+
+  app:
+    image: ${MIRRORELF_IMAGE}
+    environment:
+      MIRRORELF_SYNC_RELEASES_MANIFEST: '1'
+    labels:
+      - com.centurylinklabs.watchtower.enable=true
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - '18888:16888'
+    volumes:
+      - mirrorelf_config:/app/config
+      - mirrorelf_log:/app/log
+      - mirrorelf_data:/app/data
+
+  watchtower:
+    profiles: [watchtower]
+    image: nickfedor/watchtower:latest
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      WATCHTOWER_LABEL_ENABLE: 'true'
+      WATCHTOWER_POLL_INTERVAL: '600'
+      WATCHTOWER_CLEANUP: 'true'
+      WATCHTOWER_INCLUDE_RESTARTING: 'true'
+      TZ: Asia/Shanghai
+
+volumes:
+  mirrorelf_pgdata:
+  mirrorelf_config:
+  mirrorelf_log:
+  mirrorelf_data:
