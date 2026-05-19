@@ -202,7 +202,8 @@ echo_prompt
 echo_prompt "安装目录: $WORKDIR"
 echo_prompt
 echo_prompt "将执行：停止并删除 app / postgres / watchtower 容器及数据卷（数据库与配置不可恢复）。"
-if ! confirm_default_yes "确认完全卸载？[回车=Y/n]: "; then
+echo_prompt "直接回车=是，输入 n=否。"
+if ! confirm_default_yes "确认完全卸载？[Y/n]: "; then
 	echo_prompt "已取消。"
 	exit 0
 fi
@@ -220,12 +221,12 @@ while IFS= read -r vol; do
 done < <(docker volume ls -q 2>/dev/null | grep mirrorelf || true)
 
 REMOVE_DIR=0
-if confirm_default_yes "删除安装目录 ${WORKDIR}？[回车=Y/n]: "; then
+if confirm_default_yes "删除安装目录 ${WORKDIR}？[Y/n]: "; then
 	REMOVE_DIR=1
 fi
 
 REMOVE_IMAGES=0
-if confirm_default_yes "删除 Docker 镜像（${APP_IMAGE} 等）？[回车=Y/n]: "; then
+if confirm_default_yes "删除 Docker 镜像（${APP_IMAGE} 等）？[Y/n]: "; then
 	REMOVE_IMAGES=1
 fi
 
