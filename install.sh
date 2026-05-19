@@ -160,7 +160,7 @@ fi
 if [[ ! -f "$ENV_FILE" ]]; then
 	PG_HOST_PORT=5432
 	if command -v ss >/dev/null 2>&1 && ss -lntp 2>/dev/null | grep -qE ':5432[[:space:]]'; then
-		PG_HOST_PORT=5433
+		PG_HOST_PORT=15432
 		echo "检测到宿主机 5432 已被占用，Postgres 将映射到 127.0.0.1:${PG_HOST_PORT}"
 	fi
 	{
