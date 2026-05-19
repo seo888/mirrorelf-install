@@ -21,8 +21,14 @@ if (-not (Test-Path .git)) {
   git commit -m "Initial commit: MirrorElf Docker one-line install"
 }
 
-$exists = gh repo view seo888/mirrorelf-install 2>$null
-if ($LASTEXITCODE -ne 0) {
+$exists = $false
+try {
+  gh repo view seo888/mirrorelf-install 2>$null | Out-Null
+  if ($LASTEXITCODE -eq 0) { $exists = $true }
+} catch {
+  $exists = $false
+}
+if (-not $exists) {
   gh repo create mirrorelf-install --public --description "MirrorElf Docker one-line install (compose + install.sh)" --source . --remote origin --push
   Write-Host "已创建并推送: https://github.com/seo888/mirrorelf-install"
 } else {
@@ -30,5 +36,8 @@ if ($LASTEXITCODE -ne 0) {
     git remote add origin https://github.com/seo888/mirrorelf-install.git
   }
   git push -u origin main
+  if ($LASTEXITCODE -ne 0 -and (Test-Path env:HTTPS_PROXY)) {
+    Write-Warning '直连 push 失败，可设置 HTTPS_PROXY 后重试'
+  }
   Write-Host "已推送到: https://github.com/seo888/mirrorelf-install"
 }
