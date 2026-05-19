@@ -111,8 +111,9 @@ resolve_install_dir() {
 			fi
 
 			if ! read_prompt "安装目录 [${DEFAULT_INSTALL_DIR}]: " chosen; then
-				pick_install_dir_noninteractive || exit 1
-				return 0
+				echo_prompt "无法读取终端输入。请使用: curl -fsSL ... -o uninstall.sh && bash uninstall.sh" >&2
+				echo_prompt "或设置 MIRRORELF_INSTALL_DIR=/实际路径" >&2
+				exit 1
 			fi
 
 			if [[ -n "$chosen" ]] && [[ "$chosen" =~ ^[0-9]+$ ]] && [[ ${#candidates[@]} -gt 0 ]]; then
