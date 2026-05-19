@@ -64,7 +64,7 @@ MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 \
   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh | bash
 ```
 
-Compose 与 `env.hub` 默认写在 `~/.mirrorelf/`（可用环境变量 `MIRRORELF_INSTALL_DIR` 修改）。
+安装时会提示安装目录，**直接回车** 默认为 `/www/mirrorelf`（`compose.hub.yml`、`env.hub` 写在该目录）。也可输入自定义路径，或非交互：`MIRRORELF_INSTALL_DIR=/opt/mirrorelf bash install.sh`。
 
 ### 安装完成后
 
@@ -77,7 +77,7 @@ Compose 与 `env.hub` 默认写在 `~/.mirrorelf/`（可用环境变量 `MIRRORE
 ### Watchtower 自动更新
 
 ```bash
-cd ~/.mirrorelf
+cd /www/mirrorelf   # 或你选择的安装目录
 docker compose -f compose.hub.yml --env-file env.hub --profile watchtower up -d
 ```
 
@@ -163,7 +163,7 @@ MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 \
   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh | bash
 ```
 
-Files default to `~/.mirrorelf/` (set `MIRRORELF_INSTALL_DIR` to override).
+On install you will be prompted for a directory; press **Enter** for default `/www/mirrorelf`, or set `MIRRORELF_INSTALL_DIR` for non-interactive installs.
 
 ### After install
 
@@ -176,7 +176,7 @@ Files default to `~/.mirrorelf/` (set `MIRRORELF_INSTALL_DIR` to override).
 ### Watchtower (auto-update)
 
 ```bash
-cd ~/.mirrorelf
+cd /www/mirrorelf   # or your chosen install path
 docker compose -f compose.hub.yml --env-file env.hub --profile watchtower up -d
 ```
 

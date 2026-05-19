@@ -9,21 +9,36 @@
 #
 # 可选环境变量：
 #   MIRRORELF_IMAGE         应用镜像，默认 seo888/mirrorelf:latest
-#   MIRRORELF_INSTALL_DIR   compose/env 目录，默认 ~/.mirrorelf
+#   MIRRORELF_INSTALL_DIR   安装目录（设置后不再交互询问，默认 /www/mirrorelf）
 
 set -euo pipefail
 
 DEFAULT_IMAGE="${MIRRORELF_IMAGE:-seo888/mirrorelf:latest}"
-INSTALL_DIR="${MIRRORELF_INSTALL_DIR:-${HOME}/.mirrorelf}"
+DEFAULT_INSTALL_DIR="/www/mirrorelf"
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)"
+resolve_install_dir() {
+	local d="" chosen=""
+	if [[ -n "${MIRRORELF_INSTALL_DIR:-}" ]]; then
+		d="${MIRRORELF_INSTALL_DIR}"
+	elif [[ -t 0 ]]; then
+		read -r -p "安装目录 [${DEFAULT_INSTALL_DIR}]: " chosen
+		d="${chosen:-$DEFAULT_INSTALL_DIR}"
+	else
+		d="$DEFAULT_INSTALL_DIR"
+	fi
+	d="${d%/}"
+	if [[ -z "$d" ]]; then
+		echo "安装目录不能为空。" >&2
+		exit 1
+	fi
+	if ! mkdir -p "$d"; then
+		echo "无法创建安装目录: $d（若无 /www 写权限，请指定其他路径或 sudo 执行）" >&2
+		exit 1
+	fi
+	(cd "$d" && pwd)
+}
 
-if [[ -f "$SCRIPT_DIR/compose.hub.yml" ]]; then
-	WORKDIR="$SCRIPT_DIR"
-else
-	WORKDIR="$INSTALL_DIR"
-	mkdir -p "$WORKDIR"
-fi
+WORKDIR="$(resolve_install_dir)"
 
 COMPOSE="$WORKDIR/compose.hub.yml"
 ENV_FILE="$WORKDIR/env.hub"
@@ -98,11 +113,9 @@ volumes:
 COMPOSE_EOF
 }
 
-if [[ "$WORKDIR" == "$INSTALL_DIR" ]]; then
-	if [[ ! -f "$COMPOSE" ]]; then
-		echo "正在写入 $COMPOSE …"
-		write_embedded_compose
-	fi
+if [[ ! -f "$COMPOSE" ]]; then
+	echo "正在写入 $COMPOSE …"
+	write_embedded_compose
 fi
 
 if ! command -v docker >/dev/null 2>&1; then
