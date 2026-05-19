@@ -1,20 +1,50 @@
 #!/usr/bin/env bash
 # MirrorElf 完全卸载：停止容器、删除数据卷，可选删除安装目录与镜像。
-# 需要：Docker 与 docker compose 插件。
 #
 # 用法：
 #   bash uninstall.sh
-# 或：
 #   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
+# 推荐（便于交互）：curl -fsSL ... -o uninstall.sh && bash uninstall.sh
 #
-# 可选环境变量：
-#   MIRRORELF_INSTALL_DIR   安装目录（与安装时一致；设置后不再交互询问）
-#   MIRRORELF_YES=1         非交互：须同时设置 MIRRORELF_INSTALL_DIR；全部按 Y 执行
+# 环境变量：
+#   MIRRORELF_INSTALL_DIR   安装目录（与安装时一致）
+#   MIRRORELF_YES=1         非交互；须能唯一确定目录（见脚本逻辑）
 
 set -euo pipefail
 
 DEFAULT_INSTALL_DIR="/www/mirrorelf"
 DEFAULT_IMAGE="seo888/mirrorelf:latest"
+
+# curl | bash 时 stdin 不是 TTY，从 /dev/tty 读写
+can_prompt_user() {
+	[[ -t 0 ]] || { [[ -r /dev/tty ]] && [[ -w /dev/tty ]]; }
+}
+
+read_prompt() {
+	local prompt="$1"
+	local __varname="$2"
+	if [[ -t 0 ]]; then
+		read -r -p "$prompt" "$__varname"
+	elif [[ -r /dev/tty ]] && [[ -w /dev/tty ]]; then
+		read -r -p "$prompt" "$__varname" </dev/tty
+	else
+		return 1
+	fi
+}
+
+echo_prompt() {
+	if [[ -t 1 ]]; then
+		echo "$@"
+	elif [[ -w /dev/tty ]]; then
+		echo "$@" >/dev/tty
+	else
+		echo "$@"
+	fi
+}
+
+is_valid_install_dir() {
+	[[ -d "$1" && -f "$1/compose.hub.yml" ]]
+}
 
 list_install_dir_candidates() {
 	local root dir
@@ -23,73 +53,103 @@ list_install_dir_candidates() {
 		while IFS= read -r -d '' dir; do
 			printf '%s\n' "$(dirname "$dir")"
 		done < <(find "$root" -maxdepth 5 -name 'compose.hub.yml' -print0 2>/dev/null)
-	done | sort -u
+	done
+	if [[ -f "${HOME:-}/.mirrorelf/compose.hub.yml" ]]; then
+		printf '%s\n' "${HOME}/.mirrorelf"
+	fi
+}
+
+pick_install_dir_noninteractive() {
+	local -a candidates=()
+	mapfile -t candidates < <(list_install_dir_candidates | sort -u || true)
+	if [[ ${#candidates[@]} -eq 1 ]]; then
+		echo_prompt "自动检测到安装目录: ${candidates[0]}"
+		printf '%s' "${candidates[0]}"
+		return 0
+	fi
+	echo_prompt "无法交互且未能唯一确定安装目录。请指定 MIRRORELF_INSTALL_DIR，例如：" >&2
+	if [[ ${#candidates[@]} -gt 0 ]]; then
+		echo_prompt "检测到的可能路径：" >&2
+		local c
+		for c in "${candidates[@]}"; do
+			echo_prompt "  $c" >&2
+		done
+	fi
+	echo_prompt "  MIRRORELF_INSTALL_DIR=/实际路径 bash uninstall.sh" >&2
+	return 1
 }
 
 resolve_install_dir() {
 	local d="" chosen="" candidates=()
 
+	if [[ -n "${MIRRORELF_INSTALL_DIR:-}" ]] && is_valid_install_dir "${MIRRORELF_INSTALL_DIR%/}"; then
+		(cd "${MIRRORELF_INSTALL_DIR%/}" && pwd)
+		return 0
+	fi
 	if [[ -n "${MIRRORELF_INSTALL_DIR:-}" ]]; then
-		d="${MIRRORELF_INSTALL_DIR%/}"
-		if [[ ! -d "$d" ]]; then
-			echo "目录不存在: $d" >&2
-			exit 1
-		fi
-		if [[ ! -f "$d/compose.hub.yml" ]]; then
-			echo "未找到 $d/compose.hub.yml，请检查 MIRRORELF_INSTALL_DIR。" >&2
-			exit 1
-		fi
-		(cd "$d" && pwd)
-		return 0
+		echo_prompt "注意: 环境变量 MIRRORELF_INSTALL_DIR=${MIRRORELF_INSTALL_DIR} 无效（目录不存在或无 compose.hub.yml），将请您选择或自动检测。"
+		echo_prompt
 	fi
 
-	if [[ ! -t 0 ]]; then
-		echo "非交互卸载请指定安装目录，例如：" >&2
-		echo "  MIRRORELF_INSTALL_DIR=/你的路径 MIRRORELF_YES=1 bash uninstall.sh" >&2
-		exit 1
-	fi
+	if can_prompt_user; then
+		echo_prompt "请输入安装时选择的目录（若当时不是 ${DEFAULT_INSTALL_DIR}，请填写实际路径，勿盲目回车）。"
+		echo_prompt
 
-	echo "请输入安装时选择的目录（若当时未用默认 ${DEFAULT_INSTALL_DIR}，请勿直接回车）。"
-	echo
-
-	while true; do
-		if [[ ! -f "${DEFAULT_INSTALL_DIR}/compose.hub.yml" ]]; then
-			mapfile -t candidates < <(list_install_dir_candidates || true)
-			if [[ ${#candidates[@]} -gt 0 ]]; then
-				echo "检测到可能的安装目录："
-				local i=1 c
-				for c in "${candidates[@]}"; do
-					echo "  [$i] $c"
-					i=$((i + 1))
-				done
-				echo "  也可直接输入完整路径。"
-				echo
+		while true; do
+			if ! is_valid_install_dir "$DEFAULT_INSTALL_DIR"; then
+				mapfile -t candidates < <(list_install_dir_candidates | sort -u || true)
+				if [[ ${#candidates[@]} -gt 0 ]]; then
+					echo_prompt "检测到可能的安装目录："
+					local i=1 c
+					for c in "${candidates[@]}"; do
+						echo_prompt "  [$i] $c"
+						i=$((i + 1))
+					done
+					echo_prompt "  输入序号或完整路径。"
+					echo_prompt
+				fi
 			fi
-		fi
 
-		read -r -p "安装目录 [${DEFAULT_INSTALL_DIR}]: " chosen
-		if [[ -n "$chosen" ]]; then
-			d="${chosen%/}"
-		else
-			d="$DEFAULT_INSTALL_DIR"
-		fi
+			if ! read_prompt "安装目录 [${DEFAULT_INSTALL_DIR}]: " chosen; then
+				pick_install_dir_noninteractive || exit 1
+				return 0
+			fi
 
-		if [[ -z "$d" ]]; then
-			echo "安装目录不能为空，请重新输入。" >&2
-			continue
-		fi
-		if [[ ! -d "$d" ]]; then
-			echo "目录不存在: $d —— 请填写安装时实际使用的路径。" >&2
-			continue
-		fi
-		if [[ ! -f "$d/compose.hub.yml" ]]; then
-			echo "未找到 $d/compose.hub.yml —— 该目录不是 MirrorElf 安装位置，请重新输入。" >&2
-			continue
-		fi
+			if [[ -n "$chosen" ]] && [[ "$chosen" =~ ^[0-9]+$ ]] && [[ ${#candidates[@]} -gt 0 ]]; then
+				local idx="$chosen"
+				if [[ "$idx" -ge 1 && "$idx" -le ${#candidates[@]} ]]; then
+					d="${candidates[$((idx - 1))]}"
+				else
+					echo_prompt "序号无效，请重新输入。" >&2
+					continue
+				fi
+			elif [[ -n "$chosen" ]]; then
+				d="${chosen%/}"
+			else
+				d="$DEFAULT_INSTALL_DIR"
+			fi
 
-		(cd "$d" && pwd)
-		return 0
-	done
+			if [[ -z "$d" ]]; then
+				echo_prompt "安装目录不能为空。" >&2
+				continue
+			fi
+			if ! is_valid_install_dir "$d"; then
+				if [[ -d "$d" ]]; then
+					echo_prompt "未找到 $d/compose.hub.yml，请重新输入。" >&2
+				else
+					echo_prompt "目录不存在: $d，请填写安装时实际路径。" >&2
+				fi
+				continue
+			fi
+
+			(cd "$d" && pwd)
+			return 0
+		done
+	fi
+
+	# 完全非交互（无 /dev/tty）
+	d="$(pick_install_dir_noninteractive)" || exit 1
+	(cd "$d" && pwd)
 }
 
 confirm_default_yes() {
@@ -97,11 +157,13 @@ confirm_default_yes() {
 	if [[ "${MIRRORELF_YES:-}" == "1" ]]; then
 		return 0
 	fi
-	if [[ ! -t 0 ]]; then
+	if ! can_prompt_user; then
 		return 0
 	fi
 	local ans=""
-	read -r -p "$prompt" ans
+	if ! read_prompt "$prompt" ans; then
+		return 0
+	fi
 	ans="$(printf '%s' "$ans" | tr '[:upper:]' '[:lower:]')"
 	case "$ans" in
 	n | no) return 1 ;;
@@ -129,19 +191,19 @@ if ! docker compose version >/dev/null 2>&1; then
 	exit 1
 fi
 
-echo
-echo "安装目录: $WORKDIR"
-echo
-echo "将执行：停止并删除 app / postgres / watchtower 容器及数据卷（数据库与配置不可恢复）。"
+echo_prompt
+echo_prompt "安装目录: $WORKDIR"
+echo_prompt
+echo_prompt "将执行：停止并删除 app / postgres / watchtower 容器及数据卷（数据库与配置不可恢复）。"
 if ! confirm_default_yes "确认完全卸载？[Y/n]: "; then
-	echo "已取消。"
+	echo_prompt "已取消。"
 	exit 0
 fi
 
 COMPOSE_BASE=(docker compose -f "$COMPOSE" --env-file "$ENV_FILE")
 
-echo
-echo "正在停止并删除容器与卷 …"
+echo_prompt
+echo_prompt "正在停止并删除容器与卷 …"
 "${COMPOSE_BASE[@]}" --profile watchtower down -v --remove-orphans 2>/dev/null || \
 	"${COMPOSE_BASE[@]}" down -v --remove-orphans
 
@@ -161,19 +223,19 @@ if confirm_default_yes "是否删除 Docker 镜像（${APP_IMAGE}、postgres:16-
 fi
 
 if [[ "$REMOVE_DIR" == 1 ]]; then
-	echo "正在删除安装目录 …"
+	echo_prompt "正在删除安装目录 …"
 	rm -rf "$WORKDIR"
-	echo "已删除: $WORKDIR"
+	echo_prompt "已删除: $WORKDIR"
 fi
 
 if [[ "$REMOVE_IMAGES" == 1 ]]; then
-	echo "正在删除镜像 …"
+	echo_prompt "正在删除镜像 …"
 	docker image rm "$APP_IMAGE" 2>/dev/null || true
 	docker image rm postgres:16-bookworm 2>/dev/null || true
 	docker image rm nickfedor/watchtower:latest 2>/dev/null || true
 fi
 
-echo
-echo "卸载完成。"
-echo "  · 若曾在 Nginx、雷池等网关中配置回源，请手动删除对应站点/upstream。"
-echo "  · 检查: docker ps -a | grep mirrorelf ; docker volume ls | grep mirrorelf ; ss -lntp | grep 18888"
+echo_prompt
+echo_prompt "卸载完成。"
+echo_prompt "  · 若曾在 Nginx、雷池等网关中配置回源，请手动删除对应站点/upstream。"
+echo_prompt "  · 检查: docker ps -a | grep mirrorelf ; docker volume ls | grep mirrorelf ; ss -lntp | grep 18888"

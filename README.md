@@ -104,9 +104,11 @@ bash install.sh
 curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
 ```
 
-若安装时改过目录，卸载时会提示输入**实际路径**（不会静默用错默认目录）；也可列出检测到的候选目录。
+`curl | bash` 会通过 `/dev/tty` 交互；若仅有一处 `compose.hub.yml` 也会自动选用。若 shell 里曾设置过错误的 `MIRRORELF_INSTALL_DIR`，脚本会提示并改由您选择。
 
-非交互须**明确指定**安装目录（慎用）：
+若安装时改过目录，卸载时会提示输入**实际路径**（勿盲目回车默认 `/www/mirrorelf`）；也可从检测到的候选目录中选序号。
+
+非交互须能**唯一确定**目录（自动检测或环境变量）：
 
 ```bash
 MIRRORELF_INSTALL_DIR=/www/mirrorelf MIRRORELF_YES=1 \
@@ -222,7 +224,9 @@ Stops containers, **removes volumes** (database included), and optionally delete
 curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
 ```
 
-If you used a custom install path, the script asks for it (and may list detected paths). Non-interactive requires `MIRRORELF_INSTALL_DIR`:
+`curl | bash` prompts via `/dev/tty`; a single detected install dir is auto-selected. Wrong `MIRRORELF_INSTALL_DIR` in your shell is ignored with a warning.
+
+If you used a custom install path, enter it when asked (do not blindly accept `/www/mirrorelf`). Non-interactive needs a unique detected path or `MIRRORELF_INSTALL_DIR`:
 
 ```bash
 MIRRORELF_INSTALL_DIR=/www/mirrorelf MIRRORELF_YES=1 \
