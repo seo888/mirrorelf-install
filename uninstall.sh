@@ -108,25 +108,15 @@ resolve_install_dir() {
 				prompt_default="$DEFAULT_INSTALL_DIR"
 			fi
 
-			if [[ ${#candidates[@]} -gt 0 ]]; then
-				echo_prompt "检测到可能的安装目录："
+			if [[ ${#candidates[@]} -gt 1 ]]; then
 				i=1
 				for c in "${candidates[@]}"; do
 					echo_prompt "  [$i] $c"
 					i=$((i + 1))
 				done
-				if [[ ${#candidates[@]} -eq 1 ]]; then
-					echo_prompt "  直接回车将使用: ${candidates[0]}"
-				else
-					echo_prompt "  输入序号或完整路径；直接回车将使用: ${prompt_default}"
-				fi
-				echo_prompt
-			else
-				echo_prompt "请输入安装时使用的目录（安装脚本默认路径为 ${DEFAULT_INSTALL_DIR}）。"
-				echo_prompt
 			fi
 
-			if ! read_prompt "安装目录，直接回车使用 [${prompt_default}]: " chosen; then
+			if ! read_prompt "安装目录 [${prompt_default}]: " chosen; then
 				echo_prompt "无法读取终端输入。请使用: curl -fsSL ... -o uninstall.sh && bash uninstall.sh" >&2
 				echo_prompt "或设置 MIRRORELF_INSTALL_DIR=/实际路径" >&2
 				exit 1
@@ -212,7 +202,7 @@ echo_prompt
 echo_prompt "安装目录: $WORKDIR"
 echo_prompt
 echo_prompt "将执行：停止并删除 app / postgres / watchtower 容器及数据卷（数据库与配置不可恢复）。"
-if ! confirm_default_yes "确认完全卸载？[Y/n]: "; then
+if ! confirm_default_yes "确认完全卸载？[回车=Y/n]: "; then
 	echo_prompt "已取消。"
 	exit 0
 fi
@@ -230,12 +220,12 @@ while IFS= read -r vol; do
 done < <(docker volume ls -q 2>/dev/null | grep mirrorelf || true)
 
 REMOVE_DIR=0
-if confirm_default_yes "是否删除安装目录 ${WORKDIR}（含 compose.hub.yml、env.hub）？[Y/n]: "; then
+if confirm_default_yes "删除安装目录 ${WORKDIR}？[回车=Y/n]: "; then
 	REMOVE_DIR=1
 fi
 
 REMOVE_IMAGES=0
-if confirm_default_yes "是否删除 Docker 镜像（${APP_IMAGE}、postgres:16-bookworm、watchtower）？[Y/n]: "; then
+if confirm_default_yes "删除 Docker 镜像（${APP_IMAGE} 等）？[回车=Y/n]: "; then
 	REMOVE_IMAGES=1
 fi
 
