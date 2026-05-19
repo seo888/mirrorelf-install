@@ -96,11 +96,29 @@ cp env.hub.example env.hub
 bash install.sh
 ```
 
+### 完全卸载
+
+停止容器、**删除数据卷**（含数据库），并可删除安装目录与镜像。交互默认均为 **回车确认（Y）**。
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
+```
+
+非交互一键卸干净（慎用）：
+
+```bash
+MIRRORELF_YES=1 MIRRORELF_INSTALL_DIR=/www/mirrorelf \
+  curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
+```
+
+卸载后请自行在 Nginx、雷池等网关中删除指向本机 `18888` 的回源配置。
+
 ### 目录说明
 
 | 文件 | 说明 |
 |------|------|
 | `install.sh` | 一键安装脚本 |
+| `uninstall.sh` | 完全卸载脚本 |
 | `compose.hub.yml` | 应用 + Postgres（可选 Watchtower profile） |
 | `env.hub.example` | 镜像名示例 `MIRRORELF_IMAGE` |
 
@@ -194,11 +212,29 @@ cp env.hub.example env.hub
 bash install.sh
 ```
 
+### Full uninstall
+
+Stops containers, **removes volumes** (database included), and optionally deletes the install directory and images. Prompts default to **Yes** on Enter.
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
+```
+
+Non-interactive (destructive):
+
+```bash
+MIRRORELF_YES=1 MIRRORELF_INSTALL_DIR=/www/mirrorelf \
+  curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
+```
+
+Remove any Nginx / WAF upstream pointing at port **18888** on this host manually.
+
 ### Files in this repo
 
 | File | Purpose |
 |------|---------|
 | `install.sh` | One-line / local install script |
+| `uninstall.sh` | Full uninstall script |
 | `compose.hub.yml` | App + Postgres (+ optional Watchtower) |
 | `env.hub.example` | Sample `MIRRORELF_IMAGE` |
 
