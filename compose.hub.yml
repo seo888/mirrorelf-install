@@ -1,10 +1,11 @@
-# MirrorElf Hub 部署（拉取 Docker Hub 镜像，不在本机构建）
-#
-#   cp env.hub.example env.hub
+# 从 Docker Hub 拉镜像运行（唯一 compose；不在本机构建）。
+# 在仓库根目录：
+#   docker compose up -d
+# 或在 docker/ 目录：
 #   docker compose -f compose.hub.yml --env-file env.hub up -d
 #
-# 一键安装：bash install.sh 或见 README
-# 若改 compose，请同步修改 install.sh 中的内嵌段落。
+# Linux 一键安装：bash docker/install.sh
+# 若改端口/卷名等，请同步修改 docker/install.sh 中的内嵌段落。
 #
 # Watchtower：install.sh 安装时询问，默认安装；手动启用：
 #   docker compose -f compose.hub.yml --env-file env.hub --profile watchtower up -d
@@ -21,7 +22,7 @@ services:
       POSTGRES_PASSWORD: mirrorelf
       POSTGRES_DB: mirror
     ports:
-      - '127.0.0.1:5432:5432'
+      - '127.0.0.1:${MIRRORELF_PG_HOST_PORT:-5432}:5432'
     volumes:
       - mirrorelf_pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -37,6 +38,7 @@ services:
     environment:
       MIRRORELF_SYNC_RELEASES_MANIFEST: '1'
       MIRRORELF_HOST_NETWORK: '1'
+      MIRRORELF_PG_HOST_PORT: ${MIRRORELF_PG_HOST_PORT:-5432}
     labels:
       - com.centurylinklabs.watchtower.enable=true
     depends_on:

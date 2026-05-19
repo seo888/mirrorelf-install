@@ -95,7 +95,7 @@ services:
       POSTGRES_PASSWORD: mirrorelf
       POSTGRES_DB: mirror
     ports:
-      - '127.0.0.1:5432:5432'
+      - '127.0.0.1:${MIRRORELF_PG_HOST_PORT:-5432}:5432'
     volumes:
       - mirrorelf_pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -111,6 +111,7 @@ services:
     environment:
       MIRRORELF_SYNC_RELEASES_MANIFEST: '1'
       MIRRORELF_HOST_NETWORK: '1'
+      MIRRORELF_PG_HOST_PORT: ${MIRRORELF_PG_HOST_PORT:-5432}
     labels:
       - com.centurylinklabs.watchtower.enable=true
     depends_on:
@@ -157,8 +158,16 @@ if ! docker compose version >/dev/null 2>&1; then
 fi
 
 if [[ ! -f "$ENV_FILE" ]]; then
-	echo "MIRRORELF_IMAGE=${DEFAULT_IMAGE}" >"$ENV_FILE"
-	echo "已写入 $ENV_FILE（MIRRORELF_IMAGE=${DEFAULT_IMAGE}），可按需编辑后重新执行本脚本。"
+	PG_HOST_PORT=5432
+	if command -v ss >/dev/null 2>&1 && ss -lntp 2>/dev/null | grep -qE ':5432[[:space:]]'; then
+		PG_HOST_PORT=5433
+		echo "检测到宿主机 5432 已被占用，Postgres 将映射到 127.0.0.1:${PG_HOST_PORT}"
+	fi
+	{
+		echo "MIRRORELF_IMAGE=${DEFAULT_IMAGE}"
+		echo "MIRRORELF_PG_HOST_PORT=${PG_HOST_PORT}"
+	} >"$ENV_FILE"
+	echo "已写入 $ENV_FILE，可按需编辑后重新执行本脚本。"
 fi
 
 cd "$WORKDIR"
