@@ -9,8 +9,9 @@
 #
 # 可选环境变量：
 #   MIRRORELF_IMAGE         应用镜像，默认 seo888/mirrorelf:latest
-#   MIRRORELF_INSTALL_DIR       安装目录（设置后不再交互询问，默认 /www/mirrorelf）
-#   MIRRORELF_SKIP_WATCHTOWER   设为 1 则不安装 Watchtower
+#   MIRRORELF_INSTALL_DIR          安装目录（设置后不再交互询问，默认 /www/mirrorelf）
+#   MIRRORELF_INSTALL_WATCHTOWER   1/0 强制是否安装 Watchtower（设置后不再询问）
+#   MIRRORELF_SKIP_WATCHTOWER      同 0，兼容：设为 1 则不安装 Watchtower
 
 set -euo pipefail
 
@@ -37,6 +38,25 @@ resolve_install_dir() {
 		exit 1
 	fi
 	(cd "$d" && pwd)
+}
+
+resolve_install_watchtower() {
+	if [[ "${MIRRORELF_SKIP_WATCHTOWER:-}" == "1" ]] || [[ "${MIRRORELF_INSTALL_WATCHTOWER:-}" == "0" ]]; then
+		return 1
+	fi
+	if [[ "${MIRRORELF_INSTALL_WATCHTOWER:-}" == "1" ]]; then
+		return 0
+	fi
+	if [[ -t 0 ]]; then
+		local ans=""
+		read -r -p "是否安装 Watchtower 自动更新（约每 10 分钟检查 Hub）？[Y/n]: " ans
+		ans="$(printf '%s' "$ans" | tr '[:upper:]' '[:lower:]')"
+		case "$ans" in
+		n | no) return 1 ;;
+		*) return 0 ;;
+		esac
+	fi
+	return 0
 }
 
 WORKDIR="$(resolve_install_dir)"
@@ -136,12 +156,13 @@ fi
 cd "$WORKDIR"
 echo "工作目录: $WORKDIR"
 COMPOSE_BASE=(docker compose -f "$COMPOSE" --env-file "$ENV_FILE")
-if [[ -z "${MIRRORELF_SKIP_WATCHTOWER:-}" ]]; then
+INSTALL_WATCHTOWER=0
+if resolve_install_watchtower; then
+	INSTALL_WATCHTOWER=1
 	COMPOSE_PROFILE=(--profile watchtower)
-	echo "将一并安装 Watchtower（约每 10 分钟检查 Hub 更新；跳过请设 MIRRORELF_SKIP_WATCHTOWER=1）"
 else
 	COMPOSE_PROFILE=()
-	echo "已跳过 Watchtower（MIRRORELF_SKIP_WATCHTOWER=1）"
+	echo "已选择不安装 Watchtower。"
 fi
 "${COMPOSE_BASE[@]}" "${COMPOSE_PROFILE[@]}" pull
 "${COMPOSE_BASE[@]}" "${COMPOSE_PROFILE[@]}" up -d
@@ -160,7 +181,7 @@ echo "  · 回源地址（upstream）: ${HOST_IP}"
 echo "  · 回源端口: 18888"
 echo "  公网入口填在 Nginx/雷池 的站点或监听上，不要直接把 18888 暴露到公网（除非已做访问控制）。"
 	echo "  仅在本机调试时可访问: http://127.0.0.1:18888/"
-if [[ -z "${MIRRORELF_SKIP_WATCHTOWER:-}" ]]; then
+if [[ "$INSTALL_WATCHTOWER" == 1 ]]; then
 	echo
 	echo "Watchtower 已启动，将自动拉取并重建带更新标签的 app 容器（镜像 ${DEFAULT_IMAGE}）。"
 	echo "  查看日志: cd \"$WORKDIR\" && ${COMPOSE_BASE[*]} ${COMPOSE_PROFILE[*]} logs -f watchtower"
