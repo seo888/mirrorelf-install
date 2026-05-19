@@ -112,6 +112,7 @@ services:
       MIRRORELF_SYNC_RELEASES_MANIFEST: '1'
       MIRRORELF_HOST_NETWORK: '1'
       MIRRORELF_PG_HOST_PORT: ${MIRRORELF_PG_HOST_PORT:-5432}
+      MIRRORELF_PG_PASSWORD: ${MIRRORELF_PG_PASSWORD:-mirrorelf}
     labels:
       - com.centurylinklabs.watchtower.enable=true
     depends_on:
