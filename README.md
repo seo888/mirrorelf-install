@@ -70,8 +70,8 @@ MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 \
 
 | 项目 | 地址 |
 |------|------|
-| 站点 | `http://<服务器IP>:18888/` |
-| 管理后台 | `http://<服务器IP>:18888/_/admin/` |
+| 站点 | `http://<服务器IP>:16888/` |
+| 管理后台 | `http://<服务器IP>:16888/_/admin/` |
 | 默认账号 | `admin` / `admin`（**生产环境请立即修改**） |
 
 ### Watchtower 自动更新
@@ -115,7 +115,7 @@ MIRRORELF_INSTALL_DIR=/www/mirrorelf MIRRORELF_YES=1 \
   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
 ```
 
-卸载后请自行在 Nginx、雷池等网关中删除指向本机 `18888` 的回源配置。
+卸载后请自行在 Nginx、雷池等网关中删除指向本机 `16888` 的回源配置。
 
 ### 目录说明
 
@@ -195,8 +195,8 @@ On install you will be prompted for a directory; press **Enter** for default `/w
 
 | Item | URL |
 |------|-----|
-| Site | `http://<host>:18888/` |
-| Admin | `http://<host>:18888/_/admin/` |
+| Site | `http://<host>:16888/` |
+| Admin | `http://<host>:16888/_/admin/` |
 | Default login | `admin` / `admin` — **change in production** |
 
 ### Watchtower (auto-update)
@@ -233,7 +233,7 @@ MIRRORELF_INSTALL_DIR=/www/mirrorelf MIRRORELF_YES=1 \
   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
 ```
 
-Remove any Nginx / WAF upstream pointing at port **18888** on this host manually.
+Remove any Nginx / WAF upstream pointing at port **16888** on this host manually.
 
 ### Files in this repo
 

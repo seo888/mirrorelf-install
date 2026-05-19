@@ -1,14 +1,17 @@
 #!/usr/bin/env bash
-# MirrorElf 一键安装（Docker Hub 镜像 + Postgres，无需克隆业务源码）
-# 需要：Docker 与 docker compose 插件
+# 一键安装：只依赖 Docker Hub 上的应用镜像 + Postgres 官方镜像（无需克隆代码仓库）。
+# 需要本机已安装 Docker 与 docker compose 插件。
 #
 # 用法：
-#   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh | bash
-# 或：
 #   bash install.sh
+# 或一条命令（公开安装仓）：
+#   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh | bash
+#
+# 完全卸载：
+#   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
 #
 # 可选环境变量：
-#   MIRRORELF_IMAGE         应用镜像，默认 seo888/mirrorelf:latest
+#   MIRRORELF_IMAGE        应用镜像，默认 seo888/mirrorelf:latest
 #   MIRRORELF_INSTALL_DIR          安装目录（设置后不再交互询问，默认 /www/mirrorelf）
 #   MIRRORELF_INSTALL_WATCHTOWER   1/0 强制是否安装 Watchtower（设置后不再询问）
 #   MIRRORELF_SKIP_WATCHTOWER      同 0，兼容：设为 1 则不安装 Watchtower
@@ -18,6 +21,7 @@ set -euo pipefail
 DEFAULT_IMAGE="${MIRRORELF_IMAGE:-seo888/mirrorelf:latest}"
 DEFAULT_INSTALL_DIR="/www/mirrorelf"
 
+# 交互选择安装目录；非 TTY（如部分 CI）或已设 MIRRORELF_INSTALL_DIR 则用默认/指定值
 resolve_install_dir() {
 	local d="" chosen=""
 	if [[ -n "${MIRRORELF_INSTALL_DIR:-}" ]]; then
@@ -40,6 +44,7 @@ resolve_install_dir() {
 	(cd "$d" && pwd)
 }
 
+# 是否安装 Watchtower：交互默认 Y；非 TTY 默认安装
 resolve_install_watchtower() {
 	if [[ "${MIRRORELF_SKIP_WATCHTOWER:-}" == "1" ]] || [[ "${MIRRORELF_INSTALL_WATCHTOWER:-}" == "0" ]]; then
 		return 1
@@ -64,6 +69,7 @@ WORKDIR="$(resolve_install_dir)"
 COMPOSE="$WORKDIR/compose.hub.yml"
 ENV_FILE="$WORKDIR/env.hub"
 
+# 本机主 IP（默认路由出口，供对外访问与 Nginx/雷池回源提示）
 detect_primary_ip() {
 	local ip=""
 	if command -v ip >/dev/null 2>&1; then
@@ -88,6 +94,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mirrorelf
       POSTGRES_DB: mirror
+    ports:
+      - '127.0.0.1:5432:5432'
     volumes:
       - mirrorelf_pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -99,15 +107,15 @@ services:
 
   app:
     image: ${MIRRORELF_IMAGE}
+    network_mode: host
     environment:
       MIRRORELF_SYNC_RELEASES_MANIFEST: '1'
+      MIRRORELF_HOST_NETWORK: '1'
     labels:
       - com.centurylinklabs.watchtower.enable=true
     depends_on:
       postgres:
         condition: service_healthy
-    ports:
-      - '18888:16888'
     volumes:
       - mirrorelf_config:/app/config
       - mirrorelf_log:/app/log
@@ -170,17 +178,17 @@ fi
 HOST_IP="$(detect_primary_ip)"
 echo
 echo "已启动。"
-echo "  站点:     http://${HOST_IP}:18888/"
-echo "  管理后台: http://${HOST_IP}:18888/_/admin/ （默认 admin / admin，生产环境请修改）"
+echo "  站点:     http://${HOST_IP}:16888/"
+echo "  管理后台: http://${HOST_IP}:16888/_/admin/ （默认 admin / admin，生产环境请修改）"
 if [[ "$HOST_IP" == "127.0.0.1" ]]; then
 	echo "  （未能自动检测服务器 IP，请将上文地址中的 IP 改为本机内网或公网地址）"
 fi
 echo
 echo "若使用 Nginx、雷池（SafeLine）等反向代理 / WAF 对外暴露，请在网关配置回源："
 echo "  · 回源地址（upstream）: ${HOST_IP}"
-echo "  · 回源端口: 18888"
-echo "  公网入口填在 Nginx/雷池 的站点或监听上，不要直接把 18888 暴露到公网（除非已做访问控制）。"
-	echo "  仅在本机调试时可访问: http://127.0.0.1:18888/"
+echo "  · 回源端口: 16888（app 为 host 网络，直接监听宿主机 16888）"
+echo "  公网入口填在 Nginx/雷池 的站点或监听上，不要直接把 16888 暴露到公网（除非已做访问控制）。"
+	echo "  仅在本机调试时可访问: http://127.0.0.1:16888/"
 if [[ "$INSTALL_WATCHTOWER" == 1 ]]; then
 	echo
 	echo "Watchtower 已启动，将自动拉取并重建带更新标签的 app 容器（镜像 ${DEFAULT_IMAGE}）。"

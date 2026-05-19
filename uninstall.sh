@@ -246,4 +246,4 @@ fi
 echo_prompt
 echo_prompt "卸载完成。"
 echo_prompt "  · 若曾在 Nginx、雷池等网关中配置回源，请手动删除对应站点/upstream。"
-echo_prompt "  · 检查: docker ps -a | grep mirrorelf ; docker volume ls | grep mirrorelf ; ss -lntp | grep 18888"
+echo_prompt "  · 检查: docker ps -a | grep mirrorelf ; docker volume ls | grep mirrorelf ; ss -lntp | grep 16888"

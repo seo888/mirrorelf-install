@@ -1,14 +1,16 @@
 # MirrorElf Hub 部署（拉取 Docker Hub 镜像，不在本机构建）
 #
-# 在仓库目录：
-#   cp env.hub.example env.hub   # 首次
+#   cp env.hub.example env.hub
 #   docker compose -f compose.hub.yml --env-file env.hub up -d
 #
-# 一键安装：见 README 或 install.sh
+# 一键安装：bash install.sh 或见 README
+# 若改 compose，请同步修改 install.sh 中的内嵌段落。
 #
-# Watchtower：install.sh 安装时询问，默认安装（--profile watchtower）
+# Watchtower：install.sh 安装时询问，默认安装；手动启用：
+#   docker compose -f compose.hub.yml --env-file env.hub --profile watchtower up -d
 #
-# 管理后台：http://<主机>:18888/_/admin/  默认 admin / admin
+# app 使用 host 网络以便多 IP 出站；进程直接监听宿主机 16888（非 18888）。
+# 管理后台：http://<服务器IP>:16888/_/admin/  默认 admin / admin
 
 services:
   postgres:
@@ -18,6 +20,8 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mirrorelf
       POSTGRES_DB: mirror
+    ports:
+      - '127.0.0.1:5432:5432'
     volumes:
       - mirrorelf_pgdata:/var/lib/postgresql/data
     healthcheck:
@@ -29,15 +33,15 @@ services:
 
   app:
     image: ${MIRRORELF_IMAGE}
+    network_mode: host
     environment:
       MIRRORELF_SYNC_RELEASES_MANIFEST: '1'
+      MIRRORELF_HOST_NETWORK: '1'
     labels:
       - com.centurylinklabs.watchtower.enable=true
     depends_on:
       postgres:
         condition: service_healthy
-    ports:
-      - '18888:16888'
     volumes:
       - mirrorelf_config:/app/config
       - mirrorelf_log:/app/log
