@@ -76,12 +76,20 @@ MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 \
 
 ### Watchtower 自动更新
 
+**`install.sh` 会默认一并安装并启动 Watchtower**（约每 10 分钟检查 Hub，自动重建 `app`）。
+
+若不要 Watchtower：
+
 ```bash
-cd /www/mirrorelf   # 或你选择的安装目录
-docker compose -f compose.hub.yml --env-file env.hub --profile watchtower up -d
+MIRRORELF_SKIP_WATCHTOWER=1 bash install.sh
 ```
 
-启用后约每 10 分钟检查 Docker Hub 上的 `latest`，并重建带 `watchtower.enable` 标签的 `app` 容器。
+安装后查看 Watchtower 日志：
+
+```bash
+cd /www/mirrorelf   # 或你的安装目录
+docker compose -f compose.hub.yml --env-file env.hub --profile watchtower logs -f watchtower
+```
 
 ### 手动安装
 
@@ -175,12 +183,11 @@ On install you will be prompted for a directory; press **Enter** for default `/w
 
 ### Watchtower (auto-update)
 
-```bash
-cd /www/mirrorelf   # or your chosen install path
-docker compose -f compose.hub.yml --env-file env.hub --profile watchtower up -d
-```
+**`install.sh` enables Watchtower by default** (~10 min Hub poll, recreates `app` when the image changes).
 
-Polls Docker Hub about every 10 minutes and recreates the `app` container when `latest` changes.
+To skip Watchtower: `MIRRORELF_SKIP_WATCHTOWER=1 bash install.sh`
+
+View logs: `docker compose -f compose.hub.yml --env-file env.hub --profile watchtower logs -f watchtower` (from your install directory).
 
 ### Manual install
 

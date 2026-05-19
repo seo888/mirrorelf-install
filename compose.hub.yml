@@ -6,8 +6,7 @@
 #
 # 一键安装：见 README 或 install.sh
 #
-# Watchtower（每 10 分钟检查 Hub 更新）：
-#   docker compose -f compose.hub.yml --env-file env.hub --profile watchtower up -d
+# Watchtower：install.sh 默认一并安装；跳过：MIRRORELF_SKIP_WATCHTOWER=1
 #
 # 管理后台：http://<主机>:18888/_/admin/  默认 admin / admin
 
