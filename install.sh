@@ -28,6 +28,20 @@ fi
 COMPOSE="$WORKDIR/compose.hub.yml"
 ENV_FILE="$WORKDIR/env.hub"
 
+detect_primary_ip() {
+	local ip=""
+	if command -v ip >/dev/null 2>&1; then
+		ip="$(ip -4 route get 1.1.1.1 2>/dev/null | awk '{for (i=1;i<=NF;i++) if ($i=="src") {print $(i+1); exit}}')"
+	fi
+	if [[ -z "$ip" ]] && command -v hostname >/dev/null 2>&1; then
+		ip="$(hostname -I 2>/dev/null | awk '{print $1}')"
+	fi
+	if [[ -z "$ip" ]]; then
+		ip="127.0.0.1"
+	fi
+	printf '%s' "$ip"
+}
+
 write_embedded_compose() {
 	cat <<'COMPOSE_EOF' >"$COMPOSE"
 services:
@@ -110,9 +124,20 @@ echo "工作目录: $WORKDIR"
 docker compose -f "$COMPOSE" --env-file "$ENV_FILE" pull
 docker compose -f "$COMPOSE" --env-file "$ENV_FILE" up -d
 
+HOST_IP="$(detect_primary_ip)"
 echo
-echo "已启动。本机访问: http://127.0.0.1:18888/"
-echo "管理后台: http://127.0.0.1:18888/_/admin/ （默认 admin / admin，生产环境请修改）"
+echo "已启动。"
+echo "  站点:     http://${HOST_IP}:18888/"
+echo "  管理后台: http://${HOST_IP}:18888/_/admin/ （默认 admin / admin，生产环境请修改）"
+if [[ "$HOST_IP" == "127.0.0.1" ]]; then
+	echo "  （未能自动检测服务器 IP，请将上文地址中的 IP 改为本机内网或公网地址）"
+fi
+echo
+echo "若使用 Nginx、雷池（SafeLine）等反向代理 / WAF 对外暴露，请在网关配置回源："
+echo "  · 回源地址（upstream）: ${HOST_IP}"
+echo "  · 回源端口: 18888"
+echo "  公网入口填在 Nginx/雷池 的站点或监听上，不要直接把 18888 暴露到公网（除非已做访问控制）。"
+echo "  仅在本机调试时可访问: http://127.0.0.1:18888/"
 echo
 echo "启用 Watchtower 自动更新（每 10 分钟检查 Hub）："
 echo "  cd \"$WORKDIR\" && docker compose -f \"$COMPOSE\" --env-file \"$ENV_FILE\" --profile watchtower up -d"
