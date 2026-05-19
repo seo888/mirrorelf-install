@@ -92,25 +92,41 @@ resolve_install_dir() {
 	fi
 
 	if can_prompt_user; then
-		echo_prompt "请输入安装时选择的目录（若当时不是 ${DEFAULT_INSTALL_DIR}，请填写实际路径，勿盲目回车）。"
-		echo_prompt
+		local prompt_default="$DEFAULT_INSTALL_DIR"
+		local i=1 c
 
 		while true; do
-			if ! is_valid_install_dir "$DEFAULT_INSTALL_DIR"; then
-				mapfile -t candidates < <(list_install_dir_candidates | sort -u || true)
-				if [[ ${#candidates[@]} -gt 0 ]]; then
-					echo_prompt "检测到可能的安装目录："
-					local i=1 c
-					for c in "${candidates[@]}"; do
-						echo_prompt "  [$i] $c"
-						i=$((i + 1))
-					done
-					echo_prompt "  输入序号或完整路径。"
-					echo_prompt
-				fi
+			mapfile -t candidates < <(list_install_dir_candidates | sort -u || true)
+
+			if is_valid_install_dir "$DEFAULT_INSTALL_DIR"; then
+				prompt_default="$DEFAULT_INSTALL_DIR"
+			elif [[ ${#candidates[@]} -eq 1 ]]; then
+				prompt_default="${candidates[0]}"
+			elif [[ ${#candidates[@]} -gt 1 ]]; then
+				prompt_default="${candidates[0]}"
+			else
+				prompt_default="$DEFAULT_INSTALL_DIR"
 			fi
 
-			if ! read_prompt "安装目录 [${DEFAULT_INSTALL_DIR}]: " chosen; then
+			if [[ ${#candidates[@]} -gt 0 ]]; then
+				echo_prompt "检测到可能的安装目录："
+				i=1
+				for c in "${candidates[@]}"; do
+					echo_prompt "  [$i] $c"
+					i=$((i + 1))
+				done
+				if [[ ${#candidates[@]} -eq 1 ]]; then
+					echo_prompt "  直接回车将使用: ${candidates[0]}"
+				else
+					echo_prompt "  输入序号或完整路径；直接回车将使用: ${prompt_default}"
+				fi
+				echo_prompt
+			else
+				echo_prompt "请输入安装时使用的目录（安装脚本默认路径为 ${DEFAULT_INSTALL_DIR}）。"
+				echo_prompt
+			fi
+
+			if ! read_prompt "安装目录，直接回车使用 [${prompt_default}]: " chosen; then
 				echo_prompt "无法读取终端输入。请使用: curl -fsSL ... -o uninstall.sh && bash uninstall.sh" >&2
 				echo_prompt "或设置 MIRRORELF_INSTALL_DIR=/实际路径" >&2
 				exit 1
@@ -127,7 +143,7 @@ resolve_install_dir() {
 			elif [[ -n "$chosen" ]]; then
 				d="${chosen%/}"
 			else
-				d="$DEFAULT_INSTALL_DIR"
+				d="$prompt_default"
 			fi
 
 			if [[ -z "$d" ]]; then
