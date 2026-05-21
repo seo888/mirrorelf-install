@@ -13,7 +13,9 @@
 # app 使用 host 网络以便多 IP 出站；进程直接监听宿主机 16888（非 18888）。
 # 管理后台：http://<服务器IP>:16888/_/admin/  默认 admin / admin
 #
-# 持久化卷（Watchtower 换镜像后仍保留）：config / log / data / doc / templates / 数据库 pgdata。
+# 数据目录绑定到宿主机（相对本 compose 文件所在目录，install.sh 默认为 /www/mirrorelf）：
+#   config/  log/  data/  doc/  templates/  pgdata/
+# doc、templates 为建站文档与 HTML 模板；程序仅在文件不存在时写入内置种子，不会覆盖已有文件。
 
 services:
   postgres:
@@ -26,7 +28,7 @@ services:
     ports:
       - '127.0.0.1:${MIRRORELF_PG_HOST_PORT:-5432}:5432'
     volumes:
-      - mirrorelf_pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U postgres -d mirror']
       interval: 5s
@@ -48,11 +50,11 @@ services:
       postgres:
         condition: service_healthy
     volumes:
-      - mirrorelf_config:/app/config
-      - mirrorelf_log:/app/log
-      - mirrorelf_data:/app/data
-      - mirrorelf_doc:/app/doc
-      - mirrorelf_templates:/app/templates
+      - ./config:/app/config
+      - ./log:/app/log
+      - ./data:/app/data
+      - ./doc:/app/doc
+      - ./templates:/app/templates
 
   watchtower:
     profiles: [watchtower]
@@ -66,11 +68,3 @@ services:
       WATCHTOWER_CLEANUP: 'true'
       WATCHTOWER_INCLUDE_RESTARTING: 'true'
       TZ: Asia/Shanghai
-
-volumes:
-  mirrorelf_pgdata:
-  mirrorelf_config:
-  mirrorelf_log:
-  mirrorelf_data:
-  mirrorelf_doc:
-  mirrorelf_templates:

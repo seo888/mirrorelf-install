@@ -84,6 +84,13 @@ detect_primary_ip() {
 	printf '%s' "$ip"
 }
 
+ensure_data_dirs() {
+	mkdir -p "$WORKDIR"/{config,log,data,doc,templates,pgdata}
+	if [[ "$(uname -s 2>/dev/null)" == Linux ]] && command -v chown >/dev/null 2>&1; then
+		chown -R 999:999 "$WORKDIR/pgdata" 2>/dev/null || true
+	fi
+}
+
 write_embedded_compose() {
 	cat <<'COMPOSE_EOF' >"$COMPOSE"
 services:
@@ -97,7 +104,7 @@ services:
     ports:
       - '127.0.0.1:${MIRRORELF_PG_HOST_PORT:-5432}:5432'
     volumes:
-      - mirrorelf_pgdata:/var/lib/postgresql/data
+      - ./pgdata:/var/lib/postgresql/data
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U postgres -d mirror']
       interval: 5s
@@ -119,11 +126,11 @@ services:
       postgres:
         condition: service_healthy
     volumes:
-      - mirrorelf_config:/app/config
-      - mirrorelf_log:/app/log
-      - mirrorelf_data:/app/data
-      - mirrorelf_doc:/app/doc
-      - mirrorelf_templates:/app/templates
+      - ./config:/app/config
+      - ./log:/app/log
+      - ./data:/app/data
+      - ./doc:/app/doc
+      - ./templates:/app/templates
 
   watchtower:
     profiles: [watchtower]
@@ -137,14 +144,6 @@ services:
       WATCHTOWER_CLEANUP: 'true'
       WATCHTOWER_INCLUDE_RESTARTING: 'true'
       TZ: Asia/Shanghai
-
-volumes:
-  mirrorelf_pgdata:
-  mirrorelf_config:
-  mirrorelf_log:
-  mirrorelf_data:
-  mirrorelf_doc:
-  mirrorelf_templates:
 COMPOSE_EOF
 }
 
@@ -177,6 +176,8 @@ fi
 
 cd "$WORKDIR"
 echo "工作目录: $WORKDIR"
+ensure_data_dirs
+echo "数据目录: $WORKDIR/{config,log,data,doc,templates,pgdata}"
 COMPOSE_BASE=(docker compose -f "$COMPOSE" --env-file "$ENV_FILE")
 INSTALL_WATCHTOWER=0
 if resolve_install_watchtower; then
