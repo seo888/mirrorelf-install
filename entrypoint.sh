@@ -4,6 +4,13 @@ cd /app
 
 mkdir -p config log data doc templates
 
+# bind mount 由 install/root 创建时多为 root 属主；启动前改为应用用户可写
+if [ "$(id -u)" = "0" ] && [ "$1" != "--app" ]; then
+  chown -R mirrorelf:mirrorelf config log data doc templates 2>/dev/null || true
+  exec su -s /bin/sh mirrorelf -c '/app/entrypoint.sh --app'
+fi
+[ "$1" = "--app" ] && shift
+
 if [ ! -f config/config.yml ]; then
   echo "[entrypoint] No config/config.yml — copying docker default (mount a volume to override)."
   cp -f /app/docker/config.default.yml config/config.yml

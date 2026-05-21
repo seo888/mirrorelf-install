@@ -87,6 +87,7 @@ detect_primary_ip() {
 ensure_data_dirs() {
 	mkdir -p "$WORKDIR"/{config,log,data,doc,templates,pgdata}
 	if [[ "$(uname -s 2>/dev/null)" == Linux ]] && command -v chown >/dev/null 2>&1; then
+		chown -R 10001:10001 "$WORKDIR"/{config,log,data,doc,templates} 2>/dev/null || true
 		chown -R 999:999 "$WORKDIR/pgdata" 2>/dev/null || true
 	fi
 }
