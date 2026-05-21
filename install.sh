@@ -122,6 +122,8 @@ services:
       - mirrorelf_config:/app/config
       - mirrorelf_log:/app/log
       - mirrorelf_data:/app/data
+      - mirrorelf_doc:/app/doc
+      - mirrorelf_templates:/app/templates
 
   watchtower:
     profiles: [watchtower]
@@ -141,6 +143,8 @@ volumes:
   mirrorelf_config:
   mirrorelf_log:
   mirrorelf_data:
+  mirrorelf_doc:
+  mirrorelf_templates:
 COMPOSE_EOF
 }
 

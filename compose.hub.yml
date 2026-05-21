@@ -12,6 +12,8 @@
 #
 # app 使用 host 网络以便多 IP 出站；进程直接监听宿主机 16888（非 18888）。
 # 管理后台：http://<服务器IP>:16888/_/admin/  默认 admin / admin
+#
+# 持久化卷（Watchtower 换镜像后仍保留）：config / log / data / doc / templates / 数据库 pgdata。
 
 services:
   postgres:
@@ -49,6 +51,8 @@ services:
       - mirrorelf_config:/app/config
       - mirrorelf_log:/app/log
       - mirrorelf_data:/app/data
+      - mirrorelf_doc:/app/doc
+      - mirrorelf_templates:/app/templates
 
   watchtower:
     profiles: [watchtower]
@@ -68,3 +72,5 @@ volumes:
   mirrorelf_config:
   mirrorelf_log:
   mirrorelf_data:
+  mirrorelf_doc:
+  mirrorelf_templates:

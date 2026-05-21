@@ -2,7 +2,7 @@
 set -e
 cd /app
 
-mkdir -p config log
+mkdir -p config log data doc templates
 
 if [ ! -f config/config.yml ]; then
   echo "[entrypoint] No config/config.yml — copying docker default (mount a volume to override)."
