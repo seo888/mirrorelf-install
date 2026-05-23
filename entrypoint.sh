@@ -2,11 +2,20 @@
 set -e
 cd /app
 
-mkdir -p config log data doc templates
+mkdir -p config log data doc templates _/static/js _/static/images _/admin
+
+# 管理后台随镜像更新；_/static 为用户目录，永不从镜像覆盖
+if [ -d /app/docker/bundled/admin ]; then
+  cp -a /app/docker/bundled/admin/. _/admin/
+fi
+# 旧版 favicon 在 _/static，迁移到 _/admin（仅当新路径不存在时）
+if [ ! -f _/admin/favicon.ico ] && [ -f _/static/favicon.ico ]; then
+  cp -a _/static/favicon.ico _/admin/favicon.ico
+fi
 
 # bind mount 由 install/root 创建时多为 root 属主；启动前改为应用用户可写
 if [ "$(id -u)" = "0" ] && [ "$1" != "--app" ]; then
-  chown -R mirrorelf:mirrorelf config log data doc templates 2>/dev/null || true
+  chown -R mirrorelf:mirrorelf config log data doc templates _/static _/admin 2>/dev/null || true
   exec su -s /bin/sh mirrorelf -c '/app/entrypoint.sh --app'
 fi
 [ "$1" = "--app" ] && shift

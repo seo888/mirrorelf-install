@@ -14,8 +14,11 @@
 # 管理后台：http://<服务器IP>:16888/_/admin/  默认 admin / admin
 #
 # 数据目录绑定到宿主机（相对本 compose 文件所在目录，install.sh 默认为 /www/mirrorelf）：
-#   config/  log/  data/  doc/  templates/  pgdata/
+#   config/  log/  data/  doc/  templates/  pgdata/  _/static/
+# 应用目录属主应为 uid 10001（install.sh 会 chown）；Permission denied 时见 README 排错。
 # doc、templates 为建站文档与 HTML 模板；程序仅在文件不存在时写入内置种子，不会覆盖已有文件。
+# _/static/（含 js/、images/）为用户自写静态资源，升级镜像不会覆盖；管理后台 _/admin 由 entrypoint 从镜像同步。
+# 从旧版「命名卷」升级：可用 docker run --rm -v mirrorelf_config:/from -v $(pwd)/config:/to alpine cp -a /from/. /to/
 
 services:
   postgres:
@@ -55,6 +58,7 @@ services:
       - ./data:/app/data
       - ./doc:/app/doc
       - ./templates:/app/templates
+      - ./_static:/app/_/static
 
   watchtower:
     profiles: [watchtower]

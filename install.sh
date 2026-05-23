@@ -85,9 +85,10 @@ detect_primary_ip() {
 }
 
 ensure_data_dirs() {
-	mkdir -p "$WORKDIR"/{config,log,data,doc,templates,pgdata}
+	mkdir -p "$WORKDIR"/{config,log,data,doc,templates,pgdata,_static/js,_static/images}
+	# 与 Dockerfile 中 mirrorelf 用户 uid/gid 一致（10001）；Postgres 为 999
 	if [[ "$(uname -s 2>/dev/null)" == Linux ]] && command -v chown >/dev/null 2>&1; then
-		chown -R 10001:10001 "$WORKDIR"/{config,log,data,doc,templates} 2>/dev/null || true
+		chown -R 10001:10001 "$WORKDIR"/{config,log,data,doc,templates,_static} 2>/dev/null || true
 		chown -R 999:999 "$WORKDIR/pgdata" 2>/dev/null || true
 	fi
 }
@@ -132,6 +133,7 @@ services:
       - ./data:/app/data
       - ./doc:/app/doc
       - ./templates:/app/templates
+      - ./_static:/app/_/static
 
   watchtower:
     profiles: [watchtower]

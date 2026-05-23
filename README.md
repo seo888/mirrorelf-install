@@ -66,13 +66,13 @@ MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 \
 
 安装时会提示安装目录，**直接回车** 默认为 `/www/mirrorelf`（`compose.hub.yml`、`env.hub` 写在该目录）。也可输入自定义路径，或非交互：`MIRRORELF_INSTALL_DIR=/opt/mirrorelf bash install.sh`。
 
-数据目录**直接映射到宿主机**（与 compose 同目录）：`config/`、`log/`、`data/`、`doc/`、`templates/`、`pgdata/`（数据库）。可直接编辑 `doc/target.txt`、模板 HTML 等；Watchtower 换镜像后仍会保留。应用目录属主为 **uid 10001**（`install.sh` 会自动 `chown`）。
+数据目录**直接映射到宿主机**（与 compose 同目录）：`config/`、`log/`、`data/`、`doc/`、`templates/`、`pgdata/`（数据库）、`_static/`（用户自写静态资源，含 `js/`、`images/`）。可直接编辑 `doc/target.txt`、模板 HTML 等；Watchtower 换镜像后仍会保留。管理后台 `/_/admin` 由镜像 entrypoint 同步，不会被覆盖。应用目录属主为 **uid 10001**（`install.sh` 会自动 `chown`）。
 
 **若启动报 `cp: cannot create regular file 'config/config.yml': Permission denied`：**
 
 ```bash
 cd /www/mirrorelf   # 你的安装目录
-sudo chown -R 10001:10001 config log data doc templates
+sudo chown -R 10001:10001 config log data doc templates _static
 sudo chown -R 999:999 pgdata
 docker compose -f compose.hub.yml --env-file env.hub up -d
 ```
@@ -81,7 +81,7 @@ docker compose -f compose.hub.yml --env-file env.hub up -d
 
 ```bash
 uid=$(docker run --rm --entrypoint id seo888/mirrorelf:latest mirrorelf | sed -n 's/uid=\([0-9]*\).*/\1/p')
-sudo chown -R "${uid}:${uid}" config log data doc templates
+sudo chown -R "${uid}:${uid}" config log data doc templates _static
 ```
 
 若宿主机 **5432** 已被占用（如 1Panel 的 PostgreSQL），在 `env.hub` 中设置 `MIRRORELF_PG_HOST_PORT=15432`（安装脚本检测到占用时会自动写入 15432）。容器启动时会自动把卷内 `config.yml` 的数据库地址改为 `127.0.0.1:该端口`，密码与 compose 中 Postgres 一致（`mirrorelf`）。
