@@ -1,0 +1,495 @@
+{
+  "image": "seo888/mirrorelf:latest",
+  "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
+  "releases": [
+    {
+      "version": "0.9.60",
+      "date": "2026-06-05",
+      "title": "AI 任务全覆盖与解析加固",
+      "notes": [
+        "AI 任务：网站缓存 Meta「AI获取替换词」「生成TDK」与 AI 链轮「AI链轮分析」接入 ai_cache_task（流式弹窗仍实时预览，同时写入任务记录、prompt/response 日志；断开连接标为已取消）",
+        "AI 任务队列：手动触发的任务（含手动刷新 AI 替换词、上述流式操作、AI获取替换词、AI标题等）优先于缓存批量写入后自动排队",
+        "AI 获取替换词解析：兼容模型偶发省略区块前导 ===（如 TARGET_GLOBAL===），避免目标站全局替换词解析为空",
+        "AI 任务列表：链轮任务域名/路径显示为「AI链轮」「批量友链」path-tag（同「站点信息」样式），不再裸露 (AI链轮)/(批量友链)",
+        "AI 任务列表：全表单元格 vertical-align: middle，多行说明列时各行内容垂直居中"
+      ]
+    },
+    {
+      "version": "0.9.59",
+      "date": "2026-06-05",
+      "title": "P0 安全鉴权与链轮画布体验",
+      "notes": [
+        "P0 安全：管理/出站类接口从 /_api 迁入 /_api_（login_required）；含 site_status、site_include、check_domain_dns、random_target_domain、user_ip、server_ip；/metrics、/status 亦需登录",
+        "仍公开 /_api：login、check_auth、version、machine_code（DNS 指向探测协议依赖 /_api/machine_code，不可改）",
+        "流式代理 GET /-/{*url} 未改动",
+        "管理端同步新路径：仪表盘 /_api_/status、站点检测/网站列表探测接口等；开发代理移除独立 /status",
+        "P0 前端稳定性：Website / Files / CacheManage / Main 列表加载增加 generation 守卫，避免快速切换时旧请求覆盖新数据",
+        "PathPreviewSafariProgress：$effect 卸载时 clearTimers，修复定时器泄漏",
+        "AI 链轮画布：节点 >24 时默认隐藏边，悬停节点时再稀疏展示关联边（addEdgeData，修复 updateData 无法新增边）",
+        "AI 链轮：孤岛节点（当前段无镜像互链边）显示 1px 橙色描边，与「孤岛」统计一致；computeIsolatedMirrorIds 兜底",
+        "AppState 持有 PrometheusHandle；api_metrics / api_status_json 供 /_api_/metrics、/_api_/status"
+      ]
+    },
+    {
+      "version": "0.9.58",
+      "date": "2026-06-05",
+      "title": "链轮布局与友链保存优化",
+      "notes": [
+        "AI 链轮布局：去除贴边 clamp 导致的四角节点堆叠；黄金角螺旋初始分布 + 重叠分离（resolveOverlaps）；居中适度缩放，大图统一 fitView 自动缩小看全貌",
+        "AI 链轮友链保存：增删友链、侧栏「增加友链」、批量调整均传 preserve_website_cache，仅更新 conf.friend_links，不再清空 website_cache（友链为输出期动态插入）",
+        "网站管理：移除工具栏旧版「备份」按钮（完整备份/还原见侧栏「备份还原」页）"
+      ]
+    },
+    {
+      "version": "0.9.57",
+      "date": "2026-06-05",
+      "title": "版本日志修复、链轮大图布局与 AI 任务表",
+      "notes": [
+        "版本日志：后端编译期嵌入 releases.manifest，不依赖卷内旧文件；优先合并镜像内 docker/releases.manifest.json；构建时拷贝 /_/admin/releases.manifest.json 作前端兜底",
+        "Docker 升级：entrypoint 在镜像版本高于卷内 manifest 时自动同步；MIRRORELF_KEEP_RELEASES_MANIFEST=1 可保留卷内自定义",
+        "发版附带 scripts/mirrorelf-install/releases.manifest.json，可推至 mirrorelf-install 仓修复远程 manifest 404",
+        "AI 链轮大图（数百节点）：椭圆初始分布、斥力/向心力随规模自适应、力导向结束后 expandLayoutToFillCanvas 铺满画布，修复节点挤在中心方块",
+        "AI 链轮视口：节点 >40 时 fitCenter 替代 fitView，避免大图缩放异常",
+        "AI 任务队列表：消息列最多 2 行截断显示，完整内容悬停 title 或点击查看详情"
+      ]
+    },
+    {
+      "version": "0.9.56",
+      "date": "2026-06-05",
+      "title": "AI 链轮体验优化与站点日志合并",
+      "notes": [
+        "AI 链轮（#/link_wheel）性能：节点数 >24 关闭气泡动画；去除重复全量重绘；力导向迭代随规模自适应；批量友链保存最多 5 路并发，避免生产环境卡顿",
+        "AI 链轮首次打开：等待画布可见尺寸就绪后再布局，Tab 显示/尺寸变化时自动重新 fitView，修复节点挤在中间「小方块」",
+        "站点日志：侧栏「运行日志」合并进「站点日志」，顶部 Tab 切换「访问日志 / 运行日志」；#/site_logs 自动跳转 ?tab=runtime",
+        "站点日志 UI：运行日志主体高度随 flex 自适应；左右侧栏加载蒙版；两 Tab 左侧栏宽度统一为 17rem",
+        "网站管理：批量建站 textarea 修复（清除按钮包裹导致高度塌缩仅一条缝）；编译错误修复（批量友链 Promise 语法）"
+      ]
+    },
+    {
+      "version": "0.9.55",
+      "date": "2026-06-04",
+      "title": "AI 链轮：友链关系图与批量增删",
+      "notes": [
+        "管理端新增「AI 链轮」页（#/link_wheel）：汇总各站 conf.friend_links，解析 href 构建镜像站/外部站关系图（G6），支持全站/首页/内页段筛选、域名搜索定位、互链/单向/孤岛统计与配置诊断",
+        "图交互：悬停高亮链出与被链、点击节点展开详情与关联筛选、拖拽节点、滚轮缩放；深浅主题 CSS 变量同步；主站/泛域名角标",
+        "节点侧栏可增删友链（按友链样式模板生成 HTML 写入对应段）、跳转网站管理编辑 friend_links；友链样式设置（localStorage 模板，含域名/标题/关键词锚文本等预设）",
+        "批量调整友链：每行 `来源 ++ 目标` 增加或 `来源 -- 目标` 删除，同一来源合并保存；++ 按样式模板追加 HTML，-- 按当前图匹配删除",
+        "AI 链轮分析：POST /_api_/link_wheel/ai_analyze_stream（SSE），提交站点 TDK 目录与当前友链拓扑，模型输出 ++/-- 操作建议；流式预览后写入批量框",
+        "新增 prompt/link-wheel/system.md、user.md 种子（init_files 可预览/重置）；后端剥 reasoning 后校验 ++/-- 行格式",
+        "中英文 i18n（i18n-linkwheel.ts）；侧栏导航入口"
+      ]
+    },
+    {
+      "version": "0.9.54",
+      "date": "2026-06-04",
+      "title": "AI 推理块过滤与 HTML 规则解析加固",
+      "notes": [
+        "strip_model_reasoning_artifacts 扩展 `<reasoning>` 标签过滤；前端 aiStreamSanitize 与后端对齐，流式预览、缓存页 AI 任务与批量操作共用同一套剥除逻辑",
+        "HTML 多行替换：模型回复经 strip 后走 split_replace_rules_text 解析 ``` 围栏块，与 conf 替换规则解析器一致，支持多行 HTML 左右侧",
+        "纯文本模式 expand_fused_preamble_and_rule_line：模型把说明文字与首条 `->` 规则写在同一行时，自动拆出末段规则行，减少整行误解析",
+        "AI 替换规则解析失败时 meta_ai_replace_lines_parse_fail_detail 附带过滤后模型原文摘录（最多 8000 字），便于后台任务与流式 error 排查",
+        "page-replace-html/system.md 强化：禁止 ```html 语言标记围栏、左侧须逐字复制源码、无效/恒等规则反例与「优先大块」编写策略",
+        "缓存管理：本站/目标站全局替换规则 ≤1 时禁用「刷新 AI 替换词 / HTML 多行替换」，tooltip 提示 aiRefreshDisabledRules",
+        "docs/zh、docs/en 功能文档同步 HTML 替换与 AI 流式过滤说明"
+      ]
+    },
+    {
+      "version": "0.9.53",
+      "date": "2026-06-03",
+      "title": "AI HTML 多行替换与 .gov.cn 自动建站限制",
+      "notes": [
+        "新增 prompt/page-replace-html：从缓存页 <body> 源码（去 script/style）生成 ``` 围栏多行替换规则；User 模板支持 {current_time}、{date_window_start/end}（北京时间近 15 日）",
+        "系统设置「AI 自动替换提示词模式」：plain（纯文本单行）/ html（HTML 多行）；AI 任务队列与缓存页「刷新 AI 替换词」按模式选用 page-replace 或 page-replace-html",
+        "网站缓存 API 支持 replace_mode=html；缓存管理页增加「HTML 多行替换」操作（可仅写 ai_replace_lines 或连同 TDK）",
+        "init_files 种子文件新增 page-replace-html/system.md、user.md，可在文件管理预览/重置",
+        "自动建站：.gov.cn 域名（含 public_suffix 为 gov.cn）禁止触发自动建站，返回 403 并记录日志"
+      ]
+    },
+    {
+      "version": "0.9.52",
+      "date": "2026-06-02",
+      "title": "访客页内链后台预热（页面预加载）",
+      "notes": [
+        "系统设置与单站配置新增「页面预加载」：访客打开已缓存 HTML 页后，后台按链接映射同源路径集合预热 target_cache / website_cache（每页一层、最多 64 条、不递归）",
+        "与「链接映射」开关无关；仅当镜像站尚无该路径 HTML 缓存且允许爬取目标时才回源；同路径并发去重",
+        "单站 website_info.page_preload 支持 inherit / on / off；网站管理批量设置可统一 page_preload_mode",
+        "API 批量改站：POST /_api_/website/batch_settings 增加 page_preload_mode 字段校验"
+      ]
+    },
+    {
+      "version": "0.9.51",
+      "date": "2026-06-02",
+      "title": "站点访问日志按日永久删除",
+      "notes": [
+        "站点日志页（#/site_access）：左侧日期列表支持多选，可永久删除对应日期的 access-YYYY-MM-DD.jsonl（非回收站软删）",
+        "API：POST /_api_/spider/site_access_delete，body { dates: [\"YYYY-MM-DD\", ...] }；返回已删/失败列表",
+        "当日（服务器本地日历日）日志不可删，避免误删正在写入的文件；删除前二次确认，中英文 i18n",
+        "GET /_api_/spider/site_access_dates 仍返回 today、retain_days 供管理端对齐时区"
+      ]
+    },
+    {
+      "version": "0.9.50",
+      "date": "2026-06-02",
+      "title": "标签文档页体验与发布同步",
+      "notes": [
+        "内置标签文档 /_tag.html：与后台共用 mirrorelf-admin-theme 深浅主题，切换后台主题后刷新文档页即可同步",
+        "文档页版式与配色变量重构（DM Sans / JetBrains Mono）；左侧目录滚动高亮、返回顶部与刷新按钮",
+        "代码块点击复制：优先 Clipboard API，HTTP 非安全上下文下自动降级为 textarea + execCommand",
+        "镜像同步包含 0.9.49 备份还原页布局修复（范围区无滚动条、筛选框自适应高度）"
+      ]
+    },
+    {
+      "version": "0.9.49",
+      "date": "2026-06-02",
+      "title": "备份还原页布局与筛选区自适应",
+      "notes": [
+        "导出面板：备份范围（scope 勾选）完整展示，顶区不再出现独立滚动条",
+        "域名/目标站筛选 textarea 占面板剩余高度，内容在框内滚动，不再把上方范围区挤出滚动条",
+        "修复 clearableField 包裹层未参与 flex 导致 textarea 按内容撑高的问题",
+        "双栏筛选区与导出/还原按钮区在窄屏下仍保持面板内分区，不叠加外层滚动"
+      ]
+    },
+    {
+      "version": "0.9.48",
+      "date": "2026-06-02",
+      "title": "AI 提示词目录精简与种子文件重置",
+      "notes": [
+        "AI 提示词目录改为短路径：page-replace、site-replace、tdk-rules、tdk-kw、target-kw、yaml-translate；启动时自动将旧版 prompt/* 目录重命名迁移（仅当新目录不存在）",
+        "提示词与 doc/templates 种子文件编入程序，init_files 缺失时自动创建；AI 接口统一读取新路径",
+        "文件管理：系统种子文件禁止删除（delete_prohibited）；可 GET /_api_/file/seed-preset 预览出厂正文，PUT /_api_/file/reset-seed 一键恢复",
+        "编辑种子文件时若与预设不一致，管理端提示可重置；templates 旧 web 目录与 favicon（_/static→_/admin）启动时自动迁移"
+      ]
+    },
+    {
+      "version": "0.9.47",
+      "date": "2026-06-02",
+      "title": "备份导出异步落盘与分阶段下载",
+      "notes": [
+        "POST /_api_/backup/create 改为异步：立即返回 export_id，后台写入 data/backup_exports/{id}.mefbackup；进度仍经 X-Backup-Job-Id + SSE",
+        "就绪后 GET /_api_/backup/export/{export_id}/status（ready + size），再 GET /_api_/backup/download/{export_id} 流式下载（256KB 分块），避免单 POST 长时间占用被 Nginx/代理掐断",
+        "导出包约 6 小时 TTL，定时清理过期文件；失败时自动删除半成品",
+        "前端 createBackupDownload：提交 JSON → SSE 等待打包完成 → 轮询 status → XHR 带进度下载 .mefbackup；超时提示可调大代理 read_timeout",
+        "Docker/部署请挂载 data 目录（含 backup_exports、backup_staging、spider_counter.json）"
+      ]
+    },
+    {
+      "version": "0.9.46",
+      "date": "2026-05-27",
+      "title": "蜘蛛统计落盘与站点 7 日趋势稳定",
+      "notes": [
+        "内存蜘蛛计数（按域名/日期/蜘蛛名）定期写入 data/spider_counter.json，进程启动时自动加载；重启后仪表盘与站点列表「近 7 日分蜘蛛」趋势不丢失",
+        "落盘每 5 分钟一次，临时文件 + rename 原子写入；快照自动裁剪超过约 45 个日历日的旧数据",
+        "Docker/部署请挂载 data 目录（或至少 data/spider_counter.json）以持久化统计",
+        "站点列表：site_status / DNS 轮询与 7 日蜘蛛趋势、缓存条数请求使用独立代数（websiteListGen / rowAuxGen），避免状态探测刷新误取消趋势加载"
+      ]
+    },
+    {
+      "version": "0.9.45",
+      "date": "2026-05-27",
+      "title": "备份还原进度条与长任务防卡顿",
+      "notes": [
+        "备份还原页统一进度条：导出/预览/还原覆盖上传字节、服务端 SSE 处理、下载 .mefbackup 三阶段，0–100% 平滑显示",
+        "新增 backupProgress / backupSse 前端模块与 BackupTransferProgress 组件；SSE 在 POST 前建立，避免漏事件",
+        "服务端长查询/大 ZIP 写入期间 run_with_stall_guard 周期性推进进度（上限约 92%），避免进度条长时间不动",
+        "SSE 进度支持小数百分比；同百分比下若阶段说明变化仍会推送，便于展示「查库中」等状态文案",
+        "还原流程支持 upload_id 复用暂存包，无需重复上传大文件"
+      ]
+    },
+    {
+      "version": "0.9.44",
+      "date": "2026-05-27",
+      "title": "备份还原（.mefbackup）与进度 SSE",
+      "notes": [
+        "管理后台新增「备份还原」页（/_/admin/#/backup_restore）：导出/导入 .mefbackup 包，用于迁移与灾备（与回收站 7 天软删除不同）",
+        "备份范围可选：主站/泛站网站配置、目标站替换词、网站缓存（页面&映射/静态/泛目录）、目标站缓存（HTML/静态）及关联 content_chunks；支持按域名/目标站筛选",
+        "还原前上传预览 manifest（网站/缓存/块数量）；冲突策略：跳过、覆盖、合并；目标站支持仅 rules 或完整 conf JSON",
+        "大文件上传暂存 data/backup_staging（约 3 小时 TTL），预览后还原无需重复上传；可 DELETE /_api_/backup/staging/{upload_id} 丢弃",
+        "创建/还原过程经 X-Backup-Job-Id 关联 GET /_api_/backup/progress/{job_id} SSE，分阶段上报百分比与说明；卡死检测与超时保护",
+        "API：GET /_api_/backup/sizes 估算体量；POST create/preview/restore；备份路由放宽请求体大小限制",
+        "仍支持导出旧版 TXT 配置摘要；备份还原页中英文 i18n"
+      ]
+    },
+    {
+      "version": "0.9.43",
+      "date": "2026-05-26",
+      "title": "站点检测增强与中英文文档",
+      "notes": [
+        "站点检测：收录查询新增 Yandex、360（so360），与百度/谷歌/必应/搜狗并列可选列",
+        "站点检测：查询项分组（站点状态 / 收录 / 域名 WHOIS），支持 HTTP 状态、耗时、标题、注册/到期/DNS/注册商等列",
+        "站点检测：结果区 TSV 导出、复制失败项；按数据来源删除筛选项（doc/target.txt 行、target 表、website 表）并二次确认",
+        "后端 site_include：多引擎 site: 探测与验证码/解析失败分类；设置页蜘蛛策略补充 Yandex",
+        "新增 docs/ 中英文文档集（产品、架构、部署、配置、管理后台、FAQ、授权、附录），可供官网或 VitePress 建站",
+        "Docker 构建：reqwest 关闭 default-features；构建镜像补充 libclang-dev，避免 Linux release 链接失败"
+      ]
+    },
+    {
+      "version": "0.9.42",
+      "date": "2026-05-26",
+      "title": "站点访问日志与运行日志管理页",
+      "notes": [
+        "新增「站点日志」页：镜像站访问按日 JSONL 落盘 log/access/（保留约 30 天），字段对齐 combined 日志（IP/方法/路径/状态/耗时/蜘蛛/Referer/UA/Content-Type）",
+        "站点日志：左栏域名分页筛选，右栏最近访问表；支持按日查询、仅 HTML、5 秒轮询与 SSE 实时跟踪（/_api_/spider/site_access_stream）；单站展示当前 QPS",
+        "新增「运行日志」页：只读浏览 log/app/ 下 app.log 及历史滚动文件；级别（info/warn/error）与关键词筛选、向上翻页加载、app.log 实时跟踪（SSE）",
+        "后端 site_access_log：内存环缓冲 + 异步写盘 + broadcast；历史查询反向扫描单文件最多 8MB；启动时清理超 30 天文件",
+        "应用日志改为按日滚动至 log/app/app.log.YYYY-MM-DD，管理端 file API 兼容旧版 log/app.log 路径",
+        "侧栏导航拆分「站点日志」与「运行日志」；共享 LogViewer 组件统一日志行着色与高亮"
+      ]
+    },
+    {
+      "version": "0.9.41",
+      "date": "2026-05-23",
+      "title": "目标缓存模板中心编辑与版本日志云端合并",
+      "notes": [
+        "目标缓存列表：行内「编辑」跳转模板中心，合并 content_chunks 加载正文（HTML/文本/图片），保存经 PUT /_api_/target_cache/content 写回分块存储",
+        "模板中心目标缓存模式：虚拟路径 @target-cache/域名/path；sessionStorage 传递草稿与跳转，首屏不触发普通文件列表覆盖",
+        "模板中心保存目标缓存：文本/图片分别走 content 与 content_base64，保存后提示「目标缓存已保存」",
+        "后端新增 GET/PUT /_api_/target_cache/content：按 chunks 顺序合并读取、保存时重新分块写入 content_chunks",
+        "版本日志：manifest 支持 remote_manifest_url，与 mirrorelf-install 云端 manifest 合并；侧栏版本弹窗展示 release_history 累加全部历史说明"
+      ]
+    },
+    {
+      "version": "0.9.40",
+      "date": "2026-05-23",
+      "title": "随机目标池探测与网站列表布局优化",
+      "notes": [
+        "目标缓存列表：path 列链接显示「目标域名+路径」，隐藏单独的 target_domain 列",
+        "随机目标站（建站/编辑/批量）：跳过目标管理中已登记域名；site_status 探测可达性，不可达最多连续重抽 5 次",
+        "后端新增 /_api_/random_target_probe：首次不可达记入 data/random_target_probe_fail.json；再次抽到仍不可达则异步从 doc/target.txt 移除对应行",
+        "random_target_domain 返回 prior_unreachable，前端无需等待上报即可触发文档行删除并提示",
+        "建站表单网络 IO 按钮（随机、自动 TDK、AI 获取替换词）：请求期间转圈 loading 并 disabled",
+        "网站列表域名行：域名、缓存角标、复制/清缓存图标同一行 nowrap 紧凑排列，避免换行错位"
+      ]
+    },
+    {
+      "version": "0.9.39",
+      "date": "2026-05-23",
+      "title": "网站列表 UI 与 Hub 静态资源卷",
+      "notes": [
+        "网站管理·域名 DNS/WHOIS Tooltip：无到期日或注册商数据时不显示对应行，去掉「—」占位",
+        "网站列表标题文字改用正文色（--text），悬停 accent 高亮，避免标题行发灰",
+        "网站列表单元格内标题行与域名行间距收紧（cell-stack gap），表格更紧凑",
+        "Hub compose / install.sh：新增 _static 宿主机绑定（js、images 等用户静态资源升级不丢）；entrypoint 每次启动同步管理后台，_/static 永不从镜像覆盖"
+      ]
+    },
+    {
+      "version": "0.9.38",
+      "date": "2026-05-23",
+      "title": "管理台交互增强与镜像构建修复",
+      "notes": [
+        "管理后台全局自定义 Tooltip：按钮/图标 title 统一延迟悬停展示，滚动、点击、切 Tab 自动收起，避免与原生提示重复",
+        "站点可达性探测（site_status）跨页面 localStorage 共享缓存，网站/目标/缓存页复用结果，减少重复请求",
+        "网站管理「批量打开」：弹窗内逐条打开已勾选站点，支持 Ctrl/⌘ 新标签打开与复制全部链接",
+        "Docker 构建：编译期嵌入 config/whois-servers.json，修复 0.9.37 镜像因缺少 WHOIS 配置而无法编译的问题"
+      ]
+    },
+    {
+      "version": "0.9.37",
+      "date": "2026-05-22",
+      "title": "域名 DNS/WHOIS 与建站校验",
+      "notes": [
+        "新增 /_api/check_domain_dns：对比本机 machine_code 判断 DNS 是否指向本站，并附带根域 WHOIS 摘要（config/whois-servers.json）",
+        "网站管理列表展示域名解析/WHOIS 状态（本地缓存）；自动建站前校验未指向本机则跳过并提示",
+        "网站管理·批量操作弹窗：并发下拉与操作按钮不再挤叠，按钮按内容宽度排列"
+      ]
+    },
+    {
+      "version": "0.9.36",
+      "date": "2026-05-22",
+      "title": "设置页国际化与授权文案",
+      "notes": [
+        "设置页文案收拢至 i18n-config：AI 接口预设厂商、授权校验状态/失败原因、机器码芯片复制提示等中英完整",
+        "授权说明与出口 IP 测试弹窗、蜘蛛类型等字段统一走 $tr，便于后续维护"
+      ]
+    },
+    {
+      "version": "0.9.35",
+      "date": "2026-05-22",
+      "title": "文档对齐与镜像构建稳定性",
+      "notes": [
+        "根目录 compose.yaml 管理端地址说明与 Hub host 网络 16888 一致",
+        "Dockerfile 运行时阶段 apt 安装增加重试，缓解构建时 Debian 源偶发 502"
+      ]
+    },
+    {
+      "version": "0.9.34",
+      "date": "2026-05-21",
+      "title": "Hub 宿主机目录绑定与启动权限",
+      "notes": [
+        "Hub compose / install.sh：数据改为宿主机目录绑定（config、log、data、doc、templates、pgdata），便于备份与直接编辑",
+        "entrypoint：bind mount 场景下先 chown 应用目录再以 mirrorelf 用户运行，避免 Permission denied",
+        "镜像增加 HEALTHCHECK（/robots.txt）；安装脚本 Linux 下预置 uid 10001 / Postgres 999 属主"
+      ]
+    },
+    {
+      "version": "0.9.33",
+      "date": "2026-05-21",
+      "title": "侧栏授权提醒与 Hub 卷说明",
+      "notes": [
+        "侧栏授权横幅：未授权与「即将到期（不足 30 天）」分开展示与关闭记忆，即将到期为淡蓝样式并跳转设置续期",
+        "Hub compose / install：补充 doc、templates 持久化卷说明（种子文件不覆盖已有内容）"
+      ]
+    },
+    {
+      "version": "0.9.32",
+      "date": "2026-05-21",
+      "title": "设置页授权区交互修复",
+      "notes": [
+        "设置·授权码：区块改为 role=group，不再用外层 label 包裹「刷新」按钮，避免整块区域误触刷新",
+        "授权验证行布局与出站 IP 区块一致；刷新按钮点击区域仅限按钮本身"
+      ]
+    },
+    {
+      "version": "0.9.31",
+      "date": "2026-05-21",
+      "title": "授权分级校验与访客站注入策略",
+      "notes": [
+        "授权码校验结构化：失败原因、到期时间/剩余天数、注入模式（none / soft / hard）及到期临近后台提示",
+        "访客镜像站：未授权或过期超过 30 天宽限期 → hard（仅广告页、不拉取镜像源码）；过期 30 天内 → soft（head 插广告，蜘蛛仍见完整 HTML）",
+        "管理端：顶栏未授权横幅、设置页授权即时验证（/_api_/authorization/verify）；配置读写返回 authorization_* 字段",
+        "API/后台/内网 /-/ 预览不受授权注入影响；保存配置时同步刷新授权缓存"
+      ]
+    },
+    {
+      "version": "0.9.30",
+      "date": "2026-05-20",
+      "title": "管理路径统一与镜像流预览 UA",
+      "notes": [
+        "管理后台统一为 /_/admin/；旧路径 /_/_admin 与 ban 中间件 301 重定向，避免去尾斜杠后 404",
+        "镜像流 /-/ 支持 preview_ua 查询参数，站点预览/采集可按指定 User-Agent 出站拉取",
+        "设置·访问与封禁：出口 IP 在线测试（/_api_/outbound_ips/test）返回状态、耗时与响应预览（截断 256KB）",
+        "stream 与 ban 路径规范化一致（非 /_/admin 去尾斜杠）；会话 Cookie SameSite 调整为 Lax 提升管理端刷新稳定性"
+      ]
+    },
+    {
+      "version": "0.9.29",
+      "date": "2026-05-20",
+      "title": "Hub 部署 host 网络与安装体验",
+      "notes": [
+        "Hub compose / install.sh：app 默认 host 网络，直接监听宿主机 16888（多 IP 出站；Nginx/雷池回源 16888）",
+        "entrypoint：MIRRORELF_HOST_NETWORK=1 时按环境变量改写 pg_database_url 指向 127.0.0.1 映射端口",
+        "安装脚本：自动检测服务器 IP；宿主机 5432 占用时 Postgres 映射 15432；完成提示含 Watchtower 与反向代理说明"
+      ]
+    },
+    {
+      "version": "0.9.28",
+      "date": "2026-05-20",
+      "title": "分页下拉与 Hub 安装脚本",
+      "notes": [
+        "SelectMenu：视口下方空间不足时自动向上弹出（网站管理等底部分页「每页条数」等）",
+        "Docker Hub 一键安装脚本支持交互选择安装目录与是否启用 Watchtower",
+        "新增 uninstall.sh 完全卸载（容器、卷、安装目录可选清理）"
+      ]
+    },
+    {
+      "version": "0.9.27",
+      "date": "2026-05-19",
+      "title": "模板中心稳定性与站点检测增强",
+      "notes": [
+        "模板中心：文件列表分页拉全（不再静默截断 500 条）；上传是否已存在改为按路径 query",
+        "doc/templates/web 合并迁移仅写入新路径不存在的文件，同名冲突记录 warn 日志",
+        "修复目标管理分页下拉、模板中心乱码文案；SVG 标注仅预览",
+        "站点检测 / 网站缓存 / 链接右键：site 查询（百度/谷歌/必应/搜狗，支持主机名与根域名）",
+        "新增 templateWebFiles 单元测试（vitest）"
+      ]
+    },
+    {
+      "version": "0.9.26",
+      "date": "2026-05-18",
+      "title": "模板中心路径与文件选择体验",
+      "notes": [
+        "模板资源根目录统一为 templates/web（站点引用 /templates/web），启动时自动从 doc/templates/web 合并迁移",
+        "模板中心：文件路径与下拉框同一行；路径展示、右键菜单（含列表内文件项）、提示文案移入下拉面板",
+        "支持网页资源上传/下载进度、文件夹上传、图片预览与栅格图简单编辑；HTML 预览注入 base 路径",
+        "静态路由 /templates 提供模板资源访问；文件 API 兼容旧路径入参并统一返回新路径"
+      ]
+    },
+    {
+      "version": "0.9.25",
+      "date": "2026-05-18",
+      "title": "数据采集、模板中心与侧栏交互",
+      "notes": [
+        "数据采集：关键词采集器 / 标题生成器 / 文章采集器（URL 队列、html_to_plain_lines、导出 doc/article.txt）",
+        "模板中心：编辑区与预览可拖拽分栏；文件路径在 Windows 下读取修复",
+        "侧栏可收起，收起按钮固定在侧栏右缘中部",
+        "文件 API 列表返回统一相对路径，避免绝对路径导致无法打开"
+      ]
+    },
+    {
+      "version": "0.9.24",
+      "date": "2026-05-18",
+      "title": "出站 IP、批量设置与 Hub host 网络",
+      "notes": [
+        "设置·访问与封禁：指定出口 IP（每行），留空仍用 IPS.txt / 自动探测；支持一键探测填入",
+        "网站管理：批量设置链接映射、镜像语言、首页更新时间（未选站点则作用于全部）",
+        "Hub 部署 compose.hub.yml：app 使用 host 网络，便于多 IP 出站；Postgres 经 127.0.0.1:5432",
+        "修复管理端部分布尔配置项点击不生效；/_api_ 路由优先于静态文件，批量设置接口不再 405"
+      ]
+    },
+    {
+      "version": "0.9.23",
+      "date": "2026-05-18",
+      "title": "AI 站群登录体验与后台路径统一",
+      "notes": [
+        "管理后台统一为 /_/admin（Svelte）；静态目录 _/admin，无尾斜杠自动 308 到 /_/admin/",
+        "登录页全新视觉：WebGL 镜面极光背景、毛玻璃卡片与 AI 站群宣传语",
+        "版本日志 manifest 与发版版本号联动校验；Hub/本地 Docker 启动时同步 releases.manifest",
+        "Watchtower 改用 nickfedor/watchtower（兼容 Docker 29），默认每 10 分钟检查更新",
+        "本地 compose 挂载仓库 manifest；Hub 部署设 MIRRORELF_SYNC_RELEASES_MANIFEST 随镜像升级日志"
+      ]
+    },
+    {
+      "version": "0.9.22",
+      "date": "2026-05-17",
+      "title": "管理后台中英文化与交互统一",
+      "notes": [
+        "新版 Svelte 管理台支持中英文切换（MirrorElf / 镜像精灵），导航、表单、表格与提示全面 i18n",
+        "SelectMenu 下拉选中后自动关闭；网站管理「类型」筛选变更后自动查询",
+        "全站单行输入、下拉与按钮统一为 2.2rem 控件高度；筛选关键词框单行时占位符垂直居中",
+        "侧栏版本状态文案随语言切换；AI 任务路径列可一键跳转网站缓存并按路径筛选",
+        "网站信息：链接映射移至首页更新时间后；自动生成 TDK 按钮置于区块末尾"
+      ]
+    },
+    {
+      "version": "0.9.21",
+      "date": "2026-05-16",
+      "title": "管理后台浅色主题与交互优化",
+      "notes": [
+        "浅色模式主界面与弹窗改为白底，去除大面积灰底",
+        "标签文档随深浅主题切换；自定义复选框与表格/预览区背景修复",
+        "按钮悬停提示残留修复；关键词 Tab 选中态悬停对比度优化",
+        "侧栏版本号与查看日志眼睛图标同排；机器码/IP 复制块配色统一"
+      ]
+    },
+    {
+      "version": "0.9.20",
+      "date": "2026-05-16",
+      "title": "管理后台体验与发布",
+      "notes": [
+        "版本检查每次实时查询 Docker Hub，不再缓存 1 小时",
+        "侧栏 Hub 版本仅在高于当前版本时显示；保存配置后登录账号密码立即生效",
+        "蜘蛛策略不再拦截后台登录与 API；设置页标签与内容区间距与滚动优化",
+        "网站管理目标站探测轮询：5s → 10s → 20s → 40s 起逐次翻倍，减少无效请求"
+      ]
+    },
+    {
+      "version": "0.9.19",
+      "date": "2026-05-16",
+      "title": "管理后台与自动更新",
+      "notes": [
+        "管理后台侧栏版本信息：Docker Hub 检测、版本日志弹窗",
+        "Watchtower 可选自动拉取 Hub 镜像并重建 app（compose --profile watchtower）",
+        "AI 任务三个 Tab 共用并行数配置，不再被任务列表加载遮挡"
+      ]
+    },
+    {
+      "version": "0.9.18",
+      "date": "2026-05-16",
+      "title": "版本检查与镜像分发",
+      "notes": [
+        "管理后台版本信息改为 Docker Hub 检测，不再依赖 GitHub API",
+        "Docker 镜像体积优化；支持 Watchtower 自动拉取更新",
+        "Linux 一键安装脚本 install.sh"
+      ]
+    }
+  ]
+}
