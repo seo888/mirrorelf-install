@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.64",
+      "date": "2026-06-08",
+      "title": "目标缓存 HTML 实体解码与空白规范化",
+      "notes": [
+        "写入 target_cache 前 prepare_target_cache_bytes_for_save：HTML/XHTML 或路径为 /、.html/.htm/.xhtml 时，对正文做多轮 HTML 实体解码（最多 8 轮，含 &amp;amp; 等双重编码）",
+        "解码后 normalize_special_whitespace_for_target_cache：&nbsp;、全角空格、EN/EM 空格等统一为普通空格 (U+0020)",
+        "normalize_typographic_quotes_for_target_cache：中文弯引号 “ ” ‘ ’ 统一为 ASCII \" '，便于 replacer 精确匹配",
+        "目标站回源爬取（website.rs）与页面预加载回种（page_preload.rs）在 clean_html 后同样走 decode_html_entities_for_target_cache",
+        "sql 层 insert/update target_cache 统一经 prepare_target_cache_bytes_for_save，与直接 API 写入行为一致"
+      ]
+    },
+    {
       "version": "0.9.63",
       "date": "2026-06-08",
       "title": "友链样式迁入 config 与模板编辑器",
