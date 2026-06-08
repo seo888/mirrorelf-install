@@ -3,6 +3,44 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.63",
+      "date": "2026-06-08",
+      "title": "友链样式迁入 config 与模板编辑器",
+      "notes": [
+        "友链 HTML 模板从浏览器 localStorage 迁至 config.yml SEOFunctions.friend_link_style（string[]，每行一条）；AI 链轮「增加友链」与 ++ 批量追加仍随机抽取模板行",
+        "系统设置 SEO 区新增友链样式编辑（FriendLinkTemplateEditor，CodeMirror HTML + 行号）；config.example.yml / docker 默认配置含 10 条常用预设",
+        "AI 链轮「友链样式设置」：勾选常用样式矩阵（同窗口/新窗口 × 域名/标题/关键词等预设）自动增删模板行；保存写入 config.yml；首次读取兼容旧 localStorage 并回落默认模板",
+        "链轮页保存后 notifyExternalConfigSave，系统设置页监听 configExternalSaveTick 自动刷新，避免两处模板不同步",
+        "linkWheelFriendLinkStyleConfig：ensure/refresh/save 经 /_api_/config 读写；预览支持「换一条」随机行",
+        "docs/zh、docs/en 07-configuration 补充 friend_link_style 说明"
+      ]
+    },
+    {
+      "version": "0.9.62",
+      "date": "2026-06-06",
+      "title": "AI 任务对话详情与链轮批量清空",
+      "notes": [
+        "AI 任务「查看对话」：已发送侧 AiTaskLogPlain 区分【段落标题】/---system---/---user--- 与正文；已接收侧 AiResponseLogDisplay 拆分思考块（redacted_thinking/think/thinking/reasoning）与正文，思考段轻量 Markdown 渲染",
+        "流式 AI 任务 response_log 保留模型原文（含思考块）供详情展示；解析 ++/-- 或替换规则仍 strip 后校验；链轮/缓存 Meta/AI获取替换词等流式接口统一 acc_raw 落库",
+        "AI 任务 prompt/response 日志统一 append_ai_prompt_block / append_ai_response_block 排版（【段落】+ ---system/user/assistant---）；单条最多 80000 字截断",
+        "AI 链轮节点侧栏：链出/被链列表增加「清空」按钮，批量删除当前段全部可编辑友链",
+        "批量调整友链弹窗：「一键全清」从当前图导出全部 `来源 -- 目标` 删除行写入输入框，确认后批量保存",
+        "AI 链轮大图（节点 >24）：画布右键切换「始终显示全部连线 / 仅悬停显示关联边」；提示文案同步"
+      ]
+    },
+    {
+      "version": "0.9.61",
+      "date": "2026-06-05",
+      "title": "单站 AI 自动替换三态与链轮提示词强化",
+      "notes": [
+        "单站 website_info.ai_auto_replace_after_cache 支持 inherit/on/off 三态（缺省或 null 跟随全局 website_settings）；网站管理单站编辑与批量设置可统一 ai_auto_replace_mode",
+        "AI 任务队列：缓存批量写入、访客回种后自动排队 AI 替换词前，按单站三态判定（ai_auto_replace_enabled_for_domain）；手动「刷新 AI 替换词 / HTML 多行」不受此开关限制",
+        "site_settings.rs 集中单站布尔项解析（含 page_preload、crawler_target / pan_site_crawler_target 三态），供 middleware 与 AI 队列共用",
+        "AI 链轮提示词重写（prompt/link-wheel/system.md、user.md）：内部分析主题聚类/拓扑体检/缺口清单；明确孤岛必补、同簇互链、删不相关边与按站点规模最低 ++ 条数；禁止敷衍 0～1 条",
+        "链轮分析输入：当前友链改为同来源一行 `来源 -> 目标1,目标2,...`（buildLinkWheelCurrentLinks 合并逗号分隔），便于模型统计链出数与被链关系"
+      ]
+    },
+    {
       "version": "0.9.60",
       "date": "2026-06-05",
       "title": "AI 任务全覆盖与解析加固",
