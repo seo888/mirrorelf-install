@@ -3,6 +3,19 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.66",
+      "date": "2026-06-09",
+      "title": "回收站软删除与 AI 链轮单节点分析",
+      "notes": [
+        "网站/目标站/缓存删除默认入回收站（保留 7 天）：website_cache_trash、target_cache_trash、admin_entity_trash；到期自动清理任务物理删除 chunks",
+        "管理端文件删除移入 .admin_file_trash/{batch_id}/ 并登记 admin_entity_trash；统一回收站页 /recycle_bin（列表/整批恢复/立即清空）",
+        "网站管理、目标管理、缓存管理、文件管理等删除按钮改为 DeleteSplitButton：主按钮入回收站，副按钮 permanent=1 直接物理删除",
+        "AI 推理块过滤增强：strip_model_reasoning_artifacts 剥 redacted_thinking/think/thinking/reasoning；repair_www_domain_split_after_reasoning 修复思考块闭合后 www 被截断为 .domain 的问题；前后端 aiStreamSanitize 与 ai_shared 对齐",
+        "AI 链轮「仅分析此节点」：focus_domain 走 prompt/link-wheel/system-focus.md、user-focus.md，只分析该站出站与被链；流式解析过滤含思考标签的 ++/-- 行",
+        "启动时 migrate_legacy_prompt_dirs 自动迁移旧 prompt 目录名（如 site-preview-replace → page-replace）"
+      ]
+    },
+    {
       "version": "0.9.65",
       "date": "2026-06-09",
       "title": "出站 wreq 浏览器 persona 池与收录探测增强",
