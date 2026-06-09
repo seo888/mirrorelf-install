@@ -3,6 +3,19 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.69",
+      "date": "2026-06-10",
+      "title": "主站/泛站域名解析修正与 gov.cn 自动建站拦截",
+      "notes": [
+        "新增 functions/domain.rs（tldextract）：get_domain_info 产出 subdomain/root_domain/full_domain/public_suffix；mirror_site_fields 正确处理 co.uk、com.cn 等多段后缀",
+        "is_main_site_domain：仅 www.{根域} 为主站；www.abc.example.com 子域为 www.abc，归入泛站，不再误判为 is_www",
+        "全站替换 naive 的 domain.starts_with(\"www.\")：网站/缓存列表主站·泛站筛选、域名缓存 www/fan 分组、批量设置 crawler_target 分支、备份 scope、AI 站点类型等均走 is_main_site_domain",
+        "website_cache/domains：is_www=true/pan 改为 main_site_filter 内存过滤；返回 is_www 与 has_website 一致",
+        "自动建站 middleware：is_auto_site_building_blocked_domain 拦截 .gov.cn 注册域，跳过并提示",
+        "管理端 websiteConf：isMainSiteDomain / mirrorSiteFields 与后端对齐；网站编辑/批量设置按真实主站·泛站展示爬取目标等字段"
+      ]
+    },
+    {
       "version": "0.9.68",
       "date": "2026-06-10",
       "title": "网站批量设置、孤儿缓存标记与链轮友链去重",
