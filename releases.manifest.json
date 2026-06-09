@@ -3,6 +3,19 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.68",
+      "date": "2026-06-10",
+      "title": "网站批量设置、孤儿缓存标记与链轮友链去重",
+      "notes": [
+        "网站管理「批量设置」：POST /_api_/website/batch_settings 一次写入链接映射、页面预加载、AI 自动替换词、主站/泛站爬取目标（inherit/on/off）、to_lang、首页更新时间；支持勾选站点或空 ids 表示全部",
+        "sql batch_patch_website_settings 事务内逐站 patch conf.website_info，不清空 website_cache",
+        "网站缓存域名列表返回 has_website；website_domains_exist_set 标记无 website 配置的「孤儿缓存」；缓存管理侧栏孤儿角标、一键选中孤儿域",
+        "website_cache/domains 新增 includeCacheCount=false 时跳过条数统计（列表秒开），分页仍 DISTINCT domain 不做全表 GROUP BY",
+        "AI 链轮「调整友链」：来源 -- 目标 !keep 去重（每对保留一条）；一键全清、清理重复友链预填；同一来源多条操作合并为一次保存",
+        "站点日志 Hub：日报 Tab 日期选择与刷新并入顶栏 SelectMenu；运行日志工具条 slot 与 Tab 切换体验统一"
+      ]
+    },
+    {
       "version": "0.9.67",
       "date": "2026-06-09",
       "title": "站点日报与日志 Hub 三 Tab",
