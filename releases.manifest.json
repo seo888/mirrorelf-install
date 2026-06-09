@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.67",
+      "date": "2026-06-09",
+      "title": "站点日报与日志 Hub 三 Tab",
+      "notes": [
+        "新增 GET /_api_/spider/daily_report?date=YYYY-MM-DD：按 UTC 日历日汇总访问日志 JSONL（总量/HTML/独立 IP/2xx·4xx·5xx/24 小时分布/蜘蛛 Top/各站明细），默认昨日，括号对比前一日 Δ",
+        "各站明细含 cache_total、cache_touched（当日 updated_at 落在该 UTC 日的 website_cache 行数）及 cache_touched_delta；sql 新增 list_website_domains、count_website_cache_touched_by_domains",
+        "同日汇总运行日志 log/app/app.log.YYYY-MM-DD：info/warn/error 行数与 error 样例；与 spider_counter 当日合计一并返回",
+        "site_access_log::summarize_access_log_day 单次扫描 JSONL 产出 AccessLogDaySummary + SiteDailySiteRow（含各蜘蛛 prev_count/delta）",
+        "管理端站点日志 Hub（#/site_access）：Tab 切换「访问日志 / 运行日志 / 站点日报」；SiteDailyReport 页展示 KPI 卡片、小时柱状图、各站表格与运行日志摘要"
+      ]
+    },
+    {
       "version": "0.9.66",
       "date": "2026-06-09",
       "title": "回收站软删除与 AI 链轮单节点分析",
