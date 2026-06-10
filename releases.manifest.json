@@ -3,6 +3,19 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.70",
+      "date": "2026-06-10",
+      "title": "Docker Hub 版本检测修复与网站目标站历史回退",
+      "notes": [
+        "Docker Hub 版本检查：tags API 改为 page_size=100 并跟随 next 分页合并 semver，修复 0.9.69 落在第二页时侧栏误显 Hub 最新 0.9.68 的问题",
+        "网站管理「随机目标站」：localStorage 按镜像站记录变更前快照（目标站/替换词/to_lang，每站最多 24 条）；左键随机、右键菜单回退上一目标、历史列表点选恢复、清空本行历史",
+        "随机替换前 recordRowTargetBeforeRandom 去重压栈；行内按钮有历史时高亮；批量操作新增「随机替换目标站」",
+        "替换词悬停预览：websiteReplaceSummary 六段（目标站 global/index/page + 本站 global/index/page）打包为 website-replace-rules 提示；网站列表与缓存管理 AI 替换词计数悬停展示完整规则",
+        "uiTooltip：首行 data-ui-tip-place-below 向下弹出避免裁切；支持 data-ui-tip-title 窗口标题；replace-rules 类提示可 pin 悬停",
+        "仪表盘蜘蛛趋势图：图例各系列附周期合计 [N]；7 日/24 小时图追加访问总数行；数据点过多时折线数值标签改为仅悬停显示"
+      ]
+    },
+    {
       "version": "0.9.69",
       "date": "2026-06-10",
       "title": "主站/泛站域名解析修正与 gov.cn 自动建站拦截",
