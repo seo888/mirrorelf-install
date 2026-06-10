@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.74",
+      "date": "2026-06-11",
+      "title": "网站缓存整站清空分区 DROP 加速与清缓存文案统一",
+      "notes": [
+        "网站缓存整站清空/永久删除：list_website_cache_partition_tables 按 domain 枚举 pg 分区子表（含遗留 website_cache_domain_mig_*）；move_website_cache_to_trash、delete_website_cache_domain_permanent 优先 DROP 子表，大站瞬时完成，DROP 后仍有行则 DELETE 兜底",
+        "目标站整站 permanent 清空 DELETE 后 drop_target_cache_partition_tx；软删移入回收站逻辑不变",
+        "cacheTrash.ts 新增 cachePurgeToastMessage / formatCachePurgeFailMessage / formatCachePurgeFailDetail / cachePurgeErrorReason，统一清缓存成功 toast（回收站 vs 永久删 + deleted_count）与批量失败详情",
+        "目标管理：批量删除、清空目标站缓存改用 ConfirmAction（主按钮入回收站、副按钮 permanent）；确认文案展示 retention_days",
+        "网站管理、缓存管理清缓存确认框与 toast 统一展示回收站保留天数；getRecycleBinRetentionDays 预载 cacheRetentionDays；批量清空失败 toast 拼接前几条域名+原因"
+      ]
+    },
+    {
       "version": "0.9.73",
       "date": "2026-06-10",
       "title": "缓存清空确认弹窗统一与域名级回收站",
