@@ -3,6 +3,20 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.72",
+      "date": "2026-06-10",
+      "title": "列表缓存条数异步加载与 AI 替换前置校验",
+      "notes": [
+        "网站/目标/网站缓存域名列表支持 query includeCacheCount=false（默认 true），列表 SQL 不再逐页阻塞大表 COUNT 子查询",
+        "新增批量角标 API：GET /_api_/website/cache_counts、/target/cache_counts、/website_cache/cache_counts（逗号分隔域名，最多 200 个，单次 GROUP BY 统计）",
+        "sql count_website_cache_by_domains / count_target_cache_by_domains；query_website、query_target 在 include_cache_count=true 时批量回填 website_cache_count / target_cache_count",
+        "管理端网站列表、目标列表、缓存侧栏域名：先拉列表再异步 load*CacheCounts；网站列表缓存数变化时 ±N 浮标动画（flashCacheDelta）",
+        "GET /_api_/website_cache/ai_replace_eligible?domain=：统计本站/目标站「全局替换」有效条数，至少一方 >1 条才 eligible；缓存页 AI 刷新/建议按结果禁用并 tooltip",
+        "ai_cache_global_replace_rules_gate 统一 AI 缓存任务入队前置校验（enqueue body gate / 流式 suggest 等）",
+        "网站缓存 path 列：goTargetCacheForWebsiteRow 跳转目标管理并带上 target_domain + 路径（path-src-search，与链接映射同源路径逻辑）"
+      ]
+    },
+    {
       "version": "0.9.71",
       "date": "2026-06-10",
       "title": "AI 替换词多页上下文、批量追加与链轮提示词重写",
