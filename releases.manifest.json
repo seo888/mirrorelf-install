@@ -3,6 +3,21 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.71",
+      "date": "2026-06-10",
+      "title": "AI 替换词多页上下文、批量追加与链轮提示词重写",
+      "notes": [
+        "AI 获取替换词：build_home_and_inner_pages_ai_bundle 合并首页 path=/ 与最多 12 个已缓存内页 HTML 作提示词正文；SSE 接口 ai_suggest_target_replace_lines_stream 统一走多页 bundle",
+        "POST /_api_/website_cache/warm_for_ai_replace：无首页缓存时同步回源首页并 page_preload 预热内链内页；网站编辑/批量 AI 替换词前 ensureWebsiteCacheForAiReplace",
+        "网站批量操作：AiReplaceSplitButton 主按钮覆盖、副按钮追加；ai_replace_append 在目标站·全局与本站·全局 replace_rules.all 后追加新行（applyAiReplaceSuggestAppend）",
+        "批量 AI 替换词 SSE 中断时 cancelAiCacheTasksByIds；websiteBatchOps 模块抽取 autotdk/AI 替换/随机目标/并发与目标池去重",
+        "仪表盘 24 小时图 GET /_api_/spider/chart/24h：hourly_access_chart 改读访问日志 JSONL + 内存环，按完整 UTC 小时桶汇总蜘蛛/访客（不含当前未结束小时）",
+        "链轮提示词 prompt/link-wheel/system.md、system-focus.md 重写：主题聚类/拓扑体检/缺口清单与按规模最低 ++ 条数；单节点 focus 模式优先其它站 ++ {focus_domain} 被链",
+        "文件管理：种子文件「重置为系统预设」二次确认弹窗，展示 GET seed-preset 预览后再 PUT reset-seed；编辑中与预设不一致时提示可重置",
+        "AI 任务列表 GET /_api_/ai_cache_tasks 返回 ai_cache_task_queue_workers 及配置并行数、自动刷新间隔、保留天数"
+      ]
+    },
+    {
       "version": "0.9.70",
       "date": "2026-06-10",
       "title": "Docker Hub 版本检测修复与网站目标站历史回退",
