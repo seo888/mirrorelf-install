@@ -3,6 +3,20 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.73",
+      "date": "2026-06-10",
+      "title": "缓存清空确认弹窗统一与域名级回收站",
+      "notes": [
+        "新增 ConfirmAction 通用确认组件：集成 DeleteSplitButton（主按钮入回收站、副按钮 permanent 永久删）、长任务 progress 进度条、左下角 footer 插槽（如跳转回收站）",
+        "网站管理、缓存管理清空缓存/批量清空/单行删除统一改用 ConfirmAction；批量清空逐域名上报 progress（done/total/label）；确认框左下角「回收站」按钮带 domain+kind 跳转 #/recycle_bin",
+        "新增按域名缓存回收站 API：GET /_api_/website_cache/trash、/target_cache/trash（批次列表）；POST .../trash/restore 整批恢复；返回 retention_days",
+        "网站管理域名级缓存回收站弹窗：清空后可查看该站回收站批次（原因/条数/到期），支持整批恢复；purge toast 区分移入回收站与永久删除并展示保留天数",
+        "cache_trash 恢复前 ensure_website_cache_partition / ensure_target_cache_partition；resolve_website_cache_partition_table 校验分区表名",
+        "AI 任务页「执行中」stat chip 实时展示 queue_workers/parallel（GET /_api_/ai_cache_tasks 的 ai_cache_task_queue_workers）",
+        "MCP website_cache_delete / target_cache_delete 工具 schema 增加 permanent 参数，与 HTTP API 软删行为一致"
+      ]
+    },
+    {
       "version": "0.9.72",
       "date": "2026-06-10",
       "title": "列表缓存条数异步加载与 AI 替换前置校验",
