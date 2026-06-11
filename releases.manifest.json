@@ -3,6 +3,21 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.76",
+      "date": "2026-06-12",
+      "title": "域名解析批量操作增强与 WHOIS 到期列",
+      "notes": [
+        "GET /_api_/check_domain_dns 新增 whois_only（flex bool）：true 时跳过 machine_code 探测仅返回 WHOIS；进程内缓存键 domain:whois 独立 5 分钟",
+        "domain_dns WHOIS 解析增强：detect_lifecycle（active/grace/redemption/pending_delete/available）、到期/注册天数、注册人隐私 redacted 检测",
+        "domainDnsClient：formatRegistrarExpiryCell 到期颜色档位、formatDomainDnsDisplay 多行摘要；fetchCheckDomainDns 支持 whoisOnly",
+        "域名解析页 Cloudflare Zone 到期列：loadWhoisForZones 异步 whois_only 加载 WHOIS（不判 DNS 指向）；Gname 仍用注册商 expires_at",
+        "批量解析：domain|host(s)|TYPE|value 格式；纯域名行默认 * 与 @ A 记录（随机本机出站 IP）；「批量解析域名」生成 www/@/* 模板（www 与 * 互斥）",
+        "批量清空解析 / 批量删 Zone：ConfirmAction + progress；清空解析跳过 NS 已指向 Cloudflare 的 Gname 域名",
+        "Cloudflare ensure_zone / find_zone_by_name；create_zone 支持 ACCOUNT_ID@cfat_ 账户 ID 绑定",
+        "AI 任务「清空全部/筛选结果」确认弹窗改用 ConfirmAction"
+      ]
+    },
+    {
       "version": "0.9.75",
       "date": "2026-06-11",
       "title": "域名解析管理（Cloudflare / Gname）",
