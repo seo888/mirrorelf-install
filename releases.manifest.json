@@ -3,6 +3,19 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.75",
+      "date": "2026-06-11",
+      "title": "域名解析管理（Cloudflare / Gname）",
+      "notes": [
+        "新增 registrar_dns 模块与 /_api_/domain_dns/*：账户列表/连通测试、Zone 列表/批量创建/删除、NS 修改、解析记录 CRUD；凭证格式 target|account|secret（Cloudflare API Token / 账户令牌 cfat_ / Global Key cfk_、Gname APPID@APPKEY）",
+        "Config DomainDnsSettings.domain_dns_api_key 支持多账户；管理端配置页新增「域名解析 API」区块与格式说明",
+        "管理端 #/domain_dns：CloudFlare / Gname 切换、Zone 表（状态/NS/到期/解析预览）、解析记录侧栏 inline 编辑（A/AAAA/CNAME/TXT/MX/NS）",
+        "Gname 一键转入 Cloudflare：POST /domain_dns/zones/transfer_cloudflare（CF ensure_zone 后改 Gname NS）；批量操作弹窗逐域名日志",
+        "WebsiteRefBadge + fetchWebsitesByRootDomain：Zone 行展示关联镜像站数量，浮层列站点与 site_status",
+        "解析记录 IP 建议：recordIpSuggestions 预填本机出站 IPv4/IPv6 与 server_ip；Zone 行解析预览懒加载；侧栏新增「域名解析」Tab"
+      ]
+    },
+    {
       "version": "0.9.74",
       "date": "2026-06-11",
       "title": "网站缓存整站清空分区 DROP 加速与清缓存文案统一",
