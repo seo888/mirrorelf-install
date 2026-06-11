@@ -5,16 +5,14 @@
     {
       "version": "0.9.76",
       "date": "2026-06-12",
-      "title": "域名解析批量操作增强与 WHOIS 到期列",
+      "title": "域名解析批量 A 记录与 WHOIS 增强",
       "notes": [
-        "GET /_api_/check_domain_dns 新增 whois_only（flex bool）：true 时跳过 machine_code 探测仅返回 WHOIS；进程内缓存键 domain:whois 独立 5 分钟",
-        "domain_dns WHOIS 解析增强：detect_lifecycle（active/grace/redemption/pending_delete/available）、到期/注册天数、注册人隐私 redacted 检测",
-        "domainDnsClient：formatRegistrarExpiryCell 到期颜色档位、formatDomainDnsDisplay 多行摘要；fetchCheckDomainDns 支持 whoisOnly",
-        "域名解析页 Cloudflare Zone 到期列：loadWhoisForZones 异步 whois_only 加载 WHOIS（不判 DNS 指向）；Gname 仍用注册商 expires_at",
-        "批量解析：domain|host(s)|TYPE|value 格式；纯域名行默认 * 与 @ A 记录（随机本机出站 IP）；「批量解析域名」生成 www/@/* 模板（www 与 * 互斥）",
-        "批量清空解析 / 批量删 Zone：ConfirmAction + progress；清空解析跳过 NS 已指向 Cloudflare 的 Gname 域名",
-        "Cloudflare ensure_zone / find_zone_by_name；create_zone 支持 ACCOUNT_ID@cfat_ 账户 ID 绑定",
-        "AI 任务「清空全部/筛选结果」确认弹窗改用 ConfirmAction"
+        "GET /_api_/check_domain_dns?whois_only=true：仅查 WHOIS、跳过 machine_code 探测；域名解析页到期列懒加载；进程内缓存键 domain:whois（5 分钟）",
+        "domain_dns WHOIS 摘要增强：lifecycle（active/grace/redemption/pending_delete/available）、registrant/email 隐私 redacted 标记；domainDnsClient 到期单元格展示生命周期与注册商",
+        "域名解析批量解析：纯域名行默认添加 * 与 @ 的 A 记录（随机本机出站 IP）；支持 domain|host|type|value|[mx] 行格式；批量操作可生成 www/@/* 主机记录模板（www 与 * 互斥）",
+        "批量清空所选 Zone 解析记录：ConfirmAction + progress（加载列表/逐条删除）；Gname 且 NS 已指 Cloudflare 的 Zone 不在此清空",
+        "Zone 批量删除 ConfirmAction 带 progress；Cloudflare ensure_zone 创建失败时 find_zone_by_name 兜底",
+        "AI 任务页清空全部/清空当前筛选改用 ConfirmAction 二次确认（confirmVariant delete）；保存设置后可选 prune 过期任务"
       ]
     },
     {
