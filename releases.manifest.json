@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.80",
+      "date": "2026-05-26",
+      "title": "配置页域名解析 API 凭证可视化编辑",
+      "notes": [
+        "配置页「API 接口」tab 新增「域名解析 API」区块：Cloudflare / Gname / Dynadot 多账户凭证分行编辑（服务商、账户/邮箱、API 凭证），保存后写入 DomainDnsSettings.domain_dns_api_key",
+        "domainDnsCredentialConfig.ts：target|account|secret 格式解析与序列化，Gname/Dynadot 校验 account 必填，与后端 parse_domain_dns_credential_line 对齐",
+        "支持增加/删除凭证行、密钥显示/隐藏、批量编辑弹窗导入导出（每行一条凭证）",
+        "中英文 i18n 及凭证格式说明 hint（CF 用户令牌 cfut_、账户 API 令牌 cfat_、Global Key cfk_、Gname APPID@APPKEY、Dynadot 生产密钥）"
+      ]
+    },
+    {
       "version": "0.9.79",
       "date": "2026-06-13",
       "title": "转入 Cloudflare 同步解析与批量操作弹窗紧凑布局",
