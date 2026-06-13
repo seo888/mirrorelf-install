@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.77",
+      "date": "2026-06-13",
+      "title": "Dynadot 域名商解析接入",
+      "notes": [
+        "registrar_dns 新增 DynadotProvider（api.dynadot.com/api3.json）：account_info 连通测试、list_domain Zone 列表（状态/到期/NS）、get_dns/set_dns2 解析读写",
+        "RegistrarTarget::Dynadot；uses_gname_like_ui 合并 Gname/Dynadot 前端交互（域名即 zone_id，无 Cloudflare proxied）",
+        "Dynadot 解析 CRUD：主域 main_record + 子域 sub_record 映射 A/AAAA/CNAME/TXT/MX/NS；不支持 API 注册/删除域名（须在控制台购买）",
+        "transfer_zones_to_cloudflare 源账户扩展为 Gname 或 Dynadot（CF ensure_zone 后改注册商 NS）；Gname/Dynadot 批量删 Zone 返回暂不支持",
+        "管理端 #/domain_dns 服务商下拉新增 Dynadot；配置页 DomainDnsSettings 凭证格式 dynadot|邮箱备注|API生产密钥（Tools → API）"
+      ]
+    },
+    {
       "version": "0.9.76",
       "date": "2026-06-12",
       "title": "域名解析批量 A 记录与 WHOIS 增强",
