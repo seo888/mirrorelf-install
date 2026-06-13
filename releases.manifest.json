@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.79",
+      "date": "2026-06-13",
+      "title": "转入 Cloudflare 同步解析与批量操作弹窗紧凑布局",
+      "notes": [
+        "transfer_zones_to_cloudflare 增强：转入前 fetch_all_source_records 分页拉取 Gname/Dynadot 全量解析；CF ensure_zone 后 sync_records_to_cloudflare 逐条 create（A/AAAA/CNAME/TXT/MX/CAA/SRV/PTR；A/AAAA/CNAME 默认 proxied）；81057 重复视为成功；结果 msg 含解析同步条数",
+        "normalize_transfer_host 归一化主机名；format_transfer_records_note 汇总同步/失败/无记录；transfer_tests 单元测试",
+        "域名解析批量操作弹窗布局收紧：标题行内联 Cloudflare 账户 + 一键转入 + 批量解析域名；移除转入说明文案；www/@/* 生成格式工具栏置于编辑器下方",
+        "弹窗尺寸、按钮/下拉高度、编辑器与日志区间距压缩，操作区更紧凑"
+      ]
+    },
+    {
       "version": "0.9.78",
       "date": "2026-06-13",
       "title": "website_cache 按 domain 分区迁移与日志保留配置",
