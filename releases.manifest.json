@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.78",
+      "date": "2026-06-13",
+      "title": "website_cache 按 domain 分区迁移与日志保留配置",
+      "notes": [
+        "sql migrate_website_cache_partition_by_domain：已有库 website_cache 分区键 root_domain → domain（website_cache_domain_mig 中转、按子域 COPY、DROP 旧表 RENAME）；drop_illegal_website_cache_tables 清理遗留 website_cache_domain_mig_* 分区",
+        "qps_counter 后台裁剪：spawn_qps_counter_prune 每 60s 删除早于 QPS_STATS_WINDOW+300s 的秒桶，防止 QPS 曲线长期运行内存无限增长",
+        "Config LogRetention：site_access_retain_days / runtime_log_retain_days（默认 30，0=不自动删）；管理端配置页「日志保留」；启动与定时任务按配置 prune 站点访问 JSONL 与 log/app 运行日志",
+        "仪表盘 7 日/24 小时图：pointValueLabelPlugin 在数据点旁绘制数值；可见系列×点数>24 时仅悬停列显示标签；同列多标签竖向避让；图例展示 7 日/24 小时访问总数"
+      ]
+    },
+    {
       "version": "0.9.77",
       "date": "2026-06-13",
       "title": "Dynadot 域名商解析接入",
