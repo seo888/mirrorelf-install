@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.81",
+      "date": "2026-06-14",
+      "title": "AI 缓存任务 PostgreSQL 持久化与域名解析批量增强",
+      "notes": [
+        "ai_cache_task 调度重构：任务元数据与日志持久化 PostgreSQL；pending/queued/running 状态与 channel+pending 双层队列；启动对账 orphan running/queued、列表对账 queued→pending、DB backfill 认领；清空表 flush_token 丢弃内存旧任务；新增 ai_model_name/ai_outbound_ip 字段",
+        "strip_model_reasoning_artifacts：剥除 redacted_thinking/think/thinking/reasoning 等推理包裹，修复思考块闭合后 www 与域名断裂",
+        "Gname API：gntime 有效性校验；urlencode 与官方 PHP 一致（空格为 +）；timestamp 类错误提示校正系统时间",
+        "域名解析批量操作：归属过滤（分页拉取账户域名、剔除非本账户）；格式化根域名去重；www/* 主机互斥；Gname/Dynadot NS 已指向 Cloudflare 时提示外部管理解析",
+        "stream 预览：/?preview_ua= 支持站点预览自定义 User-Agent"
+      ]
+    },
+    {
       "version": "0.9.80",
       "date": "2026-05-26",
       "title": "配置页域名解析 API 凭证可视化编辑",
