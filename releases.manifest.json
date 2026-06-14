@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.84",
+      "date": "2026-06-14",
+      "title": "仪表盘趋势图浅色主题适配",
+      "notes": [
+        "Main.svelte chartDatasetStyle / isLightChartTheme：浅色模式下折线降饱和、填充透明度降低，点边框与首条系列色走 --chart-series-1-* CSS 变量",
+        "7 日/24 小时趋势图数据点数值标签：--chart-point-label-stroke / fill / fill-zero 深浅主题区分；浅色用正文色 + 白色描边，零值用 muted 灰",
+        "app.css [data-theme=light] 补齐 chart-plot-bg、chart-card、spark 浮层/tooltip 与 chart-point-border 浅色配色，避免白底图表对比度不足"
+      ]
+    },
+    {
       "version": "0.9.83",
       "date": "2026-06-14",
       "title": "建站保存按字段粒度清理 website_cache",
