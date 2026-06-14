@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.83",
+      "date": "2026-06-14",
+      "title": "建站保存按字段粒度清理 website_cache",
+      "notes": [
+        "website_cache_purge：保存前后 WebsiteSaveSnapshot 对比，None / Index / All 三档；to_lang、目标站、keywords、本站全局/内页替换词或目标站全局/内页替换词变更 → 清整站 website_cache",
+        "仅 title / description / 本站首页替换词或目标站首页替换词变更 → 仅清首页 `/`；链接映射、友链、爬取目标、预加载、AI 自动替换等输出期或行为型配置变更 → 不清理",
+        "upsert_website 由 clear_website_cache 布尔改为 WebsiteCachePurge；单站保存与批量建站均走 plan_website_cache_purge；preserve_website_cache 仍跳过清理",
+        "目标站替换规则分段与 DB conf 对比，避免 YAML 文本 `||` 往返误判为全站变更；含单元测试"
+      ]
+    },
+    {
       "version": "0.9.82",
       "date": "2026-06-14",
       "title": "域名解析凭证说明图与友链 HTML 规范化",
