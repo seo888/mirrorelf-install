@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.82",
+      "date": "2026-06-14",
+      "title": "域名解析凭证说明图与友链 HTML 规范化",
+      "notes": [
+        "配置页「域名解析 API」：Cloudflare / Gname / Dynadot 各行增加 ? 说明按钮，弹窗展示 apikey_help_*.png 凭证配置截图；凭证行内「测试」按钮，保存前即可验证连通",
+        "POST /domain_dns/accounts/test_inline：credential_from_fields + test_credential，按表单 target|account|secret 测试，无需先写入 config.yml",
+        "友链 HTML 规范化：sanitizeFriendLinkHtmlLine 去除误存的 ` -> {keyword}` / ` -> `，多条 `<a>` 统一以 `<br>` 分隔；前后端 websiteConf 与 api/website 保存时 normalize_website_conf_friend_links",
+        "AI 链轮 appendFriendLinkLine / linkWheelFriendLinks 同步应用 sanitize，避免链轮追加友链带入替换规则语法"
+      ]
+    },
+    {
       "version": "0.9.81",
       "date": "2026-06-14",
       "title": "AI 缓存任务 PostgreSQL 持久化与域名解析批量增强",
