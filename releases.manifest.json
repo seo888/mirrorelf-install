@@ -3,6 +3,19 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.85",
+      "date": "2026-06-22",
+      "title": "文章 CMS 与 AI 缓存任务入队轻量校验",
+      "notes": [
+        "文章 CMS：PostgreSQL articles 表存源稿（draft/published/archived），与 website_cache 解耦；GET/POST /articles/query|get|save|delete|publish|unpublish|republish",
+        "article_publish 读 templates/web/{domain}/content.html（及 list/index），Markdown→HTML 填 {article_content}，应用本站替换规则后写入 website_cache 目录行；meta 含 article_id / local_lock",
+        "管理端 #/articles：按域名/状态筛选、编辑弹窗、随机关键词、AI 生成 TDK/正文、发布/撤回/重发、跳转网站缓存按路径筛选",
+        "AI 缓存任务入队重构：ai_cache_enqueue_light_gate 仅校验全局替换规则 + 缓存行存在且为 HTML（website_cache_ai_enqueue_row_hint 只读 chunks/content_type）；正文 reconstruct 与 prompt 组装推迟到 worker 执行",
+        "缓存写入后批量 enqueue 先 filter_pairs_light_enqueue；列表查询 reconcile_orphan_queued_in_memory 对账 DB queued 与内存调度队列",
+        "GET /website_cache/ai_replace_eligible?domain=：本站/目标站全局替换是否满足 AI 任务前置；缓存管理手动排队前校验"
+      ]
+    },
+    {
       "version": "0.9.84",
       "date": "2026-06-14",
       "title": "仪表盘趋势图浅色主题适配",
