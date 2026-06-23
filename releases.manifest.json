@@ -3,6 +3,19 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.87",
+      "date": "2026-06-24",
+      "title": "路径悬停预览与仪表盘蜘蛛配色稳定",
+      "notes": [
+        "pathPreviewCore / PathPreviewHost：悬停延时预览（iframe / 源码 / 图片三模式）；Safari 风格进度条；target_cache 走 GET /target_cache/content，静态源码经 buildSameOriginStreamSrc 本站 `/-/` 同源拉流（可选 preview_ua）",
+        "网站管理：域名与路径链接悬停触发 PathPreviewHost 预览镜站页面，无需新开标签",
+        "缓存管理：路径列悬停预览增强，按 content_type / 扩展名自动分流 HTML iframe、图片或源码文本（最长 12 万字符截断提示）",
+        "inAppSitePreview normalizePreviewUrl：悬停预览默认并强制 https，避免 HTTPS 后台 iframe 混合内容被拦",
+        "spiderChartSeries：Baiduspider / GoogleSpider 等固定图例顺序与独立 hex 配色；selectChartSpiderSeries 超 8 系列时保留总量 Top 并按 canonical 顺序",
+        "仪表盘 7 日/24 小时趋势图按蜘蛛名着色（spiderChartColorIndex），不再按系列下标轮换；GET /spider/chart series 名称排序保证前后端图例一致"
+      ]
+    },
+    {
       "version": "0.9.86",
       "date": "2026-06-23",
       "title": "Telegram 通知、配置摘要 XLSX 导出与批量建站 xlsx 导入",
