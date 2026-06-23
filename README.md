@@ -5,7 +5,7 @@
 > 本仓库**仅含**安装脚本与 Compose，**不含**业务源码。  
 > 程序以 Docker Hub 镜像 [`seo888/mirrorelf`](https://hub.docker.com/r/seo888/mirrorelf) 分发。
 
-[中文](README.md) · [English](README-en.md) · [标签文档](https://dynalist.io/d/pDZjfOHDp4AefwWeQT1MIgn3#theme=light)
+[中文](README.md) · [English](README-en.md)
 
 ---
 
@@ -297,7 +297,7 @@ curl -sS -O https://kejilion.pro/kejilion.sh && chmod +x kejilion.sh && ./kejili
 
 `k` → **11. 面板工具 ▶** → **3. 1Panel 新一代管理面板**（一路回车）
 
-### 5. 安装 Mirror-Elf®
+### 5. 安装 MirrorElf
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh | bash
