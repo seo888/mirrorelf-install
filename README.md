@@ -12,7 +12,8 @@
 ## 目录
 
 - [产品简介](#产品简介)
-- [核心优势](#核心优势)
+- [核心功能](#核心功能)
+- [管理后台](#管理后台)
 - [技术栈](#技术栈)
 - [快速安装](#快速安装)
 - [安装完成后](#安装完成后)
@@ -24,33 +25,88 @@
 
 ## 产品简介
 
-MirrorElf（镜像精灵）是面向 **网站镜像、缓存与 SEO 运营** 的自托管平台：实时同步目标站、将页面缓存到 PostgreSQL，并提供现代化管理后台，用于站点配置、TDK/AI 改写、蜘蛛统计、数据采集与批量运维。
+**MirrorElf（镜像精灵）** 是基于 Rust 的**站群镜像引擎与 SEO 运营平台**：在单一服务（默认 `:16888`）中托管海量域名，完成实时镜像、PostgreSQL 双层缓存、模板化 SEO 加工、蜘蛛分析与 AI 自动化。配套 **Svelte 5 中英管理后台**，支持 Docker 一键部署，服务器**无需编译**。
 
-## 核心优势
+## 核心功能
 
-| | |
-|---|---|
-| **实时镜像** | 内置 `/-/` 代理拉取并缓存目标页，适合迁移、备份与多站托管 |
-| **完整管理后台** | Svelte 单页应用（`/_/admin/`）：网站、缓存、目标站、文件、站点检测、数据采集 |
-| **AI 就绪** | 兼容 OpenAI 接口；正文提取、TDK 生成、替换行建议与网站缓存流程联动 |
-| **SEO 与蜘蛛** | QPS/最近访问、sitemap、蜘蛛策略、指定出口 IP |
-| **运维友好** | Docker Compose 一键起服务（应用 + Postgres）；可选 Watchtower 跟随 Hub 自动更新 |
-| **无需编译** | 拉取预构建镜像即可；配置与数据保存在宿主机目录 |
+### 镜像与缓存
+
+- **双层缓存**：加工页 `website_cache` + 上游原文 `target_cache`（FastCDC + LZ4 块级去重）
+- 全站镜像、预览流 `/-/`、链接映射、路径规范化、静态资源流式回源
+- 主站/泛站分离、DNS 自动建站、随机目标分配与可达性探测
+- 多语言检测与 HTML 翻译、页面预加载（访客打开后后台预热内链）
+
+### SEO 与内容
+
+- TDK 模板与标签表达式、页头/页脚注入、友链段与样式模板
+- Sitemap / Robots、JSON-LD、SEO 404、外链过滤与随机 div/class
+- **文章 CMS**：草稿/发布/归档，Markdown→HTML 写入网站缓存
+- **模板中心**：`templates/web/` 在线编辑，支持 AI 生成与从缓存跳转编辑
+
+### AI 自动化
+
+- OpenAI 兼容 API（多模型、文本/图片分离、指定出站 IP）
+- **AI 缓存任务**：缓存写入后自动排队替换词 + TDK 生成（PostgreSQL 持久化队列）
+- **AI CHAT** 多会话对话、**AI 链轮**友链关系图与批量调整
+- 缓存 Meta 替换词/TDK、模板 AI 生成、Markdown 分析
+- **Page Agent**：自然语言操作管理后台
+
+### 运维与分析
+
+- 仪表盘：站点规模、缓存概况、系统资源、QPS、7 日/24h 蜘蛛趋势图
+- 分引擎蜘蛛策略（百度/搜狗/360/字节/Bing/Google 等）、访问日志 SSE 实时流
+- **站点日志 Hub**：访问日志、运行日志、站点日报
+- **站点查询**：批量 HTTP 检测、搜索引擎收录、WHOIS
+- **数据采集**：标题生成、关键词组合、文章采集
+- **备份还原**：`.mefbackup` 细粒度导出/导入（SSE 进度）；**回收站**软删除与恢复
+- UA/IP 封禁、强制绑域、广告跳转、全局代码注入、Telegram 通知
+
+### 域名解析
+
+- 接入 **Cloudflare / Gname / Dynadot**，Zone 与解析记录 CRUD
+- Gname/Dynadot 一键转入 Cloudflare（同步全量解析）
+- 批量 A 记录、WHOIS 到期、关联镜像站数量展示
+
+## 管理后台
+
+访问 `http://<服务器IP>:16888/_/admin/`（Hash 路由，中英切换、深浅主题）
+
+| 模块 | 说明 |
+|------|------|
+| 仪表盘 | 站点与缓存概况、系统监控、蜘蛛 QPS 与趋势图 |
+| 网站管理 | 镜像站 CRUD、批量设置、DNS/WHOIS、TDK、预览 |
+| 网站缓存 | 缓存浏览/编辑/Meta/AI 替换、软删除与回收 |
+| 文章管理 | 文章编辑、AI 生成、发布/撤回/重发 |
+| 目标管理 | 上游目标站 + 目标缓存（左目标右缓存） |
+| 文件管理 | `doc/`、`prompt/`、`log/` 在线浏览编辑 |
+| 模板中心 | HTML/CSS/JS/图片、AI 生成、图片编辑 |
+| 标签文档 | 内嵌 TDK/友链等标签语法说明 |
+| 站点查询 | 批量状态/收录/WHOIS、TSV 导出 |
+| 数据采集 | 标题生成、关键词组合、文章采集 |
+| AI 任务 | 缓存任务队列、并行度、对话详情 |
+| AI 链轮 | 友链关系图、++/-- 批量调整、AI 分析 |
+| AI CHAT | 多会话对话、附件、图片生成 |
+| 站点日志 | 访问日志 / 运行日志 / 站点日报 |
+| 域名解析 | Cloudflare/Gname/Dynadot 账户与解析管理 |
+| 备份还原 | `.mefbackup` 导出/导入、进度跟踪 |
+| 回收站 | 网站/目标/缓存/文件统一恢复 |
+| 设置 | 系统 YAML 可视化编辑（6 个 Tab） |
 
 ## 技术栈
 
 | 层级 | 技术 |
 |------|------|
 | 运行时 | Rust（Tokio），单二进制部署 |
-| Web 框架 | Axum、Tower（压缩、会话等） |
-| 数据库 | PostgreSQL 16（Compose 官方镜像） |
-| 数据访问 | SQLx（异步 Postgres） |
-| 出站 HTTP | Reqwest（rustls），支持多 IP / 代理场景 |
-| 页面处理 | scraper、lol_html、markup_fmt；分块缓存（lz4、fastcdc 等） |
-| 管理端 | Svelte 5 + Vite（构建进镜像 `/_/admin/`） |
+| Web 框架 | Axum 0.8、Tower（Brotli/Zstd/Gzip 压缩、会话） |
+| 数据库 | PostgreSQL 16（SQLx 异步） |
+| 缓存存储 | FastCDC + BLAKE3 + LZ4 块级去重 |
+| 出站 HTTP | wreq + 256 浏览器 persona 池；多 IP / 代理 |
+| 页面处理 | scraper、lol_html、markup_fmt；jieba-rs 分词 |
+| 管理端 | Svelte 5 + Vite 8 + TypeScript；Chart.js、CodeMirror 6、AntV G6 |
+| AI 集成 | OpenAI 兼容 API；Page Agent 自然语言操控 |
 | 认证 | axum-login、Argon2、tower-sessions |
-| 监控 | Prometheus 指标（axum-prometheus） |
-| 部署 | Docker / Docker Compose；镜像发布于 Docker Hub |
+| 监控 | Prometheus 指标（`/metrics`，需登录） |
+| 部署 | Docker / Docker Compose；镜像 [`seo888/mirrorelf`](https://hub.docker.com/r/seo888/mirrorelf) |
 | 可选组件 | Watchtower（约每 10 分钟检查 Hub 更新） |
 
 ---
@@ -80,7 +136,7 @@ bash install.sh
 **指定镜像版本：**
 
 ```bash
-MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 \
+MIRRORELF_IMAGE=seo888/mirrorelf:0.9.85 \
   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh | bash
 ```
 
@@ -94,11 +150,12 @@ MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 \
 
 | 目录 | 说明 |
 |------|------|
-| `config/` | 应用配置（`config.yml` 等） |
-| `log/` | 运行日志 |
-| `data/` | 业务数据 |
-| `doc/` | 文档与 `target.txt` 等，可直接编辑 |
-| `templates/` | HTML 模板 |
+| `config/` | 应用配置（`config.yml`，支持热重载） |
+| `log/` | 运行日志与访问日志（JSONL 按日） |
+| `data/` | 业务数据（蜘蛛计数、备份 staging 等） |
+| `doc/` | 词库与 `target.txt` 等，可直接编辑 |
+| `templates/` | 网站 HTML 模板（`templates/web/`） |
+| `prompt/` | AI 提示词模板（page-replace、tdk-rules 等） |
 | `pgdata/` | PostgreSQL 数据库文件 |
 | `_static/` | 用户自写静态资源（`js/`、`images/` 等） |
 
@@ -112,7 +169,7 @@ MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 \
 
 ```bash
 cd /www/mirrorelf   # 你的安装目录
-sudo chown -R 10001:10001 config log data doc templates _static
+sudo chown -R 10001:10001 config log data doc templates prompt _static
 sudo chown -R 999:999 pgdata
 docker compose -f compose.hub.yml --env-file env.hub up -d
 ```
@@ -121,7 +178,7 @@ docker compose -f compose.hub.yml --env-file env.hub up -d
 
 ```bash
 uid=$(docker run --rm --entrypoint id seo888/mirrorelf:latest mirrorelf | sed -n 's/uid=\([0-9]*\).*/\1/p')
-sudo chown -R "${uid}:${uid}" config log data doc templates _static
+sudo chown -R "${uid}:${uid}" config log data doc templates prompt _static
 ```
 
 **端口冲突** — 若宿主机 **5432** 已被占用（如 1Panel 的 PostgreSQL），在 `env.hub` 中设置 `MIRRORELF_PG_HOST_PORT=15432`（安装脚本检测到占用时会自动写入）。容器启动时会自动把卷内 `config.yml` 的数据库地址改为 `127.0.0.1:该端口`，密码与 compose 中 Postgres 一致（`mirrorelf`）。
