@@ -1,27 +1,42 @@
 # mirrorelf-install
 
-MirrorElf Docker one-click install repository.
+**MirrorElf** — Docker one-click install repository
 
-> This repo contains **install scripts and Compose only** — **not** application source. Images are published on Docker Hub as [`seo888/mirrorelf`](https://hub.docker.com/r/seo888/mirrorelf).
+> This repo contains **install scripts and Compose only** — **not** application source.  
+> Images are published on Docker Hub as [`seo888/mirrorelf`](https://hub.docker.com/r/seo888/mirrorelf).
 
-[中文](README.md)
+[中文](README.md) · [English](README-en.md)
 
 ---
 
-### Introduction
+## Contents
+
+- [Introduction](#introduction)
+- [Key features](#key-features)
+- [Tech stack](#tech-stack)
+- [Quick install](#quick-install)
+- [After install](#after-install)
+- [Operations](#operations)
+- [Files in this repo](#files-in-this-repo)
+
+---
+
+## Introduction
 
 **MirrorElf** is a self-hosted **website mirroring and SEO operations platform**. It syncs target sites in real time, caches pages in PostgreSQL, and ships a modern admin UI for site management, TDK/AI workflows, spider analytics, data collection, and batch operations.
 
-### Key features
+## Key features
 
-- **Real-time mirroring** — Built-in `/-/` proxy fetch and cache; suited for migration, backup, and multi-site hosting
-- **Full admin console** — Svelte SPA at `/_/admin/`: websites, caches, targets, files, site checks, data collection
-- **AI-ready** — OpenAI-compatible APIs; plain-text extraction, TDK generation, replace-line suggestions tied to cache workflows
-- **SEO & spiders** — QPS/recent visits, sitemap, bot policies, configurable outbound IPs
-- **Simple ops** — One Compose stack (app + Postgres); optional Watchtower updates from Docker Hub
-- **No compile on server** — Pull a pre-built image; config and data live in host bind mounts under the install directory
+| | |
+|---|---|
+| **Real-time mirroring** | Built-in `/-/` proxy fetch and cache; suited for migration, backup, and multi-site hosting |
+| **Full admin console** | Svelte SPA at `/_/admin/`: websites, caches, targets, files, site checks, data collection |
+| **AI-ready** | OpenAI-compatible APIs; plain-text extraction, TDK generation, replace-line suggestions |
+| **SEO & spiders** | QPS/recent visits, sitemap, bot policies, configurable outbound IPs |
+| **Simple ops** | One Compose stack (app + Postgres); optional Watchtower updates from Docker Hub |
+| **No compile on server** | Pull a pre-built image; config and data live in host bind mounts |
 
-### Tech stack
+## Tech stack
 
 | Layer | Technology |
 |-------|------------|
@@ -37,36 +52,51 @@ MirrorElf Docker one-click install repository.
 | Deploy | Docker / Docker Compose; images on Docker Hub |
 | Optional | Watchtower (~10 min Hub poll) |
 
-### Quick install
+---
 
-**Requirements:** [Docker Engine](https://docs.docker.com/engine/install/) and the **Docker Compose v2** plugin.
+## Quick install
 
-**One command:**
+### Requirements
+
+[Docker Engine](https://docs.docker.com/engine/install/) and the **Docker Compose v2** plugin.
+
+### One command
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh | bash
 ```
 
-**Review the script first (recommended):**
+### Install options
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh -o install.sh
-less install.sh
-bash install.sh
-```
+| Scenario | Command |
+|----------|---------|
+| Review script first | `curl -fsSL …/install.sh -o install.sh` → `less install.sh` → `bash install.sh` |
+| Pin an image tag | `MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 curl -fsSL …/install.sh \| bash` |
+| Custom install dir | `MIRRORELF_INSTALL_DIR=/opt/mirrorelf bash install.sh` |
 
-**Pin an image tag:**
+On install you will be prompted for a directory; press **Enter** for default `/www/mirrorelf`.
 
-```bash
-MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 \
-  curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh | bash
-```
+### Data directories
 
-On install you will be prompted for a directory; press **Enter** for default `/www/mirrorelf`, or set `MIRRORELF_INSTALL_DIR` for non-interactive installs.
+All paths are **bind-mounted on the host** under the install directory:
 
-Data directories are **bind-mounted on the host** (under the install directory): `config/`, `log/`, `data/`, `doc/`, `templates/`, `pgdata/` (database), `_static/` (user static assets). The admin UI at `/_/admin` is synced from the image entrypoint on startup. App directories are owned by **uid 10001** (`install.sh` runs `chown` automatically).
+| Directory | Purpose |
+|-----------|---------|
+| `config/` | App configuration (`config.yml`, etc.) |
+| `log/` | Runtime logs |
+| `data/` | Application data |
+| `doc/` | Docs and `target.txt` — editable on host |
+| `templates/` | HTML templates |
+| `pgdata/` | PostgreSQL data files |
+| `_static/` | User static assets (`js/`, `images/`, etc.) |
 
-**If you see `cp: cannot create regular file 'config/config.yml': Permission denied`:**
+> The admin UI at `/_/admin` is synced from the image entrypoint on startup and is **not overwritten**.  
+> App directories are owned by **uid 10001** (`install.sh` runs `chown` automatically).
+
+<details>
+<summary><strong>Troubleshooting</strong></summary>
+
+**Permission denied** — if you see `cp: cannot create regular file 'config/config.yml': Permission denied`:
 
 ```bash
 cd /www/mirrorelf
@@ -75,23 +105,40 @@ sudo chown -R 999:999 pgdata
 docker compose -f compose.hub.yml --env-file env.hub up -d
 ```
 
-If port **5432** is already in use, set `MIRRORELF_PG_HOST_PORT=15432` in `env.hub` (the installer may auto-detect and write this).
+**Port conflict** — if host port **5432** is in use, set `MIRRORELF_PG_HOST_PORT=15432` in `env.hub` (the installer may auto-detect and write this).
 
-### After install
+</details>
+
+## After install
 
 | Item | URL |
 |------|-----|
 | Site | `http://<host>:16888/` |
 | Admin | `http://<host>:16888/_/admin/` |
-| Default login | `admin` / `admin` — **change in production** |
+| Default login | `admin` / `admin` |
+
+> **Change the default password in production.**
+
+---
+
+## Operations
 
 ### Watchtower (auto-update)
 
 The installer asks whether to enable Watchtower; **Enter** or `Y` installs it (~10 min Hub poll).
 
-Non-interactive: `MIRRORELF_INSTALL_WATCHTOWER=1` or `0`; `MIRRORELF_SKIP_WATCHTOWER=1` skips Watchtower.
+| Variable | Effect |
+|----------|--------|
+| `MIRRORELF_INSTALL_WATCHTOWER=1` | Non-interactive: install Watchtower |
+| `MIRRORELF_INSTALL_WATCHTOWER=0` | Non-interactive: skip |
+| `MIRRORELF_SKIP_WATCHTOWER=1` | Legacy alias to skip |
 
-View logs: `docker compose -f compose.hub.yml --env-file env.hub --profile watchtower logs -f watchtower` (from your install directory).
+View logs:
+
+```bash
+cd /www/mirrorelf
+docker compose -f compose.hub.yml --env-file env.hub --profile watchtower logs -f watchtower
+```
 
 ### Manual install
 
@@ -104,24 +151,28 @@ bash install.sh
 
 ### Full uninstall
 
-Stops containers, **removes volumes** (database included), and optionally deletes the install directory and images. Prompts default to **Yes** on Enter.
+Stops containers, **removes volumes** (database included), and optionally deletes the install directory and images.
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
 ```
 
-`curl | bash` prompts via `/dev/tty`; a single detected install dir is auto-selected. Wrong `MIRRORELF_INSTALL_DIR` in your shell is ignored with a warning.
+- `curl | bash` prompts via `/dev/tty`; a single detected install dir is auto-selected
+- Wrong `MIRRORELF_INSTALL_DIR` in your shell is ignored with a warning
+- If you used a custom path, enter it when asked (do not blindly accept `/www/mirrorelf`)
 
-If you used a custom install path, enter it when asked (do not blindly accept `/www/mirrorelf`). Non-interactive needs a unique detected path or `MIRRORELF_INSTALL_DIR`:
+Non-interactive uninstall:
 
 ```bash
 MIRRORELF_INSTALL_DIR=/www/mirrorelf MIRRORELF_YES=1 \
   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/uninstall.sh | bash
 ```
 
-Remove any Nginx / WAF upstream pointing at port **16888** on this host manually.
+> Remove any Nginx / WAF upstream pointing at port **16888** on this host manually.
 
-### Files in this repo
+---
+
+## Files in this repo
 
 | File | Purpose |
 |------|---------|
@@ -130,7 +181,5 @@ Remove any Nginx / WAF upstream pointing at port **16888** on this host manually
 | `compose.hub.yml` | App + Postgres (+ optional Watchtower) |
 | `env.hub.example` | Sample `MIRRORELF_IMAGE` |
 
-### Notes
-
-- Application source code is **not** included; it is maintained privately.
-- If you fork and change ports/volumes in `compose.hub.yml`, keep the embedded compose in `install.sh` in sync.
+- Application source code is **not** included; it is maintained privately
+- If you fork and change ports/volumes in `compose.hub.yml`, keep the embedded compose in `install.sh` in sync
