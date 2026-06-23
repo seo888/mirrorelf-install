@@ -3,6 +3,20 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.86",
+      "date": "2026-06-23",
+      "title": "Telegram 通知、配置摘要 XLSX 导出与批量建站 xlsx 导入",
+      "notes": [
+        "配置页「通知渠道」：NotificationChannels.telegram（Bot Token / Chat ID / 启用）；POST /notification/telegram/test 发送测试消息",
+        "license_notify：授权剩余 1～7 天、当日到期、已过期三种里程碑经 Telegram 推送（同到期周期去重）；正文前缀【程序名称】",
+        "配置摘要导出增强：GET /data/download（TXT）、/data/download-table（HTML 表格）、/data/download-xlsx（12 列 xlsx）；?site=main|pan|all 主站/泛站筛选",
+        "导出/备份文件名统一 format_export_filename：【程序名称】website_data_*.txt|html|xlsx、mirrorelf_backup_*.mefbackup",
+        "备份还原页「导出配置摘要」弹窗：选格式与站点范围后下载；MCP 工具可调用 webdata 导出",
+        "批量建站：支持上传 .txt / .xlsx 填入建站内容；split_batch_website_line ___ 优先于 Tab，兼容表格导出 12 列（首列输出语言自动合并）；批量进度条与覆盖确认",
+        "网站管理列表新增「域名解析状态」列：DNS 是否指向本机 + WHOIS 到期/注册商/lifecycle（domainDnsClient 5 分钟缓存）"
+      ]
+    },
+    {
       "version": "0.9.85",
       "date": "2026-06-22",
       "title": "文章 CMS 与 AI 缓存任务入队轻量校验",
