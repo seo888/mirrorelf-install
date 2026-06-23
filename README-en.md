@@ -68,11 +68,22 @@ curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/insta
 
 ### Install options
 
-| Scenario | Command |
-|----------|---------|
-| Review script first | `curl -fsSL …/install.sh -o install.sh` → `less install.sh` → `bash install.sh` |
-| Pin an image tag | `MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 curl -fsSL …/install.sh \| bash` |
-| Custom install dir | `MIRRORELF_INSTALL_DIR=/opt/mirrorelf bash install.sh` |
+**Review the script first (recommended):**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh -o install.sh
+less install.sh
+bash install.sh
+```
+
+**Pin an image tag:**
+
+```bash
+MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 \
+  curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh | bash
+```
+
+**Custom install dir (non-interactive):** `MIRRORELF_INSTALL_DIR=/opt/mirrorelf bash install.sh`
 
 On install you will be prompted for a directory; press **Enter** for default `/www/mirrorelf`.
 

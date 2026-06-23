@@ -69,11 +69,22 @@ curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/insta
 
 ### 安装选项
 
-| 场景 | 命令 |
-|------|------|
-| 先查看脚本再执行 | `curl -fsSL …/install.sh -o install.sh` → `less install.sh` → `bash install.sh` |
-| 指定镜像版本 | `MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 curl -fsSL …/install.sh \| bash` |
-| 自定义安装目录 | `MIRRORELF_INSTALL_DIR=/opt/mirrorelf bash install.sh` |
+**建议先查看脚本再执行：**
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh -o install.sh
+less install.sh
+bash install.sh
+```
+
+**指定镜像版本：**
+
+```bash
+MIRRORELF_IMAGE=seo888/mirrorelf:0.9.27 \
+  curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh | bash
+```
+
+**自定义安装目录（非交互）：** `MIRRORELF_INSTALL_DIR=/opt/mirrorelf bash install.sh`
 
 安装时会提示安装目录，**直接回车** 默认为 `/www/mirrorelf`（`compose.hub.yml`、`env.hub` 写在该目录）。
 
@@ -304,15 +315,31 @@ cd /www/mirrorelf && docker compose up -d
 
 ### 9. 常用命令
 
-> 换程序前请先在旧程序上**备份数据**。
+**换程序**（先在旧程序上备份数据）
 
-| 操作 | 命令 |
-|------|------|
-| 换程序并重装 | `cd /www/MirrorElf-R && docker compose down && mkdir -p /www && curl -fsSL …/install.sh \| bash` |
-| 停止 | `docker compose --env-file env.hub -f compose.hub.yml down` |
-| 前台启动 | `docker compose --env-file env.hub -f compose.hub.yml up` |
-| 后台启动 | `cd /www/mirrorelf && docker compose --env-file env.hub -f compose.hub.yml up -d` |
+```bash
+cd /www/MirrorElf-R && docker compose down && mkdir -p /www && curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/install.sh | bash
+```
 
-程序更新由 Watchtower 自动完成，无需手动操作。
+**更新程序**（程序会自动更新到最新版本）
+
+**停止**
+
+```bash
+docker compose --env-file env.hub -f compose.hub.yml down
+```
+
+**开始**
+
+```bash
+docker compose --env-file env.hub -f compose.hub.yml up
+```
+
+**开始（后台模式）**
+
+```bash
+cd /www/mirrorelf && docker compose --env-file env.hub -f compose.hub.yml up -d
+```
 
 ---
+
