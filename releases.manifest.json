@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.88",
+      "date": "2026-06-25",
+      "title": "Cloudflare 代理 Zone SSL 同步与域名解析批量归属过滤进度",
+      "notes": [
+        "Cloudflare DNS 创建/更新记录时若指定 proxied：已代理 → Zone ssl=flexible、always_use_https=on；仅 DNS → automatic_https_rewrites=off、always_use_https=off（apply_proxy_zone_settings）",
+        "Gname 批量转入 Cloudflare：A/AAAA/CNAME 默认代理后，在全部解析 upsert 完成后再统一 apply_proxy_zone_settings，避免后续仅 DNS 类型覆盖导致 Zone 设置不一致",
+        "域名解析批量操作「归属过滤」：分页拉取账户域名时显示 batchOwnershipProgress（当前页/进度条）；剔除结果汇总保留/剔除计数，日志仅列被剔除域名",
+        "AI 链轮节点侧栏「清空被链」：按来源站分组后 runWithConcurrency(5) 并发 saveSiteConf；确认框与完成提示标注外部站不可删条数，部分失败时追加 savePartialFail"
+      ]
+    },
+    {
       "version": "0.9.87",
       "date": "2026-06-24",
       "title": "路径悬停预览与仪表盘蜘蛛配色稳定",
