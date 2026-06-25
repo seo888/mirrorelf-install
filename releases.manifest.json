@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.90",
+      "date": "2026-06-26",
+      "title": "内存构成 RSS 残差分摊与仪表盘展示优化",
+      "notes": [
+        "memory_breakdown 重构：DashMap / linecache 等可 walk 结构按 weighted_size 实测（measured=true）；wreq 客户端、PG 连接池、runtime 基线改为 RSS − 实测 − jieba 残差按连接数权重分摊，不再固定 4MB/client",
+        "attribute_rss_residual：残差先扣 150MB Tokio/Axum 基线，余量按 wreq 个数与 PG 连接（×3 权重）比例分给 wreq_clients / pg_pool；分项 detail 含 idle、~MB/个、RSS残差",
+        "响应新增 process_private_bytes、measured_bytes、accounted_bytes；新增 runtime_baseline 分项；page_preload 按在途数×256B 估算",
+        "仪表盘内存悬停：分项 sub 展示占 RSS%、detail/count/limit；linecache ≥15% 或 wreq ≥35% RSS 高亮；other 占 RSS <3% 时隐藏并附未分摊堆提示"
+      ]
+    },
+    {
       "version": "0.9.89",
       "date": "2026-06-25",
       "title": "仪表盘内存构成排查与缓存库存统计",
