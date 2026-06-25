@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.89",
+      "date": "2026-06-25",
+      "title": "仪表盘内存构成排查与缓存库存统计",
+      "notes": [
+        "GET /_api_/memory/breakdown：估算进程 RSS 与各子系统占用（linecache 行/全文、域名路径索引与列表、蜘蛛统计、QPS 秒桶、访问日志内存环、随机目标不可达缓存、wreq 客户端、page_preload 在途、jieba 词典、PG 连接池）及 other 未归因字节",
+        "GET /_api_/cache/inventory：全库 website_cache / target_cache 行数与 content_chunks 个数、占用 MB",
+        "仪表盘库存区：展示网站/目标站缓存行数、content_chunks 占用空间与网站/目标占比条",
+        "系统内存 pill 悬停：RSS/虚拟/占系统/可用、CPU 累计、FD 或句柄、线程；下方「进程内存构成（估算）」分项列表，linecache 接近上限时 warn 高亮",
+        "7 日/24 小时趋势图 tooltip：多系列时 footer 显示该小时或当日访问合计"
+      ]
+    },
+    {
       "version": "0.9.88",
       "date": "2026-06-25",
       "title": "Cloudflare 代理 Zone SSL 同步与域名解析批量归属过滤进度",
