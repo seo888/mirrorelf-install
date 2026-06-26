@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.92",
+      "date": "2026-06-27",
+      "title": "出站 Client LRU 工作集轮换与 Linux smaps 内存映射",
+      "notes": [
+        "outbound_reqwest：按出口 IP 懒加载 + LRU 缓存 Client，不再为多 IP 机器预建数百 Client；上限默认 整机内存(GB)×4（4G→16 … 32G→128），可用 OUTBOUND_CLIENT_CACHE_MAX 覆盖",
+        "出站 IP 工作集：从全量出口 IP 随机抽取 ≤LRU 上限的一批，每 10 分钟轮换（OUTBOUND_WORKING_IP_ROTATE_SECS）；生产回源 pick_outbound_ip 仅在工作集内随机，轮换时剔除不在工作集中的 Client",
+        "memory_os + memory/breakdown：Linux 读取 /proc/self/smaps_rollup 与 smaps，响应 os_memory（Anonymous、Private_Dirty、[heap]、RSS≥10MB 的 Top 映射）；仪表盘内存悬停追加「内存映射（Linux /proc 实测）」区块",
+        "配置页出口 IP 测试：结果 meta 改为 chip 展示 HTTP/耗时/Content-Type/出口/TLS(reqwest)/UA，截断与 persona 兼容保留"
+      ]
+    },
+    {
       "version": "0.9.91",
       "date": "2026-06-27",
       "title": "出站 HTTP 回归 reqwest 与版本号编译期锁定",
