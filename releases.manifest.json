@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.91",
+      "date": "2026-06-27",
+      "title": "出站 HTTP 回归 reqwest 与版本号编译期锁定",
+      "notes": [
+        "移除 wreq / boring 依赖：出站回源、站点检测、AI 出站、设置页出口测试统一 outbound_reqwest（按出口 IP 缓存 reqwest Client）+ outbound_http（PC User-Agent 轮换）；/_api_/outbound_persona_user_agents 兼容返回空列表",
+        "version_info 模块：get_cache_version_info / release_history 从 system 拆出；current_version 仅取自编译期嵌入 manifest，磁盘 config 或远程合并不再抬高运行版本号",
+        "GET /_api_/version?force_manifest=1：强制拉远程 releases.manifest 合并后再返回版本日志",
+        "memory_breakdown：wreq_clients 改为 outbound_http_clients（每 IP 4MB 固定估算 + RSS 残差）；RSS <512MB 时隐藏 PG/出站/运行时残差行仅保留实测项",
+        "Windows debug 编译：.cargo/config.toml 为 aws-lc-sys 设置 AWS_LC_SYS_CFLAGS=/FS 避免 C1041 PDB 冲突"
+      ]
+    },
+    {
       "version": "0.9.90",
       "date": "2026-06-26",
       "title": "内存构成 RSS 残差分摊与仪表盘展示优化",
