@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.93",
+      "date": "2026-06-27",
+      "title": "出站回源 QPS 监控与 sitemap 随机路径优化",
+      "notes": [
+        "出站 HTTP（非站内探测）经 record_outbound_qps 按回源目标域名计 QPS，并保留最近 10 条 url/出口 IP/UA；GET /_api_/spider/outbound_qps 返回 current/avg/max/total/active_domains、top_domains 与 recent",
+        "website_usage_by_target_domains：出站 QPS 悬停展示各目标站被多少镜像站引用（website_used_count / website_used_domains 最多 10 条）；QpsRecentIp、WebsiteUsedDomainsBadge 组件",
+        "仪表盘 QPS 区新增「出口请求 QPS」列：与入站 QPS 并列，悬停展示 Top 目标站、最近回源与引用站点 badge",
+        "sitemap.xml / sitemap.txt 重写：random_website_cache_paths 随机 OFFSET 取最多 500 条 cache 路径（避免 ORDER BY RANDOM 全表扫），首页 index_url + 过滤空/根路径；xml Content-Type application/xml",
+        "memory_breakdown：PG/出站 Client 改固定估算（不再 RSS 残差分摊）；outbound 分项 detail 含缓存数/上限/配置 IP 数；Client LRU 默认改为 内存(GB)×2（0.9.92 为 ×4）"
+      ]
+    },
+    {
       "version": "0.9.92",
       "date": "2026-06-27",
       "title": "出站 Client LRU 工作集轮换与 Linux smaps 内存映射",
