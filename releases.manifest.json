@@ -3,14 +3,26 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.94",
+      "date": "2026-06-27",
+      "title": "站点指标路径过滤与登录版本更新提醒",
+      "notes": [
+        "middleware/paths.rs 统一入站路径规则：API（/_api、/_api_）、MCP、metrics/status/logout、/_static、_/admin、preview_ua 管理端拉流、x-mirrorelf-internal-fetch 探测等不计蜘蛛日活、QPS、镜像 Prometheus 与访问日志统计",
+        "蜘蛛访问策略（SpiderPolicy）仅限制访客镜像页；后台登录、管理静态与程序探测不受「搜索引擎蜘蛛」勾选影响",
+        "未配置镜像 Host 早拒：对齐 auto_site_building / pan_site_auto_site_building，返回 444 空 body（不计 QPS/蜘蛛/访问日志）；API/后台/监控路径排除",
+        "website_config 使用 should_skip_mirror_site_config_load：internal-fetch 出站探测仍加载镜像站配置，便于 site_status 回种 website_cache",
+        "访问日志 entry 增加 content_type；仅 website 表已配置域名写入内存环，未配置 Host 扫站仍 JSONL 落盘与 SSE，避免 DashMap 膨胀",
+        "管理端登录或升级后自动弹出 VersionUpdateModal：localStorage 记录已确认版本，展示自上次确认以来各版 release 说明（release_history）；中英文 i18n"
+      ]
+    },
+    {
       "version": "0.9.93",
       "date": "2026-06-27",
-      "title": "出站回源 QPS 监控与 sitemap 随机路径优化",
+      "title": "出站回源 QPS 监控与内存构成估算调整",
       "notes": [
         "出站 HTTP（非站内探测）经 record_outbound_qps 按回源目标域名计 QPS，并保留最近 10 条 url/出口 IP/UA；GET /_api_/spider/outbound_qps 返回 current/avg/max/total/active_domains、top_domains 与 recent",
         "website_usage_by_target_domains：出站 QPS 悬停展示各目标站被多少镜像站引用（website_used_count / website_used_domains 最多 10 条）；QpsRecentIp、WebsiteUsedDomainsBadge 组件",
         "仪表盘 QPS 区新增「出口请求 QPS」列：与入站 QPS 并列，悬停展示 Top 目标站、最近回源与引用站点 badge",
-        "sitemap.xml / sitemap.txt 重写：random_website_cache_paths 随机 OFFSET 取最多 500 条 cache 路径（避免 ORDER BY RANDOM 全表扫），首页 index_url + 过滤空/根路径；xml Content-Type application/xml",
         "memory_breakdown：PG/出站 Client 改固定估算（不再 RSS 残差分摊）；outbound 分项 detail 含缓存数/上限/配置 IP 数；Client LRU 默认改为 内存(GB)×2（0.9.92 为 ×4）"
       ]
     },
