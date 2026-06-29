@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.95",
+      "date": "2026-06-29",
+      "title": "mimalloc 分配器与版本已读服务端持久化",
+      "notes": [
+        "进程全局分配器切换为 mimalloc（MiMalloc）；memory_mimalloc 模块解析 mi_stats_get_json，GET /_api_/memory/breakdown 返回 mimalloc_stats（committed/reserved/malloc_requested 当前与峰值、pages、threads、purged）",
+        "仪表盘内存构成悬停新增「分配器 (mimalloc)」区块，与 Linux smaps 匿名映射提示对照排查 RSS",
+        "管理端版本已读改按登录用户落盘 data/admin_version_ack.json：GET /_api_/version/ack 读取、POST 写入 ack_version",
+        "VersionUpdateModal 关闭时同步 POST 服务端；登录后先拉取服务端 ack，旧版 localStorage mirrorelf_admin_ack_version 一次性迁移后清除",
+        "同版本 sessionStorage 临时 dismiss，刷新后台不再重复弹窗直至用户点「知道了」；versionUpdateNotice 单元测试"
+      ]
+    },
+    {
       "version": "0.9.94",
       "date": "2026-06-27",
       "title": "站点指标路径过滤与登录版本更新提醒",
