@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.97",
+      "date": "2026-06-29",
+      "title": "内存并发上限与出站响应体保护",
+      "notes": [
+        "memory_limits 模块：MIRROR_HTML_CONCURRENCY 限制镜像 HTML 缓存命中路径并发（满员等待）；PAGE_PRELOAD_MAX_IN_FLIGHT 限制 page_preload 全局在途；默认 0=不限制",
+        "memory_breakdown 新增 mirror_html_in_flight 分项；page_preload 展示 path 去重数、信号量上限与在途数",
+        "出站回源 OUTBOUND_RESPONSE_MAX_BYTES：fetch_url_with_client 流式读体，超 Content-Length 或累计字节即 502，防大响应 OOM",
+        "MIMALLOC_TRIM_INTERVAL_SECS>0 时后台定期 mi_collect(trim)，可选释放 mimalloc 保留区；docker/env.hub.example 补充内存调优环境变量说明",
+        "仪表盘内存构成：linecache / outbound_http_clients 占 RSS 过高时高亮 warn；出站 QPS 悬停域名旁 QpsDomainCopyBtn 一键复制"
+      ]
+    },
+    {
       "version": "0.9.96",
       "date": "2026-06-29",
       "title": "mimalloc 统计细化与按块大小 Top 分布",
