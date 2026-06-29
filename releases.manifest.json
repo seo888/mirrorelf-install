@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.0",
+      "date": "2026-06-30",
+      "title": "蜘蛛日统计迁入 PostgreSQL",
+      "notes": [
+        "移除 spider_counter_persist（进程内 DashMap + data/spider_counter.json 5 分钟落盘）；新增 spider_daily_stats 模块，历史数据存 PostgreSQL 表 spider_daily_stats（domain/day/spider 主键）",
+        "写路径：ban 中间件 record 仅入队 mpsc 缓冲，每 2 秒或满 2000 条批量 UPSERT；读路径（近 7 日图表、站点日报 spider_counter_total）直接查库，避免进程内大 HashMap 占 RSS",
+        "启动时 init_table 自动建表；若存在旧版 data/spider_counter.json（及 .bak）则一次性导入 PG 并归档为 .pg_imported，用户无感迁移",
+        "保留近 10 日历天数据，后台每 6 小时 DELETE 过期行；环境变量 SPIDER_STATS_DISABLED=1/true 可运行时关闭统计（替代 0.9.99 编译期开关，默认开启）",
+        "memory_breakdown 分项 id 改为 spider_stats_buffer（写缓冲待刷条数估算）；QPS、访问日志、蜘蛛策略拦截不受影响"
+      ]
+    },
+    {
       "version": "0.9.99",
       "date": "2026-06-30",
       "title": "蜘蛛统计编译期开关（RSS 基线排查）",
