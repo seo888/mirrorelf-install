@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.98",
+      "date": "2026-06-30",
+      "title": "全站维护模式（global_site_shutdown）",
+      "notes": [
+        "WebsiteSettings 新增 global_site_shutdown（默认 false）：开启后镜像访客路径在 banlist 早拒 444 空 body，暂停对外镜像响应",
+        "paths::should_reject_global_site_shutdown 与未配置 Host 早拒并列；/_api、/_api_、后台 /_/admin、metrics/status/logout 等管理路径不受影响",
+        "管理端配置页「全局控制」新增维护模式 OnOffSeg 开关（开/关）；ConfigFieldLab 绑定 WebsiteSettings.global_site_shutdown；中英文 i18n"
+      ]
+    },
+    {
       "version": "0.9.97",
       "date": "2026-06-29",
       "title": "内存并发上限与出站响应体保护",
