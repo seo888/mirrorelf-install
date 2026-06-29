@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.96",
+      "date": "2026-06-29",
+      "title": "mimalloc 统计细化与按块大小 Top 分布",
+      "notes": [
+        "memory_mimalloc 扩展 mi_stats_get_json 解析：allocator_overhead（committed−requested）、malloc_normal / malloc_huge、pages_abandoned、reset 累计、mimalloc 视角 process rss_current/peak",
+        "malloc_bins 按 current 排序取 Top 8（block_size + 当前/峰值字节），便于对照 HTML buffer、连接池等大对象分布",
+        "GET /_api_/memory/breakdown 的 mimalloc_stats 返回上述字段与 top_malloc_bins",
+        "仪表盘内存悬停「分配器 (mimalloc)」新增开销/普通块/大块/遗弃页/reset/mimalloc RSS 行，并增加「按块大小 Top」子表；中英文 i18n"
+      ]
+    },
+    {
       "version": "0.9.95",
       "date": "2026-06-29",
       "title": "mimalloc 分配器与版本已读服务端持久化",
