@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.9.99",
+      "date": "2026-06-30",
+      "title": "蜘蛛统计编译期开关（RSS 基线排查）",
+      "notes": [
+        "spider_counter_persist::SPIDER_COUNTER_ENABLED 编译期开关（本版默认 false）：关闭时不加载 data/spider_counter.json、不启动 5 分钟落盘任务、ban 中间件不再写入 spider_counter DashMap",
+        "QPS、访问日志、蜘蛛策略拦截、仪表盘出站 QPS 等其它统计不受影响；确认 RSS 与蜘蛛统计无关后改回 true 重新编译部署",
+        "启动日志输出「蜘蛛统计已关闭」提示；memory_breakdown 的 spider_counter 分项在关闭时仍为空表估算"
+      ]
+    },
+    {
       "version": "0.9.98",
       "date": "2026-06-30",
       "title": "全站维护模式（global_site_shutdown）",
