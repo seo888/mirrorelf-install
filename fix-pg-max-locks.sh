@@ -3,7 +3,7 @@
 #   ERROR: out of shared memory
 #   HINT: You might need to increase max_locks_per_transaction.
 #
-# 用法（生产机）：
+# 用法（生产机，无需 python3）：
 #   curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/fix-pg-max-locks.sh | bash
 # 或指定安装目录：
 #   MIRRORELF_HOME=/www/mirrorelf bash fix-pg-max-locks.sh
@@ -18,7 +18,6 @@ SHM="${MIRRORELF_PG_SHM_SIZE:-512mb}"
 COMPOSE_FILE_NAME="${MIRRORELF_COMPOSE_FILE:-compose.hub.yml}"
 ENV_FILE_NAME="${MIRRORELF_ENV_FILE:-env.hub}"
 PG_CONTAINER="${MIRRORELF_PG_CONTAINER:-mirrorelf-postgres-1}"
-APP_CONTAINER="${MIRRORELF_APP_CONTAINER:-mirrorelf-app-1}"
 
 log() { printf '%s\n' "$*"; }
 die() { printf 'ERROR: %s\n' "$*" >&2; exit 1; }
@@ -28,7 +27,7 @@ need_cmd() {
 }
 
 need_cmd docker
-need_cmd python3
+need_cmd awk
 
 if ! docker compose version >/dev/null 2>&1; then
   die "需要 docker compose 插件"
@@ -39,13 +38,99 @@ resolve_home() {
     printf '%s\n' "$MIRRORELF_HOME"
     return
   fi
-  for d in /www/mirrorelf "$PWD" "$(dirname "$0")"; do
+  for d in /www/mirrorelf "$PWD"; do
     if [[ -f "$d/$COMPOSE_FILE_NAME" ]]; then
       printf '%s\n' "$d"
       return
     fi
   done
+  # pipe 到 bash 时 $0 可能是 bash，忽略
+  if [[ -n "${BASH_SOURCE[0]:-}" && -f "${BASH_SOURCE[0]}" ]]; then
+    d="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    if [[ -f "$d/$COMPOSE_FILE_NAME" ]]; then
+      printf '%s\n' "$d"
+      return
+    fi
+  fi
   die "找不到 $COMPOSE_FILE_NAME（请设置 MIRRORELF_HOME=/path/to/mirrorelf）"
+}
+
+# 幂等改写 compose：postgres 段写入 shm_size + command 锁参数（纯 awk，无 python）
+patch_compose() {
+  local src="$1" dst="$2"
+  LOCKS="$LOCKS" PRED_LOCKS="$PRED_LOCKS" SHM="$SHM" awk '
+BEGIN {
+  locks = ENVIRON["LOCKS"]
+  pred = ENVIRON["PRED_LOCKS"]
+  shm = ENVIRON["SHM"]
+  in_pg = 0
+  skip_cmd = 0
+  wrote_shm = 0
+  wrote_cmd = 0
+}
+function emit_cmd() {
+  print "    command:"
+  print "      - postgres"
+  print "      - -c"
+  print "      - max_locks_per_transaction=" locks
+  print "      - -c"
+  print "      - max_pred_locks_per_transaction=" pred
+  wrote_cmd = 1
+}
+function emit_shm() {
+  print "    shm_size: " shm
+  wrote_shm = 1
+}
+{
+  # 进入 / 离开 postgres 服务
+  if ($0 ~ /^  [a-zA-Z0-9_-]+:[[:space:]]*$/) {
+    if (in_pg && !wrote_cmd) {
+      # 异常兜底：离开前补 command
+      if (!wrote_shm) emit_shm()
+      emit_cmd()
+    }
+    in_pg = ($0 ~ /^  postgres:[[:space:]]*$/)
+    skip_cmd = 0
+    if (in_pg) { wrote_shm = 0; wrote_cmd = 0 }
+    print
+    next
+  }
+
+  if (!in_pg) { print; next }
+
+  # 跳过旧 command 块
+  if (skip_cmd) {
+    if ($0 ~ /^      / || $0 ~ /^    command:/) next
+    skip_cmd = 0
+  }
+  if ($0 ~ /^    command:[[:space:]]*$/) {
+    skip_cmd = 1
+    next
+  }
+
+  # 替换已有 shm_size
+  if ($0 ~ /^    shm_size:[[:space:]]*/) {
+    emit_shm()
+    next
+  }
+
+  # 在 environment 前插入 shm（若尚未写）+ command
+  if ($0 ~ /^    environment:[[:space:]]*$/) {
+    if (!wrote_shm) emit_shm()
+    if (!wrote_cmd) emit_cmd()
+    print
+    next
+  }
+
+  print
+}
+END {
+  if (in_pg && !wrote_cmd) {
+    if (!wrote_shm) emit_shm()
+    emit_cmd()
+  }
+}
+' "$src" >"$dst"
 }
 
 HOME_DIR="$(resolve_home)"
@@ -63,63 +148,14 @@ bak="$COMPOSE.bak.$(date +%Y%m%d%H%M%S)"
 cp -a "$COMPOSE" "$bak"
 log "==> 已备份: $bak"
 
-# 幂等改写 compose：写入/替换 postgres 的 shm_size 与 command 锁参数
-python3 - "$COMPOSE" "$LOCKS" "$PRED_LOCKS" "$SHM" <<'PY'
-import re, sys
-from pathlib import Path
-
-path = Path(sys.argv[1])
-locks, pred, shm = sys.argv[2], sys.argv[3], sys.argv[4]
-text = path.read_text(encoding="utf-8")
-
-cmd_block = (
-    "    command:\n"
-    "      - postgres\n"
-    "      - -c\n"
-    f"      - max_locks_per_transaction={locks}\n"
-    "      - -c\n"
-    f"      - max_pred_locks_per_transaction={pred}\n"
-)
-
-# shm_size
-if re.search(r"(?m)^\s*shm_size:\s*", text):
-    text = re.sub(r"(?m)^(\s*)shm_size:\s*.*$", rf"\1shm_size: {shm}", text, count=1)
-else:
-    text = re.sub(
-        r"(?m)^(  postgres:\s*\n(?:    .*\n)*?)(    image:\s*postgres[^\n]*\n)",
-        rf"\1\2    shm_size: {shm}\n",
-        text,
-        count=1,
-    )
-
-# 去掉旧 command 块（仅 postgres 服务内、environment 之前）
-text2 = re.sub(
-    r"(?ms)^(  postgres:\n(?:    .*\n)*?)(    command:\n(?:      .*\n)+)",
-    r"\1",
-    text,
-    count=1,
-)
-
-# 在 postgres.environment 前插入 command
-if re.search(r"(?m)^  postgres:\n(?:    .*\n)*?    environment:", text2):
-    text2 = re.sub(
-        r"(?m)^(  postgres:\n(?:    .*\n)*?)(    environment:)",
-        rf"\1{cmd_block}\2",
-        text2,
-        count=1,
-    )
-else:
-    # 兜底：紧跟 image 行后插入
-    text2 = re.sub(
-        r"(?m)^(  postgres:\n(?:    .*\n)*?    image:\s*postgres[^\n]*\n)",
-        rf"\1    shm_size: {shm}\n{cmd_block}",
-        text2,
-        count=1,
-    )
-
-path.write_text(text2, encoding="utf-8")
-print("compose patched OK")
-PY
+tmp="$(mktemp)"
+trap 'rm -f "$tmp"' EXIT
+patch_compose "$COMPOSE" "$tmp"
+# 基本校验：必须含锁参数
+grep -q "max_locks_per_transaction=${LOCKS}" "$tmp" || die "改写 compose 失败：未写入 max_locks_per_transaction"
+mv "$tmp" "$COMPOSE"
+trap - EXIT
+log "==> compose 已更新"
 
 log "==> ALTER SYSTEM（写入 postgresql.auto.conf，重建后仍生效）"
 if docker ps --format '{{.Names}}' | grep -qx "$PG_CONTAINER"; then
@@ -141,7 +177,6 @@ for _ in $(seq 1 60); do
   st="$(docker inspect --format='{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' "$PG_CONTAINER" 2>/dev/null || echo missing)"
   log "    health=$st"
   if [[ "$st" == "healthy" || "$st" == "running" ]]; then
-    # running 且无 healthcheck 也接受；再等 isready
     if docker exec "$PG_CONTAINER" pg_isready -U postgres -d mirror >/dev/null 2>&1; then
       ok=1
       break
@@ -163,4 +198,4 @@ docker exec "$PG_CONTAINER" psql -U postgres -d mirror -v ON_ERROR_STOP=1 \
   -c "SELECT domain FROM website ORDER BY domain ASC LIMIT 5;"
 
 log "OK: 已提高 Postgres 锁上限。管理端列表若仍偶发超时，多半是 website_cache 统计慢，与本次锁表无关。"
-log "用法回顾: curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/fix-pg-max-locks.sh | bash"
+log "用法: curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/fix-pg-max-locks.sh | bash"
