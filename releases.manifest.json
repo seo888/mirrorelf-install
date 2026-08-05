@@ -3,6 +3,102 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.10",
+      "date": "2026-08-05",
+      "title": "仪表盘显示独立挂载的 /www 磁盘",
+      "notes": [
+        "仪表盘系统信息：若 /www 为独立挂载点，在根盘旁额外显示 /www 磁盘用量",
+        "修正程序挂载点识别（最长前缀匹配），避免一律落成根盘 /"
+      ]
+    },
+    {
+      "version": "0.10.9",
+      "date": "2026-08-05",
+      "title": "常用文档弹窗与站点替换词/目标站体验",
+      "notes": [
+        "网站管理：工具栏「常用文档」弹窗可快速编辑 keyword.txt / target.txt 等 doc 文件",
+        "编辑弹窗「AI获取替换词」改为覆盖/追加拆分按钮；随机换目标站清空本站替换词，保存写入可回退历史",
+        "列表随机换目标站同步清空本站替换词；回退目标站一并还原本站替换词",
+        "域名解析列表预览本机/服务器 IP 标识；系统设置过滤 IP 白名单可一键加入当前用户 IP",
+        "悬停提示幅宽随文案伸缩；行内菜单从图标位置展开"
+      ]
+    },
+    {
+      "version": "0.10.8",
+      "date": "2026-08-04",
+      "title": "批量解析同域名主机共用出口 IP",
+      "notes": [
+        "域名解析批量操作：纯域名行按勾选主机（www / @ / *）添加 A 记录，同一域名共用同一随机本机 IP"
+      ]
+    },
+    {
+      "version": "0.10.7",
+      "date": "2026-08-04",
+      "title": "域名解析批量可停与 Zone 创建间隔",
+      "notes": [
+        "域名解析批量操作：执行中可点「停止」中断后续任务；未完成项标记为已停止",
+        "批量添加域名 Zone / 一键转入 Cloudflare：新建 Zone 默认间隔 10 秒，可在域名列表旁设置中调整",
+        "系统设置 SEO 分区与备份默认勾选、批量解析拆分按钮等近期管理端优化一并纳入"
+      ]
+    },
+    {
+      "version": "0.10.6",
+      "date": "2026-08-04",
+      "title": "域名解析批量增强与设置引导优化",
+      "notes": [
+        "系统设置：SEO 分区标题改为「SEO全局设置」；「SEO优化」标签移到「访问/广告/蜘蛛」左侧",
+        "备份导出：缓存&映射、HTML 默认不勾选",
+        "域名解析：批量解析拆分按钮（主按钮先清空再解析 / + 仅追加）；未配置 API 时禁用批量操作；提示可跳转设置 → API 接口"
+      ]
+    },
+    {
+      "version": "0.10.5",
+      "date": "2026-08-03",
+      "title": "站点 SEO 三态覆盖与批量设置增强",
+      "notes": [
+        "网站编辑：seo设置分区支持跟随全局 / 开 / 关；链接映射纳入 SEO；悬停 tip 与系统设置同款样式",
+        "批量设置：同步 SEO 与链接映射等项；已勾选列支持 +主站 / +泛站 / +全站 / ×清空；布局与 tip 体验优化"
+      ]
+    },
+    {
+      "version": "0.10.4",
+      "date": "2026-07-31",
+      "title": "清缓存合并菜单与站点标题不匹配提示",
+      "notes": [
+        "网站管理工具栏：原「清空网站缓存 / 清空目标站缓存」合并为悬停「清空缓存」四项（首页/整站 × 本站/目标站）；保留「一键清空缓存」",
+        "站点状态：标题不匹配时悬停 tip 分行显示「设置标题 / 实际标题」，实际标题加粗高对比；API message 同步带上 actual_title"
+      ]
+    },
+    {
+      "version": "0.10.3",
+      "date": "2026-07-31",
+      "title": "清缓存按钮支持首页/整站悬停菜单",
+      "notes": [
+        "网站管理行内清缓存：悬停扫帚弹出「清空首页缓存 / 清空网站缓存」与「清空目标首页缓存 / 清空目标站缓存」",
+        "缓存管理左侧域名列表同样支持首页与整站（或目标首页与目标整站）两项",
+        "首页选项调用 DELETE …/delete?path=/（入回收站或永久删除流程不变）"
+      ]
+    },
+    {
+      "version": "0.10.2",
+      "date": "2026-07-30",
+      "title": "仪表盘缓存库存改为估算，避免 COUNT 超时",
+      "notes": [
+        "GET /_api_/cache/inventory：不再对 website_cache / target_cache / content_chunks 做精确 COUNT(*) 与 SUM(octet_length)（千万行级会 statement_timeout → HTTP 500）",
+        "行数改读 pg_class.reltuples（分区表对子表求和）；chunk 体积改用 pg_total_relation_size，仪表盘展示为近似值即可"
+      ]
+    },
+    {
+      "version": "0.10.1",
+      "date": "2026-07-30",
+      "title": "网站缓存域名列表改为读分区目录",
+      "notes": [
+        "query_website_cache_domains / query_website_cache_first_domain：不再对 website_cache 全表 SELECT DISTINCT（千万行级会 statement_timeout → HTTP 500）",
+        "改为从 pg_inherits + relpartbound 解析 LIST 分区域名，内存过滤 is_www / ends_with 后分页；includeCacheCount 仍只统计当前页",
+        "Dockerfile：Apple Silicon 上以 BUILDPLATFORM 原生交叉编译 linux/amd64，避免 QEMU 跑 rustc 段错误；补充 COPY vendor"
+      ]
+    },
+    {
       "version": "0.10.0",
       "date": "2026-06-30",
       "title": "蜘蛛日统计迁入 PostgreSQL",
