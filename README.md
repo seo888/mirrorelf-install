@@ -400,3 +400,19 @@ cd /www/mirrorelf && docker compose --env-file env.hub -f compose.hub.yml up -d
 
 ---
 
+
+## 修复 Postgres「out of shared memory / max_locks_per_transaction」
+
+站点按域名 LIST 分区较多时，扫 `website` 父表可能锁爆共享内存，管理端列表接口返回 500。在**每台生产机**执行：
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/fix-pg-max-locks.sh | bash
+```
+
+默认安装目录 `/www/mirrorelf`；其它路径：
+
+```bash
+MIRRORELF_HOME=/path/to/mirrorelf bash <(curl -fsSL https://raw.githubusercontent.com/seo888/mirrorelf-install/main/fix-pg-max-locks.sh)
+```
+
+脚本会备份并改写 `compose.hub.yml`、重建 Postgres、重启 app。Docker Hub / Watchtower **不会**自动改 compose。
