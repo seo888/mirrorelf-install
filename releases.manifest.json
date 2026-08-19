@@ -3,6 +3,57 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.15",
+      "date": "2026-08-20",
+      "title": "单页模式与 SPA 建站增强",
+      "notes": [
+        "网站管理：单页模式编辑弹窗（HTML 编辑器、memo、AI 生成 SPA）；列表单页标识与 memo 展示",
+        "单页 TDK：悬停 tooltip 分段展示 Set/实际字段；tip 内容变动时标题绿点；标题为空时显示绿色 Set关键词 标签",
+        "列表 TDK 右键：模板生成关键词、随机生成关键词；单页域名链接绿色高亮",
+        "AI 生成 SPA：后台任务改为长超时，修复列表 ✨ 按钮失败；建站 prompt 携带站点域名；写入编辑器时 HTML 自动格式化",
+        "Docker：构建阶段包含 config/seo 预设，修复镜像编译失败"
+      ]
+    },
+    {
+      "version": "0.10.14",
+      "date": "2026-08-17",
+      "title": "防栈溢出与授权码校验失败高亮",
+      "notes": [
+        "镜像请求：website_main / 链接映射递归加深度与防环限制，避免 Tokio worker 栈溢出整进程 abort",
+        "Tokio worker 默认栈提升至 8MB（可用 TOKIO_WORKER_STACK_BYTES 覆盖）",
+        "系统设置：授权码校验失败时输入框显示红色边框"
+      ]
+    },
+    {
+      "version": "0.10.13",
+      "date": "2026-08-07",
+      "title": "站点编辑深链设置与主站/泛站标识",
+      "notes": [
+        "网站编辑：关键词旁可跳转「设置关键词模板」，SEO 分区可跳转「全局设置」并高亮对应项",
+        "编辑弹窗域名前显示主站/泛站徽章；泛站关键词模板深链滚到底部完整展示",
+        "蜘蛛 24h 图表与站点检测列表加载优化；AI TDK / 模板生成关键词交互调整"
+      ]
+    },
+    {
+      "version": "0.10.12",
+      "date": "2026-08-06",
+      "title": "链接映射写库异步化且已存在则跳过",
+      "notes": [
+        "链接映射占位写入改为后台异步，不再阻塞页面响应",
+        "已存在且源路径相同的 mapping 行跳过 UPDATE，避免每次请求重复写库"
+      ]
+    },
+    {
+      "version": "0.10.11",
+      "date": "2026-08-06",
+      "title": "站点状态探测展示处理耗时与近 10 次历史",
+      "notes": [
+        "site_status 接口返回镜像响应头 m-processed-time / m-spend-time",
+        "网站列表状态圆点悬停：近 10 次探测明细（S/R/T/H 缩写）与次数/平均处理/成功率",
+        "修复列表加载时重复探测导致历史成对重复的问题"
+      ]
+    },
+    {
       "version": "0.10.10",
       "date": "2026-08-05",
       "title": "仪表盘显示独立挂载的 /www 磁盘",
