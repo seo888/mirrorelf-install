@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.18",
+      "date": "2026-08-21",
+      "title": "单页 SEO 侧栏与源码 TDK 优先",
+      "notes": [
+        "单页编辑：右侧增加 seo设置（友链上方）；窄栏三态切换紧凑布局",
+        "单页出站 TDK：以源码 title/keywords/description 为准，仅空值用站点 conf 补齐",
+        "列表单页无 HTML 标题时展示 Set标题 / Set关键词 / Set描述"
+      ]
+    },
+    {
       "version": "0.10.17",
       "date": "2026-08-20",
       "title": "Gname 域名分组与操作分组",
