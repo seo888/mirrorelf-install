@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.17",
+      "date": "2026-08-20",
+      "title": "Gname 域名分组与操作分组",
+      "notes": [
+        "域名解析（Gname）：列表新增分组列与筛选；工具栏「操作分组」支持移入分组、新建分组、分组改名",
+        "账户下拉底部「+ 增加接口」可跳转设置；Cloudflare 每页条数上限改为 50",
+        "MCP：domain_dns_groups / create / rename / assign，zones 支持 group 过滤"
+      ]
+    },
+    {
       "version": "0.10.16",
       "date": "2026-08-20",
       "title": "列表模式筛选与发版 manifest 同步",
