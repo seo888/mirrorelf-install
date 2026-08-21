@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.19",
+      "date": "2026-08-22",
+      "title": "批量建站与域名状态筛选",
+      "notes": [
+        "网站管理：批量新建支持镜像/单页标签；单页格式 domain___标题___关键词___描述",
+        "镜像/单页编辑布局与替换规则高度、单页 HTML 预览（blob）优化",
+        "域名解析（Gname）：分组旁增加状态筛选；去掉「分组」文案",
+        "关键词域名匹配：「复制域名与关键词」为可注册行 domain\\tkeyword"
+      ]
+    },
+    {
       "version": "0.10.18",
       "date": "2026-08-21",
       "title": "单页 SEO 侧栏与源码 TDK 优先",
