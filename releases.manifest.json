@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.20",
+      "date": "2026-08-24",
+      "title": "站长平台 Google Search Console",
+      "notes": [
+        "关键词工具：新增站长平台（GSC）页，站点列表、批量绑定与移除",
+        "配置：站长平台 OAuth（client_id/secret、只读 redirect URI）；GSC 配置帮助文档",
+        "绑定弹窗：DNS 账户选择、已验证跳过、失败重绑与域名粘贴",
+        "关键词工具默认打开站长平台；#/site_check 重定向到 site_check 工具"
+      ]
+    },
+    {
       "version": "0.10.19",
       "date": "2026-08-22",
       "title": "批量建站与域名状态筛选",
