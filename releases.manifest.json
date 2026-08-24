@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.21",
+      "date": "2026-08-25",
+      "title": "Telegram 建站日报",
+      "notes": [
+        "配置·通知渠道：Telegram 定时日报（UTC+8 昨日统计）与「发送日报信息」手动推送",
+        "日报内容：昨日新增/修改镜像站；镜像站显示 conf 标题与目标站，单页显示 HTML <title> 与「单页模式」",
+        "API：POST /_api_/notification/telegram/daily_report"
+      ]
+    },
+    {
       "version": "0.10.20",
       "date": "2026-08-24",
       "title": "站长平台 Google Search Console",
