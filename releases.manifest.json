@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.27",
+      "date": "2026-08-27",
+      "title": "移除 404 推荐链接，停止大表随机扫路径",
+      "notes": [
+        "404 页面不再从 website_cache 随机抽样推荐链接（每请求 COUNT + OFFSET 扫千万行分区）",
+        "与关闭 Sitemap 全站路径配合，可显著降低爬虫扫无效路径时的数据库 CPU"
+      ]
+    },
+    {
       "version": "0.10.26",
       "date": "2026-08-27",
       "title": "Sitemap 全站路径开关与数据库减负",
