@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.23",
+      "date": "2026-08-26",
+      "title": "修复 sitemap 子图路由导致启动 panic",
+      "notes": [
+        "sitemap 子图改为 /sitemap-{file}（如 /sitemap-1.xml），避免 Axum「单段仅允许一个参数」导致进程无法启动",
+        "保留兼容路径 /sitemap/pages/{page}"
+      ]
+    },
+    {
       "version": "0.10.22",
       "date": "2026-08-26",
       "title": "镜像建站必填目标站与空域名缓存修复",
