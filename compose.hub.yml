@@ -14,16 +14,24 @@
 # 管理后台：http://<服务器IP>:16888/_/admin/  默认 admin / admin
 #
 # 数据目录绑定到宿主机（相对本 compose 文件所在目录，install.sh 默认为 /www/mirrorelf）：
-#   config/  log/  data/  doc/  templates/  pgdata/  _/static/
+#   config/  log/  data/  doc/  templates/  prompt/  pgdata/  _/static/
 # 应用目录属主应为 uid 10001（install.sh 会 chown）；Permission denied 时见 README 排错。
-# doc、templates 为建站文档与 HTML 模板；程序仅在文件不存在时写入内置种子，不会覆盖已有文件。
+# doc、templates、prompt 持久化在宿主机；程序/entrypoint 仅在文件不存在时写入内置种子，不会覆盖已有文件。
 # _/static/（含 js/、images/）为用户自写静态资源，升级镜像不会覆盖；管理后台 _/admin 由 entrypoint 从镜像同步。
 # 从旧版「命名卷」升级：可用 docker run --rm -v mirrorelf_config:/from -v $(pwd)/config:/to alpine cp -a /from/. /to/
 
 services:
   postgres:
     image: postgres:16-bookworm
-    shm_size: 256mb
+    restart: unless-stopped
+    # 每域名一张 LIST 分区时，扫父表会锁住全部子表+索引；默认 64 易 out of shared memory
+    shm_size: 512mb
+    command:
+      - postgres
+      - -c
+      - max_locks_per_transaction=512
+      - -c
+      - max_pred_locks_per_transaction=256
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mirrorelf
@@ -41,6 +49,7 @@ services:
 
   app:
     image: ${MIRRORELF_IMAGE}
+    restart: unless-stopped
     network_mode: host
     environment:
       MIRRORELF_SYNC_RELEASES_MANIFEST: '1'
@@ -58,6 +67,7 @@ services:
       - ./data:/app/data
       - ./doc:/app/doc
       - ./templates:/app/templates
+      - ./prompt:/app/prompt
       - ./_static:/app/_/static
 
   watchtower:
@@ -70,5 +80,9 @@ services:
       WATCHTOWER_LABEL_ENABLE: 'true'
       WATCHTOWER_POLL_INTERVAL: '600'
       WATCHTOWER_CLEANUP: 'true'
+      # 坏版本启动即 panic 时 Docker 可能放弃重启（未撑满约 10s），容器变 Exited；
+      # 须纳入已退出/重启中容器，并在镜像更新后拉起，否则 Hub 修好也无人接管。
       WATCHTOWER_INCLUDE_RESTARTING: 'true'
+      WATCHTOWER_INCLUDE_STOPPED: 'true'
+      WATCHTOWER_REVIVE_STOPPED: 'true'
       TZ: Asia/Shanghai

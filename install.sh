@@ -85,10 +85,10 @@ detect_primary_ip() {
 }
 
 ensure_data_dirs() {
-	mkdir -p "$WORKDIR"/{config,log,data,doc,templates,pgdata,_static/js,_static/images}
+	mkdir -p "$WORKDIR"/{config,log,data,doc,templates,prompt,pgdata,_static/js,_static/images}
 	# 与 Dockerfile 中 mirrorelf 用户 uid/gid 一致（10001）；Postgres 为 999
 	if [[ "$(uname -s 2>/dev/null)" == Linux ]] && command -v chown >/dev/null 2>&1; then
-		chown -R 10001:10001 "$WORKDIR"/{config,log,data,doc,templates,_static} 2>/dev/null || true
+		chown -R 10001:10001 "$WORKDIR"/{config,log,data,doc,templates,prompt,_static} 2>/dev/null || true
 		chown -R 999:999 "$WORKDIR/pgdata" 2>/dev/null || true
 	fi
 }
@@ -98,7 +98,15 @@ write_embedded_compose() {
 services:
   postgres:
     image: postgres:16-bookworm
-    shm_size: 256mb
+    restart: unless-stopped
+    # 每域名一张 LIST 分区时，扫父表会锁住全部子表+索引；默认 64 易 out of shared memory
+    shm_size: 512mb
+    command:
+      - postgres
+      - -c
+      - max_locks_per_transaction=512
+      - -c
+      - max_pred_locks_per_transaction=256
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mirrorelf
@@ -116,6 +124,7 @@ services:
 
   app:
     image: ${MIRRORELF_IMAGE}
+    restart: unless-stopped
     network_mode: host
     environment:
       MIRRORELF_SYNC_RELEASES_MANIFEST: '1'
@@ -133,6 +142,7 @@ services:
       - ./data:/app/data
       - ./doc:/app/doc
       - ./templates:/app/templates
+      - ./prompt:/app/prompt
       - ./_static:/app/_/static
 
   watchtower:
@@ -145,7 +155,11 @@ services:
       WATCHTOWER_LABEL_ENABLE: 'true'
       WATCHTOWER_POLL_INTERVAL: '600'
       WATCHTOWER_CLEANUP: 'true'
+      # 坏版本启动即 panic 时 Docker 可能放弃重启（未撑满约 10s），容器变 Exited；
+      # 须纳入已退出/重启中容器，并在镜像更新后拉起，否则 Hub 修好也无人接管。
       WATCHTOWER_INCLUDE_RESTARTING: 'true'
+      WATCHTOWER_INCLUDE_STOPPED: 'true'
+      WATCHTOWER_REVIVE_STOPPED: 'true'
       TZ: Asia/Shanghai
 COMPOSE_EOF
 }
@@ -153,6 +167,21 @@ COMPOSE_EOF
 if [[ ! -f "$COMPOSE" ]]; then
 	echo "正在写入 $COMPOSE …"
 	write_embedded_compose
+else
+	# 已安装机：补 app/postgres restart + Watchtower 拉起 Exited 容器（0.10.22 事故后）
+	need_heal=0
+	if ! grep -A20 '^  app:' "$COMPOSE" | grep -q 'restart: unless-stopped'; then
+		need_heal=1
+	fi
+	if ! grep -q 'WATCHTOWER_REVIVE_STOPPED' "$COMPOSE"; then
+		need_heal=1
+	fi
+	if [[ "$need_heal" == 1 ]]; then
+		bak="${COMPOSE}.bak.$(date +%Y%m%d%H%M%S)"
+		echo "正在升级 $COMPOSE（自愈重启策略）→ 备份 $bak"
+		cp -a "$COMPOSE" "$bak"
+		write_embedded_compose
+	fi
 fi
 
 if ! command -v docker >/dev/null 2>&1; then
@@ -180,7 +209,7 @@ fi
 cd "$WORKDIR"
 echo "工作目录: $WORKDIR"
 ensure_data_dirs
-echo "数据目录: $WORKDIR/{config,log,data,doc,templates,pgdata}"
+echo "数据目录: $WORKDIR/{config,log,data,doc,templates,prompt,pgdata}"
 COMPOSE_BASE=(docker compose -f "$COMPOSE" --env-file "$ENV_FILE")
 INSTALL_WATCHTOWER=0
 if resolve_install_watchtower; then

@@ -1,4 +1,4 @@
-﻿# mirrorelf-install
+# mirrorelf-install
 
 **MirrorElf（镜像精灵）** — Docker 一键安装仓库
 
@@ -386,13 +386,13 @@ cd /www/MirrorElf-R && docker compose down && mkdir -p /www && curl -fsSL https:
 docker compose --env-file env.hub -f compose.hub.yml down
 ```
 
-**开始**
+**开始（前台模式-用于调试）**
 
 ```bash
 docker compose --env-file env.hub -f compose.hub.yml up
 ```
 
-**开始（后台模式）**
+**开始（后台模式-正常启动）**
 
 ```bash
 cd /www/mirrorelf && docker compose --env-file env.hub -f compose.hub.yml up -d
@@ -400,6 +400,39 @@ cd /www/mirrorelf && docker compose --env-file env.hub -f compose.hub.yml up -d
 
 ---
 
+## 版本清单同步（开发者）
+
+> 本节供 MirrorElf 源码仓维护者使用。
+
+发版时将 `releases.manifest.json` 推送到 [seo888/mirrorelf-install](https://github.com/seo888/mirrorelf-install) 仓库根目录，供已部署实例通过 `remote_manifest_url` 拉取完整版本历史。
+
+### 一键同步（推荐）
+
+在 MirrorElf 根目录（需已克隆 `mirrorelf-install` 到同级目录，默认 `../mirrorelf-install`）：
+
+```powershell
+.\scripts\sync-install-manifest.ps1
+```
+
+| 参数 | 说明 |
+|------|------|
+| `-InstallRepo D:\code\mirrorelf-install` | 自定义 install 仓路径 |
+| `-DryRun` | 预览，不提交 |
+
+脚本流程：`config/releases.manifest.json` → `scripts/mirrorelf-install/` → install 仓根目录 → `git commit` → `git push`。
+
+### 手动步骤
+
+```bash
+# MirrorElf 根目录
+cp config/releases.manifest.json scripts/mirrorelf-install/releases.manifest.json
+
+# mirrorelf-install 克隆目录
+cp /path/to/MirrorElf/scripts/mirrorelf-install/releases.manifest.json ./releases.manifest.json
+git add releases.manifest.json && git commit -m "chore: sync releases manifest 0.9.56" && git push
+```
+
+远程 URL：`https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json`
 
 ## 修复 Postgres「out of shared memory / max_locks_per_transaction」
 
