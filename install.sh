@@ -38,7 +38,7 @@ resolve_install_dir() {
 		exit 1
 	fi
 	if ! mkdir -p "$d"; then
-		echo "无法创建安装目录: $d（若无 /www 写权限，请指定其他路径或 sudo 执行）" >&2
+		echo "无法创建安装目录: ${d}（若无 /www 写权限，请指定其他路径或 sudo 执行）" >&2
 		exit 1
 	fi
 	(cd "$d" && pwd)
