@@ -3,12 +3,23 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.24",
+      "date": "2026-08-26",
+      "title": "sitemap 精简、路径规范化与出站性能",
+      "notes": [
+        "移除 /sitemap.txt；robots.txt 仅声明 sitemap.xml（index + 分页子图）",
+        "sitemap 输出 URL 去重；请求路径 // 折叠（入口 301 + 缓存写入规范化）",
+        "出站 Client LRU 上限进程内缓存，出口 IP 配置保存后 invalidate，LRU 热路径不再重复 sysinfo",
+        "仪表盘出站 QPS 悬停：展示触发回源的镜像站域名",
+        "站长平台：批量提交地图支持「仅 www / 全部引用站」"
+      ]
+    },
+    {
       "version": "0.10.23",
       "date": "2026-08-26",
       "title": "修复 sitemap 子图路由导致启动 panic",
       "notes": [
-        "sitemap 子图改为 /sitemap-{file}（如 /sitemap-1.xml），避免 Axum「单段仅允许一个参数」导致进程无法启动",
-        "保留兼容路径 /sitemap/pages/{page}"
+        "sitemap 子图改为 /sitemap-{file}（如 /sitemap-1.xml），避免 Axum「单段仅允许一个参数」导致进程无法启动"
       ]
     },
     {
