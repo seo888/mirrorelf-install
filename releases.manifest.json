@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.26",
+      "date": "2026-08-27",
+      "title": "Sitemap 全站路径开关与数据库减负",
+      "notes": [
+        "系统设置：新增「Sitemap 全站路径」；关闭后 /sitemap.xml 仅输出首页（不查库），/sitemap-N.xml 返回 404",
+        "移除 website_cache (page_type, path) 索引自动创建，避免大库启动时长时间建索引",
+        "生产止血：关闭全站路径即可停掉 sitemap 全表扫描，无需额外建索引"
+      ]
+    },
+    {
       "version": "0.10.25",
       "date": "2026-08-26",
       "title": "sitemap 性能与数据库连接优化",
