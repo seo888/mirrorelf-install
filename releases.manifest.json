@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.25",
+      "date": "2026-08-26",
+      "title": "sitemap 性能与数据库连接优化",
+      "notes": [
+        "sitemap.xml / 子图：进程内 XML 缓存（默认 TTL 60 分钟），同域名并发单飞，响应 Cache-Control",
+        "大站 sitemap 路径数改用分区 reltuples/n_live_tup 估算，避免千万行 COUNT(*)；≤15 万行仍精确 COUNT",
+        "website_cache 新增索引 (page_type, path)，加速 sitemap 分页 ORDER BY path",
+        "Hub compose：PostgreSQL max_connections=200；应用 PG_POOL_MAX 默认 128",
+        "环境变量 SITEMAP_CACHE_TTL_SECS（60～3600，默认 3600）"
+      ]
+    },
+    {
       "version": "0.10.24",
       "date": "2026-08-26",
       "title": "sitemap 精简、路径规范化与出站性能",
