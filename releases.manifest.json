@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.22",
+      "date": "2026-08-26",
+      "title": "镜像建站必填目标站与空域名缓存修复",
+      "notes": [
+        "网站管理：镜像模式新建/编辑/批量建站必须填写目标站；站点域名与目标站校验提示显示在对应输入框下方",
+        "空 target_domain 不再创建 target_cache 分区表；写入目标缓存时跳过空域名",
+        "设置页：含行内按钮的字段改为非 label 包裹，修复按钮 hover 命中异常；「编辑广告js」增加铅笔图标",
+        "站长平台：引用站 sitemap 提交与批量提交地图；sitemap 子图路径改为 /sitemap-N.xml",
+        "管理弹窗：取消点击遮罩关闭"
+      ]
+    },
+    {
       "version": "0.10.21",
       "date": "2026-08-25",
       "title": "Telegram 建站日报",
