@@ -165,7 +165,7 @@ COMPOSE_EOF
 }
 
 if [[ ! -f "$COMPOSE" ]]; then
-	echo "正在写入 $COMPOSE …"
+	echo "正在写入 ${COMPOSE} …"
 	write_embedded_compose
 else
 	# 已安装机：补 app/postgres restart + Watchtower 拉起 Exited 容器（0.10.22 事故后）
@@ -178,7 +178,7 @@ else
 	fi
 	if [[ "$need_heal" == 1 ]]; then
 		bak="${COMPOSE}.bak.$(date +%Y%m%d%H%M%S)"
-		echo "正在升级 $COMPOSE（自愈重启策略）→ 备份 $bak"
+		echo "正在升级 ${COMPOSE}（自愈重启策略）→ 备份 ${bak}"
 		cp -a "$COMPOSE" "$bak"
 		write_embedded_compose
 	fi
