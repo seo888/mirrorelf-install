@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.28",
+      "date": "2026-08-28",
+      "title": "站长平台搜索表现与 GSC OAuth 配置体验",
+      "notes": [
+        "站长平台：近28日搜索表现仅加载可视行；表头支持单独强制刷新（绕过 12h 缓存）",
+        "站长平台：展开明细支持按日/关键词/页面、指标排序、页面标题、可点 URL、Google 搜索图标",
+        "设置：GSC OAuth 帮助文档（Markdown 链接/标题/分隔线排版）；client_secret 按密码回显；回调地址与复制按钮同行",
+        "网站列表：AI TDK 按钮紧贴标题文字末尾（多行时跟在末行后）"
+      ]
+    },
+    {
       "version": "0.10.27",
       "date": "2026-08-27",
       "title": "移除 404 推荐链接，停止大表随机扫路径",
