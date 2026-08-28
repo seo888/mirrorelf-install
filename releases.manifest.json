@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.29",
+      "date": "2026-08-28",
+      "title": "网站搜索引擎直达与清缓存策略",
+      "notes": [
+        "网站列表：标题前可勾选显示谷歌/必应/百度/搜狗/Yandex/360 图标；左键搜标题、右键搜首个关键词；设置弹窗与行内贴齐标题",
+        "网站列表：移除标题右键「搜标题/搜关键词」菜单；悬停搜索图标时标题不再高亮",
+        "站长平台：展开行自动滚到表格可视区顶部；明细表日期列可排序",
+        "清缓存：清空整站/目标站缓存改为直接永久删除（可 DROP 域名分区子表）；仅清首页仍支持进回收站与永久删除拆分按钮"
+      ]
+    },
+    {
       "version": "0.10.28",
       "date": "2026-08-28",
       "title": "站长平台搜索表现与 GSC OAuth 配置体验",
