@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.30",
+      "date": "2026-08-29",
+      "title": "封禁路径与配置页密钥体验",
+      "notes": [
+        "访问策略：新增「封禁路径」（每行一条；末尾 * 为前缀匹配），命中后直接拒绝且不请求目标站；管理台 / API 路径不受影响",
+        "访问策略：「指定出口 IP」挪到访问策略分区；封禁列表独立展示 UA / IP / 路径",
+        "配置页：授权码、登录密码、AI Key、域名 DNS、站长平台、Telegram 等密钥框聚焦时显示明文并全选",
+        "配置页：授权码标题旁增加 MirrorElf 官网链接（www.mirrorelf.com）",
+        "Gname：时间戳错误提示补充 Linux/Docker 主机需开启 NTP 的说明"
+      ]
+    },
+    {
       "version": "0.10.29",
       "date": "2026-08-28",
       "title": "网站搜索引擎直达与清缓存策略",
