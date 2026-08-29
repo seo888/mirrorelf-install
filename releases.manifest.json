@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.31",
+      "date": "2026-08-29",
+      "title": "链轮标签对齐与模板全屏编辑",
+      "notes": [
+        "链轮：节点序号与域名改为自绘文本，统一垂直居中（相对胶囊几何中心下移 1px）",
+        "模板中心：编辑区标题旁增加「全屏」，预览+编辑工作区可铺满视口（Esc 退出）",
+        "网站列表：本会话内点击过的搜索引擎图标降低透明度并显示角标，便于区分已搜过的引擎"
+      ]
+    },
+    {
       "version": "0.10.30",
       "date": "2026-08-29",
       "title": "封禁路径与配置页密钥体验",
