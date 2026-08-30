@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.33",
+      "date": "2026-08-30",
+      "title": "全局代码生效范围与列表缓存角标",
+      "notes": [
+        "全局代码插入：新增生效范围「仅访客 / 访客与蜘蛛」；网站编辑页标题旁显示当前模式",
+        "过滤 IP 白名单：文案标明名单内不加载广告、不跳转广告",
+        "网站列表：缓存角标仅对当前可视行分块拉取，单块失败不影响其它行",
+        "404 模板：启动不再因缺少旧占位符覆盖用户修改；内置种子移除已废弃的推荐链接占位"
+      ]
+    },
+    {
       "version": "0.10.32",
       "date": "2026-08-30",
       "title": "404 广告、缓存跳转与清缓存策略",
