@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.34",
+      "date": "2026-08-31",
+      "title": "页面智能混淆与 SEO 随机标识",
+      "notes": [
+        "SEO：新增「页面智能混淆」，body 首尾各注入 2～4 组屏外假 DOM（每组约 200～350 对标签，组间换行，同页稳定派生）",
+        "SEO：新增「随机 class / 随机 id」稳定改写；系统设置、单站三态、批量设置与 SEO 预设同步",
+        "广告 JS：支持自定义路径别名；访问默认 ad.js 可 307 到别名",
+        "友链样式：系统设置与链轮共用弹窗编辑"
+      ]
+    },
+    {
       "version": "0.10.33",
       "date": "2026-08-30",
       "title": "全局代码生效范围与列表缓存角标",
