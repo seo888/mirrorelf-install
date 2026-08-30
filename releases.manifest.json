@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.32",
+      "date": "2026-08-30",
+      "title": "404 广告、缓存跳转与清缓存策略",
+      "notes": [
+        "404 模板：应用广告 / 访客可见全局代码插入；SEO 优化插入仍不作用于 404",
+        "网站列表：点击缓存角标跳转网站缓存时，主站默认「仅主站」、泛站默认「主站+泛站」",
+        "网站列表：清空网站/首页/目标站缓存一律永久删除，不再进回收站"
+      ]
+    },
+    {
       "version": "0.10.31",
       "date": "2026-08-29",
       "title": "链轮标签对齐与模板全屏编辑",
