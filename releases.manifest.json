@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.40",
+      "date": "2026-09-01",
+      "title": "静态资源映射：无前导斜杠相对路径按站点根解析",
+      "notes": [
+        "静态资源映射：`css/base.css` 等无前导 `/` 且非 `./`/`../` 的相对路径按站点根解析为 `/css/base.css`，避免页面落在错误深层路径时编出 `/js/css/js/...` 污染 URL",
+        "显式 `./`、`../` 仍相对当前页；当前页本身已是静态资源路径或映射形 URL 时，相对拼接回落到站点根"
+      ]
+    },
+    {
       "version": "0.10.39",
       "date": "2026-09-01",
       "title": "预加载结算与回源/访问日志体验",
