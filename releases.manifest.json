@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.37",
+      "date": "2026-08-31",
+      "title": "路径封禁映射还原、拦截/回源日志与站点日志体验",
+      "notes": [
+        "访问策略：路径封禁先匹配入站原路径（命中不查库），再解析静态/链接映射并对还原路径二次封禁；映射结果请求内缓存复用",
+        "站点日志：新增「拦截日志」；回源日志增加「访问 URL」列，可区分直访与映射还原后回源",
+        "访问日志侧栏：主站/泛站筛选、域名列显示 ID、按 ID 升降序、筛选站点数量；表格样式与回源/拦截统一（不透明 sticky 表头、垂直居中）"
+      ]
+    },
+    {
       "version": "0.10.36",
       "date": "2026-08-31",
       "title": "站点日志新增回源日志",
