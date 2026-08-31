@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.39",
+      "date": "2026-09-01",
+      "title": "预加载结算与回源/访问日志体验",
+      "notes": [
+        "页面预加载：未过期 target_cache（含 404）视为已结算，避免 soft-404 反复回源",
+        "回源日志：「预加载」徽章与「非预加载」筛选；访问/回源路径左侧色条（蓝=直连、橙=静态资源映射、绿=链接映射）",
+        "访问日志：侧栏域名悬停展示站点 TDK（标题/关键词/描述）"
+      ]
+    },
+    {
       "version": "0.10.38",
       "date": "2026-08-31",
       "title": "静态资源映射优先还原，避免 jpg 误回源到 html",
