@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.35",
+      "date": "2026-08-31",
+      "title": "自动建站页签、封禁路径通配与访问/QPS 体验",
+      "notes": [
+        "系统设置：「建站设置」更名为「网站设置」；新增「自动建站设置」页签（语言 + 主站/泛站自动建站），开关改为开/关分段",
+        "访问日志：蜘蛛 tip 显示来路；支持搜索；UA / 站点 TDK tip 可悬停选中复制",
+        "访问策略：封禁路径支持精确、末尾 * 前缀、开头 * 后缀、*…* 包含匹配",
+        "仪表盘 QPS：入站/出站 IP 旁可一键封禁；「平均」改为近 300 秒滑动窗口"
+      ]
+    },
+    {
       "version": "0.10.34",
       "date": "2026-08-31",
       "title": "页面智能混淆与 SEO 随机标识",
