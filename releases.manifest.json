@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.36",
+      "date": "2026-08-31",
+      "title": "站点日志新增回源日志",
+      "notes": [
+        "站点日志：在「访问日志」旁新增「回源日志」页签，查看镜像站向目标站的出站抓取（含 HTML 与静态资源）",
+        "回源日志：进程内环形缓冲最多 500 条，支持搜索/分页/自动刷新；重启清空、不落盘"
+      ]
+    },
+    {
       "version": "0.10.35",
       "date": "2026-08-31",
       "title": "自动建站页签、封禁路径通配与访问/QPS 体验",
