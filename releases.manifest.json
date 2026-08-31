@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.38",
+      "date": "2026-08-31",
+      "title": "静态资源映射优先还原，避免 jpg 误回源到 html",
+      "notes": [
+        "静态资源映射：请求还原优先于链接映射；形如 /{站短码}/{stem}.{载荷}.{ext} 的 URL 只走资源解码，失败也不查 mapping",
+        "资源映射还原不再依赖 target_static_save 白名单（白名单仅约束写出），避免配置变更后旧映射 URL 解失败",
+        "website_cache：忽略资源映射形 path 上的 page_type=mapping；写入链接映射时跳过此类 path"
+      ]
+    },
+    {
       "version": "0.10.37",
       "date": "2026-08-31",
       "title": "路径封禁映射还原、拦截/回源日志与站点日志体验",
