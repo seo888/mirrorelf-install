@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.10.42",
+      "date": "2026-09-03",
+      "title": "文件管理目录钻取与 Agent Skills",
+      "notes": [
+        "文件管理：当前目录一层浏览、可点面包屑与「上一级」、列表默认加宽且可拖拽分栏（localStorage 记忆）",
+        "新建文件/文件夹成功后自动打开该文件或进入文件夹，并滚动列表定位到对应行",
+        "AI Agent Skills（agentskills.io）：skills_list/load/read/install/uninstall；种子 skill website-create；启动时注入目录 catalog"
+      ]
+    },
+    {
       "version": "0.10.41",
       "date": "2026-09-01",
       "title": "缓存 meta 对齐、CSS url 收绝对路径与批量清缓存",
