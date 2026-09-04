@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.0",
+      "date": "2026-09-05",
+      "title": "预加载失败确认复检、目标缓存 UI 与回源日志增强",
+      "notes": [
+        "页面预加载：硬失败先写 target_cache.meta.checked=false；访客命中未确认失败时仍返非 200 并异步复检；复检仍败则 checked=true 不再反复回源；连接失败不抬升 checked",
+        "目标站缓存：状态码按 2xx/3xx/4xx/5xx 着色；非 200 旁「?」暂败 /「!」已确认；支持手动复检（POST /_api_/target_cache/recheck）与结果报告",
+        "回源日志：新增「非stream」筛选；stream / download 模式徽章；硬 HTTP 失败结算、连接失败不结算"
+      ]
+    },
+    {
       "version": "0.10.42",
       "date": "2026-09-03",
       "title": "文件管理目录钻取与 Agent Skills",
