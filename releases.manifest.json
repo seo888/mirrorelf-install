@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.1",
+      "date": "2026-09-06",
+      "title": "文件管理复制移动、AI Skill 管理与静态站品味生成",
+      "notes": [
+        "文件管理：多选与右键重命名/复制/移动/删除；剪贴板粘贴；上传拆分为文件/文件夹；路径面包屑迁入列表头，条数统计迁入底部分页栏左侧",
+        "后端：POST /_api_/file/rename|copy|move；GET /_api_/ai/agent_skills；静态站 Ai 生成强制注入 website-static-generate + design-taste-frontend",
+        "AI 对话：工具帮助旁「Skill 管理」；Agent/对话文本模型解析与随机策略对齐；网站页静态站工具栏与 Ai 优化修改流程调整"
+      ]
+    },
+    {
       "version": "0.11.0",
       "date": "2026-09-05",
       "title": "预加载失败确认复检、目标缓存 UI 与回源日志增强",
