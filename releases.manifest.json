@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.2",
+      "date": "2026-09-08",
+      "title": "AI替换词入队落库、robots 标准写法与双轨 Agent 工具",
+      "notes": [
+        "网站列表/批量「AI获取替换词」：入队 Ai 任务后台执行（dual_replace / append），缺缓存则预热，生成目标站·全局与本站·全局后自动保存",
+        "配置面板「AI获取替换词」：Agent 工具 website_ai_dual_replace_suggest（共用 prompt/site-replace），确认后写表单、不自动保存",
+        "robots.txt：去掉 Disallow: /_api，改为 User-agent * + Allow: / + Sitemap 标准写法（不在 robots 暴露内部 API 路径）"
+      ]
+    },
+    {
       "version": "0.11.1",
       "date": "2026-09-06",
       "title": "文件管理复制移动、AI Skill 管理与静态站品味生成",
