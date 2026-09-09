@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.3",
+      "date": "2026-09-10",
+      "title": "文章库解绑域名、多站引用与弹层层级",
+      "notes": [
+        "文章管理改为独立文章库：内容不再绑定域名；新增 article_refs 多站引用，旧库 domain/path 自动迁移回填后卸列",
+        "发布到站点：镜像写 website_cache、静态写 website/ 并尽量更新 site-content.json；支持下线单条引用且文章保留在库；列表内联展示引用并可一键下线",
+        "发布改用 ConfirmAction 表单（站点 / 模式 / 路径 / 栏目）；ConfirmAction、SelectMenu、PageToast 统一 portal + 分层，避免下拉里被挡住、Toast 被盖住",
+        "website-static-generate Skill：强制 viewport 与窄屏叠排/触控规则，静态站默认按手机可读交付",
+        "Agent 工具对齐：articles_query/save/publish/unpublish（及 republish 等）随文章库 API 使用"
+      ]
+    },
+    {
       "version": "0.11.2",
       "date": "2026-09-08",
       "title": "AI替换词入队落库、robots 标准写法与双轨 Agent 工具",
