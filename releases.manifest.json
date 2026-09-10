@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.4",
+      "date": "2026-09-11",
+      "title": "弹窗毛玻璃统一、使用教程与技术文档入口",
+      "notes": [
+        "管理后台弹窗统一毛玻璃：确认框、配置批量编辑、站长平台、友链样式/调整友链、模板中心预览编辑等与「技术文档」同档半透 + blur",
+        "侧栏帮助：「技术文档」打开内嵌手册（管理后台 / 配置 / FAQ）；页脚保留「使用教程」产品引导",
+        "建站引导：大段说明改为居中气泡、模式切换无闪烁；创建弹窗布局修复，避免镜像表单被包层撑空",
+        "ConfirmAction / 友链 / 模板中心等遮罩与面板层级对齐，避免 backdrop-filter 被实心标题栏或内层 card 盖住"
+      ]
+    },
+    {
       "version": "0.11.3",
       "date": "2026-09-10",
       "title": "文章库解绑域名、多站引用与弹层层级",
