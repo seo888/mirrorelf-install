@@ -156,6 +156,7 @@ MIRRORELF_IMAGE=seo888/mirrorelf:0.9.85 \
 | `doc/` | 词库与 `target.txt` 等，可直接编辑 |
 | `templates/` | 网站 HTML 模板（`templates/web/`） |
 | `prompt/` | AI 提示词模板（page-replace、tdk-rules 等） |
+| `website/` | 静态站点文件（`website/{root}/{full}/`）；**必须挂载**，否则 Watchtower 换镜像会清空 |
 | `pgdata/` | PostgreSQL 数据库文件 |
 | `_static/` | 用户自写静态资源（`js/`、`images/` 等） |
 
@@ -169,7 +170,7 @@ MIRRORELF_IMAGE=seo888/mirrorelf:0.9.85 \
 
 ```bash
 cd /www/mirrorelf   # 你的安装目录
-sudo chown -R 10001:10001 config log data doc templates prompt _static
+sudo chown -R 10001:10001 config log data doc templates prompt website _static
 sudo chown -R 999:999 pgdata
 docker compose -f compose.hub.yml --env-file env.hub up -d
 ```
@@ -178,7 +179,7 @@ docker compose -f compose.hub.yml --env-file env.hub up -d
 
 ```bash
 uid=$(docker run --rm --entrypoint id seo888/mirrorelf:latest mirrorelf | sed -n 's/uid=\([0-9]*\).*/\1/p')
-sudo chown -R "${uid}:${uid}" config log data doc templates prompt _static
+sudo chown -R "${uid}:${uid}" config log data doc templates prompt website _static
 ```
 
 **端口冲突** — 若宿主机 **5432** 已被占用（如 1Panel 的 PostgreSQL），在 `env.hub` 中设置 `MIRRORELF_PG_HOST_PORT=15432`（安装脚本检测到占用时会自动写入）。容器启动时会自动把卷内 `config.yml` 的数据库地址改为 `127.0.0.1:该端口`，密码与 compose 中 Postgres 一致（`mirrorelf`）。
@@ -202,6 +203,13 @@ sudo chown -R "${uid}:${uid}" config log data doc templates prompt _static
 ### Watchtower 自动更新
 
 安装时会询问是否安装 Watchtower；**直接回车**或输入 `Y` 为默认安装（约每 10 分钟检查 Hub）。
+
+`compose.hub.yml` 已配置：
+
+- `app` / `postgres`：`restart: unless-stopped`（进程崩了 Docker 会拉起）
+- Watchtower：`INCLUDE_STOPPED` + `REVIVE_STOPPED`（启动即 panic 导致容器 `Exited` 时，仍监控并在 Hub 有新镜像时重建拉起）
+
+已装机若还是旧 compose，重新跑一次 `install.sh`（或手动把上述项写进 `compose.hub.yml` 后 `docker compose … up -d`）即可补齐。
 
 | 环境变量 | 说明 |
 |----------|------|

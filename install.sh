@@ -85,10 +85,10 @@ detect_primary_ip() {
 }
 
 ensure_data_dirs() {
-	mkdir -p "$WORKDIR"/{config,log,data,doc,templates,prompt,pgdata,_static/js,_static/images}
+	mkdir -p "$WORKDIR"/{config,log,data,doc,templates,prompt,website,pgdata,_static/js,_static/images}
 	# 与 Dockerfile 中 mirrorelf 用户 uid/gid 一致（10001）；Postgres 为 999
 	if [[ "$(uname -s 2>/dev/null)" == Linux ]] && command -v chown >/dev/null 2>&1; then
-		chown -R 10001:10001 "$WORKDIR"/{config,log,data,doc,templates,prompt,_static} 2>/dev/null || true
+		chown -R 10001:10001 "$WORKDIR"/{config,log,data,doc,templates,prompt,website,_static} 2>/dev/null || true
 		chown -R 999:999 "$WORKDIR/pgdata" 2>/dev/null || true
 	fi
 }
@@ -143,6 +143,7 @@ services:
       - ./doc:/app/doc
       - ./templates:/app/templates
       - ./prompt:/app/prompt
+      - ./website:/app/website
       - ./_static:/app/_/static
 
   watchtower:
@@ -169,6 +170,7 @@ if [[ ! -f "$COMPOSE" ]]; then
 	write_embedded_compose
 else
 	# 已安装机：补 app/postgres restart + Watchtower 拉起 Exited 容器（0.10.22 事故后）
+	# 以及静态站 website/ 宿主机挂载（缺挂载时 Watchtower 换镜像会清空容器内 website）
 	need_heal=0
 	if ! grep -A20 '^  app:' "$COMPOSE" | grep -q 'restart: unless-stopped'; then
 		need_heal=1
@@ -176,9 +178,12 @@ else
 	if ! grep -q 'WATCHTOWER_REVIVE_STOPPED' "$COMPOSE"; then
 		need_heal=1
 	fi
+	if ! grep -q './website:/app/website' "$COMPOSE"; then
+		need_heal=1
+	fi
 	if [[ "$need_heal" == 1 ]]; then
 		bak="${COMPOSE}.bak.$(date +%Y%m%d%H%M%S)"
-		echo "正在升级 ${COMPOSE}（自愈重启策略）→ 备份 ${bak}"
+		echo "正在升级 ${COMPOSE}（自愈重启策略 / website 挂载）→ 备份 ${bak}"
 		cp -a "$COMPOSE" "$bak"
 		write_embedded_compose
 	fi
@@ -209,7 +214,7 @@ fi
 cd "$WORKDIR"
 echo "工作目录: $WORKDIR"
 ensure_data_dirs
-echo "数据目录: $WORKDIR/{config,log,data,doc,templates,prompt,pgdata}"
+echo "数据目录: $WORKDIR/{config,log,data,doc,templates,prompt,website,pgdata}"
 COMPOSE_BASE=(docker compose -f "$COMPOSE" --env-file "$ENV_FILE")
 INSTALL_WATCHTOWER=0
 if resolve_install_watchtower; then

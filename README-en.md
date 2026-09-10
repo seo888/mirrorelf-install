@@ -155,6 +155,7 @@ All paths are **bind-mounted on the host** under the install directory:
 | `doc/` | Word lists & `target.txt` — editable on host |
 | `templates/` | Site HTML templates (`templates/web/`) |
 | `prompt/` | AI prompt templates (page-replace, tdk-rules, etc.) |
+| `website/` | Static site files (`website/{root}/{full}/`); **must be mounted** or Watchtower image updates wipe them |
 | `pgdata/` | PostgreSQL data files |
 | `_static/` | User static assets (`js/`, `images/`, etc.) |
 
@@ -168,7 +169,7 @@ All paths are **bind-mounted on the host** under the install directory:
 
 ```bash
 cd /www/mirrorelf
-sudo chown -R 10001:10001 config log data doc templates prompt _static
+sudo chown -R 10001:10001 config log data doc templates prompt website _static
 sudo chown -R 999:999 pgdata
 docker compose -f compose.hub.yml --env-file env.hub up -d
 ```
