@@ -3,12 +3,21 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.6",
+      "date": "2026-09-11",
+      "title": "回退 website→data 方案，仅保留独立 website 挂载",
+      "notes": [
+        "回退 0.11.5 entrypoint：不再把 /app/website 软链到 data/website",
+        "静态站持久化仍靠 compose / install.sh 的 ./website:/app/website（已装机可重跑 install 自愈补挂载）"
+      ]
+    },
+    {
       "version": "0.11.5",
       "date": "2026-09-11",
-      "title": "静态站 website 随 Watchtower 自动持久化",
+      "title": "静态站 website 挂载与（已回退）data 软链尝试",
       "notes": [
-        "entrypoint：未挂载 ./website 时自动把 /app/website 指到已挂载的 data/website，Watchtower 换镜像后静态站文件不再被清空（无需重跑 install.sh）",
-        "compose / install.sh：新增 ./website:/app/website 挂载，并自愈补全已装机 compose；推荐新装与手动升级使用独立 website 目录"
+        "compose / install.sh：新增 ./website:/app/website 挂载，并自愈补全已装机 compose",
+        "entrypoint 曾尝试未挂载时软链到 data/website（0.11.6 已回退）"
       ]
     },
     {
