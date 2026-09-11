@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.7",
+      "date": "2026-09-11",
+      "title": "模板中心静态预览、Agent 参数预览与建站列表体验",
+      "notes": [
+        "模板中心：静态站只读/画布可加载本地图片；只读预览点站内链接打开源文件，占位 # 不再误跳 /_/admin/",
+        "Agent：工具参数流式生成显示尾部预览与体积；超大参数中止/拒绝，避免整页 HTML 卡死",
+        "静态站编辑器保存移入顶栏图标；列表无标题时隐藏搜索直达与 AI TDK；站长工具默认「网站查询」",
+        "批量操作：左侧域名栏略加宽、目标缓存文案去「站」、日志加序号、表头粘性露底修复；Ai生成完成态改到底部按钮"
+      ]
+    },
+    {
       "version": "0.11.6",
       "date": "2026-09-11",
       "title": "回退 website→data 方案，仅保留独立 website 挂载",
