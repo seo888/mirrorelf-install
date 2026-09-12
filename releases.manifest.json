@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.8",
+      "date": "2026-09-13",
+      "title": "AI 自动建站工作流、定时任务开关与域名注册体验",
+      "notes": [
+        "AI 自动建站策略：建站权限改为工作流（注册→建站→解析 / 含 Cloudflare / 解析→建站 / 仅建站）；后两种须「关键词 域名」；注册默认用域名解析 API 靠前的 Gname",
+        "business-expand skill：含注册流程先建站再解析，用建站耗时覆盖过户等待，禁止注册后空等",
+        "定时任务：名称前列启用/停用开关；切换不再把行顶到列表最前；「域名注册」按钮改为主色",
+        "域名解析 API 凭证支持拖动排序（靠前优先）"
+      ]
+    },
+    {
       "version": "0.11.7",
       "date": "2026-09-11",
       "title": "模板中心静态预览、Agent 参数预览与建站列表体验",
