@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.11",
+      "date": "2026-09-13",
+      "title": "Agent 参数逐字显示、思考保持可见与 DNS 账户钉死",
+      "notes": [
+        "工具参数流式预览逐字平滑显示；流式中思考默认展开；同工具仅刷新参数时不再强制钉底，避免思考/正文被刷出视野",
+        "AI 自动建站展开提示词钉死注册商 account_index；非「转入 Cloudflare」工作流硬拒 CF 转入及用 Cloudflare 账户建 zone/写解析",
+        "结束时优先保留已流式完整内容（含思考），不被 strip 后的 done 覆盖"
+      ]
+    },
+    {
       "version": "0.11.10",
       "date": "2026-09-13",
       "title": "自动建站强制 www 主站与静态内容后续步骤提示",
