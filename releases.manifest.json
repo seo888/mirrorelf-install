@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.12",
+      "date": "2026-09-13",
+      "title": "Agent 超长消息截断、静态生成续跑与模板全屏修复",
+      "notes": [
+        "Agent 上报历史前剥离思考并截断单条至 12000 字符；后端 Agent 路径超长改为截断而非拒绝，避免「继续」弹「单条消息过长」",
+        "静态 AI 生成：中断态可继续/重新开始；避免清空后误显示「正在连接」；思考闭合后自动折叠",
+        "模板中心「全屏」z-index 高于弹窗遮罩，工作区可真正铺满视口"
+      ]
+    },
+    {
       "version": "0.11.11",
       "date": "2026-09-13",
       "title": "Agent 参数逐字显示、思考保持可见与 DNS 账户钉死",
