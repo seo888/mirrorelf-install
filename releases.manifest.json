@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.14",
+      "date": "2026-09-14",
+      "title": "Cloudflare DNS 独立工具、命名清理与 MCP/帮助面板对齐",
+      "notes": [
+        "Cloudflare DNS 与注册商工具彻底拆分：新增 cloudflare_dns_* 读写工具；domain_dns_* 仅服务 Gname/Dynadot，服务端拒绝 CF 账户走注册商工具",
+        "命名对齐：转入 CF 改为 cloudflare_dns_zones_transfer；zones 列表加 _list；旧名保留为别名；business-expand / 无头任务 / 管理端标签与提示词同步",
+        "Agent「可用工具」按类分组展示并收紧文案；MCP tools/list 与 Agent 同源，调用优先走 Agent 分发，去掉可绕过守卫的遗留 DNS 创建/删除分支"
+      ]
+    },
+    {
       "version": "0.11.13",
       "date": "2026-09-14",
       "title": "Agent 思考正文保持、清空会话与静态站壳层/出口 IP",
