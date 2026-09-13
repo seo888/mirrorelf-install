@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.13",
+      "date": "2026-09-14",
+      "title": "Agent 思考正文保持、清空会话与静态站壳层/出口 IP",
+      "notes": [
+        "Ai Agent：工具确认/续流期间保持 UI streaming，续流合并已有正文，避免思考与正文跑着消失；对话代码块取消高度裁切；侧栏可一键清空全部会话",
+        "静态站 skill：全站导航与页脚必须统一，文章页禁止无壳裸正文；增量加文须复用首页/栏目页壳层",
+        "AI 自动建站解析：必须 outbound_ips_detect；多出口时排除第一个主 IP，在其余中随机，同域名 @/www 共用"
+      ]
+    },
+    {
       "version": "0.11.12",
       "date": "2026-09-13",
       "title": "Agent 超长消息截断、静态生成续跑与模板全屏修复",
