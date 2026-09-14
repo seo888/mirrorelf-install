@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.16",
+      "date": "2026-09-14",
+      "title": "Ai Chat 滚动对齐、提示词可编辑与 DNS 补解析硬约束",
+      "notes": [
+        "Ai Chat：对话滚动铺满 wrap；顶栏/底栏/滚动区统一 scrollbar-gutter，列与输入框对齐；欢迎页垂直居中；窄屏左侧内边距可调",
+        "AI 自动建站策略：标题旁「提示词设置」可改展开模板（存 policy.extra），刷新可从服务器重读；可用工具/模式/授权菜单改为 portal 浮层，避免底栏裁切",
+        "business-expand 1.15：解析失败（模板未就绪等）必须 scheduled_job_create（once、delay_minutes=10），禁止只甩用户去后台过户；展开提示词同步提醒"
+      ]
+    },
+    {
       "version": "0.11.15",
       "date": "2026-09-14",
       "title": "定时单次任务、对话列宽切换与 DNS 工具提示精简",
