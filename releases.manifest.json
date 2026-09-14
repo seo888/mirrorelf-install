@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.15",
+      "date": "2026-09-14",
+      "title": "定时单次任务、对话列宽切换与 DNS 工具提示精简",
+      "notes": [
+        "定时任务：执行时刻旁增加「每日/单次」；单次到点跑完自动停用；Agent 可用 scheduled_job_create（delay_minutes）挂补解析",
+        "business-expand：注册后模板未生效导致解析失败时，挂约 10 分钟后的 once 补解析任务，禁止空等卡住会话",
+        "Ai Chat：对话列宽距/窄距图标切换；展开自动建站提示词去掉重复 CF 禁令，只钉注册商账户；工具拆分后由 skill/硬拦兜底"
+      ]
+    },
+    {
       "version": "0.11.14",
       "date": "2026-09-14",
       "title": "Cloudflare DNS 独立工具、命名清理与 MCP/帮助面板对齐",
