@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.18",
+      "date": "2026-09-15",
+      "title": "静态建站死链闭环、Logo 图与少用 emoji",
+      "notes": [
+        "website-static-generate：交付前必须全站扫描站内 href/src，循环修复死链直至为零；未过闸门不算完成",
+        "静态站必须 ai_image_generate 写入 images/logo.png 并用于页头；文案/导航默认少用 emoji",
+        "business-expand / website-create / website-static-append / 单页 SPA 提示词同步上述硬约束"
+      ]
+    },
+    {
       "version": "0.11.17",
       "date": "2026-09-14",
       "title": "欢迎页样式、公网主 IP 命名与解析选出口硬约束",
