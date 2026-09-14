@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.17",
+      "date": "2026-09-14",
+      "title": "欢迎页样式、公网主 IP 命名与解析选出口硬约束",
+      "notes": [
+        "Ai Chat 空会话欢迎区改版：字标 + 规格表布局，去掉装饰线与卡片圆点列表",
+        "get_server_ip 展示名为「服务器公网主 IP」：仅运维核对；解析域名禁止用主 IP，必须 outbound_ips_detect 在出口列表中抽取（多出口排除第一个主 IP）",
+        "Agent schema / 工具帮助 / business-expand 同步强调主 IP 与出口抽取规则"
+      ]
+    },
+    {
       "version": "0.11.16",
       "date": "2026-09-14",
       "title": "Ai Chat 滚动对齐、提示词可编辑与 DNS 补解析硬约束",
