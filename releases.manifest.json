@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.22",
+      "date": "2026-09-15",
+      "title": "静态站配图落盘硬闸门，无图不得交卷/开下一站",
+      "notes": [
+        "website-static-generate：新增配图落盘闸门——必须 file_browse 证实 images/logo.png，且栅格图数≥1+5+2×文章数；禁止删 img 凑死链绿",
+        "business-expand / 展开提示词：静态站无图不算完成；多站禁止减图跳过 ai_image_generate",
+        "website_create 静态后续提示强调先 ai_image_generate 再交卷"
+      ]
+    },
+    {
       "version": "0.11.21",
       "date": "2026-09-15",
       "title": "多站建站自检后连续开站，禁止中途等人确认",
