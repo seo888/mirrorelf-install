@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.20",
+      "date": "2026-09-15",
+      "title": "自动建站多站串行提示词与官方 skill 随镜像同步",
+      "notes": [
+        "管理端「AI 自动建站」展开提示词补上：建站数>1 时必须上一站验收通过再开下一站（禁止先批量注册再减配写内容）",
+        "Docker entrypoint：prompt/agent/skills/** 随镜像覆盖同步，升级不再沿用卷内旧 SKILL.md；其它 prompt 仍仅缺失时写入",
+        "重新构建管理后台资源并打入镜像，避免源码已改但 _/admin 未 rebuild 导致生产看不到新文案"
+      ]
+    },
+    {
       "version": "0.11.19",
       "date": "2026-09-15",
       "title": "静态站磁盘 sitemap.xml 与建站 skill 收尾",
