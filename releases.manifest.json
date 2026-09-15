@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.24",
+      "date": "2026-09-16",
+      "title": "静态站 sitemap 由清单现场生成、死链审计工具与补解析 action 纠偏",
+      "notes": [
+        "静态站 /sitemap.xml：按 site-content.json（pages/categories/articles）现场生成，不再让 AI 手写/落盘 sitemap.xml",
+        "新增只读工具 website_static_audit：扫描站内 href/src 死链与 logo/配图门槛；建站收尾与多站开下一站前须 pass=true",
+        "scheduled_job_create：action 为任务动作 ID（补解析必须 ai_agent），禁止把 domain_dns_records_create 等工具名填进 action；skill/提示词同步",
+        "business-expand / website-static-generate：多站证据块、反模板拷贝与审计闸门强化"
+      ]
+    },
+    {
       "version": "0.11.23",
       "date": "2026-09-16",
       "title": "定时任务倒计时模式、多选与补解析/导航硬约束",
