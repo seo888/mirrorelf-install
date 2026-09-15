@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.21",
+      "date": "2026-09-15",
+      "title": "多站建站自检后连续开站，禁止中途等人确认",
+      "notes": [
+        "business-expand：多站「验收」改为 Agent 按清单自检；自检通过后同一轮立刻开下一站，禁止停下来请用户确认",
+        "展开提示词同步：建站数>1 时禁止停顿等人验收；DNS 挂补解析也不构成停顿理由",
+        "重建管理端资源打入镜像"
+      ]
+    },
+    {
       "version": "0.11.20",
       "date": "2026-09-15",
       "title": "自动建站多站串行提示词与官方 skill 随镜像同步",
