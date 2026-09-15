@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.23",
+      "date": "2026-09-16",
+      "title": "定时任务倒计时模式、多选与补解析/导航硬约束",
+      "notes": [
+        "定时任务新增倒计时模式：延迟 N 分钟执行，成功后自动删除；补解析必须用 countdown+@/www 两条 A",
+        "定时任务 / 文章列表支持多选批量操作；编辑弹窗模式切换移至标题栏右侧",
+        "静态建站强化导航死链闸门与配图落盘；官方 skill 随镜像覆盖同步"
+      ]
+    },
+    {
       "version": "0.11.22",
       "date": "2026-09-15",
       "title": "静态站配图落盘硬闸门，无图不得交卷/开下一站",
