@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.26",
+      "date": "2026-09-17",
+      "title": "Agent 全部自动服务端放行、静态站审计门禁纠偏",
+      "notes": [
+        "Agent「全部自动 / safe」改为服务端直接执行写工具，不再先 tool_pending 卡死大文件 CSS/JS；SSE/确认响应裁剪超大参数",
+        "静态站审计：面包屑等降为 warn；强制侧栏≥3 链；首页内容块≥8（section）才过闸；skill/工具说明同步",
+        "同轮同名写工具（多 file_create）空 id 时按序号区分，避免 pending 互相覆盖"
+      ]
+    },
+    {
       "version": "0.11.25",
       "date": "2026-09-16",
       "title": "静态站 content_dir 差异化、审计扩 SEO、解析默认 @+*",
