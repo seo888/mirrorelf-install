@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.25",
+      "date": "2026-09-16",
+      "title": "静态站 content_dir 差异化、审计扩 SEO、解析默认 @+*",
+      "notes": [
+        "静态站内容目录可差异化（blog/articles/news…），写入 site-content.json 的 content_dir；同轮多站禁止全用 pages/",
+        "website_static_audit 更名为「静态站审计」：死链 + 配图 + 页头页脚一致 + Google SEO 结构（TDK/h1/viewport/文章字数侧栏/图alt/清单/移动端）",
+        "自动建站/补解析 DNS 默认写 host=@ 与 host=* 两条 A（禁止只写 @）；skill 与工具说明同步",
+        "article 发布到静态站跟随 content_dir；审计同步清单时按 content_dir 归类栏目/文章"
+      ]
+    },
+    {
       "version": "0.11.24",
       "date": "2026-09-16",
       "title": "静态站 sitemap 由清单现场生成、死链审计工具与补解析 action 纠偏",
