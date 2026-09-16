@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.27",
+      "date": "2026-09-17",
+      "title": "Agent 续跑可点/自动续段、file_str_replace 缩进容错",
+      "notes": [
+        "Agent 本段轮次上限默认 64；「继续」按钮不再因 streaming 假死点不了；全部自动时到上限自动续跑下一段",
+        "file_str_replace：忽略行首缩进差异再匹配；失败时附带文件中真实相近片段，减少导航批量改反复失败",
+        "承 0.11.26：全部自动服务端直接执行写工具、SSE 裁剪超大参数"
+      ]
+    },
+    {
       "version": "0.11.26",
       "date": "2026-09-17",
       "title": "Agent 全部自动服务端放行、静态站审计门禁纠偏",
