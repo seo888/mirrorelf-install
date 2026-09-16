@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.28",
+      "date": "2026-09-17",
+      "title": "全部自动不再中段弹出轮次上限",
+      "notes": [
+        "全部自动：同一次 SSE 内连续多段（默认至约 512 轮），中途不再弹「已达本轮工具上限（64）」",
+        "若触绝对上限：前端静默续跑，不先打开「继续」横幅；非全部自动仍按段暂停需手动继续",
+        "可用 MIRRORELF_AGENT_MAX_ITERATIONS / MIRRORELF_AGENT_MAX_ITERATIONS_ABS 覆盖段长与绝对上限"
+      ]
+    },
+    {
       "version": "0.11.27",
       "date": "2026-09-17",
       "title": "Agent 续跑可点/自动续段、file_str_replace 缩进容错",
