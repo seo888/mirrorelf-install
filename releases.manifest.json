@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.30",
+      "date": "2026-09-19",
+      "title": "批量建站可见进度与关键词入队",
+      "notes": [
+        "任务列表「批量建站」：每站左侧列表 + 右侧对话线程，执行中逐步刷新工具步骤；列表显示创建时间",
+        "注册类工作流可只带关键词入队（account_index 随战役下发）；Worker 按注册 → 建站 → 解析执行，不再因缺域名失败",
+        "侧栏移除「Ai 站长」；「Ai 链轮」改名为「友情链接」"
+      ]
+    },
+    {
       "version": "0.11.29",
       "date": "2026-09-18",
       "title": "AI站长策略/工单与任务列表合一",
