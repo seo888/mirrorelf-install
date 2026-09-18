@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.29",
+      "date": "2026-09-18",
+      "title": "AI站长策略/工单与任务列表合一",
+      "notes": [
+        "AI站长：策略与批量建站合一（保存即创建并启动）；Tab 改名「自动建站」；工单支持清空记录、运行详情、执行中停止",
+        "任务列表：合并 Ai 任务与定时任务；运行记录改为弹窗；定时任务入口并入任务列表",
+        "策略弹窗拉高、关键词框撑满；业务拓展 N>1 走 site_campaign 排队（非同会话连开）"
+      ]
+    },
+    {
       "version": "0.11.28",
       "date": "2026-09-17",
       "title": "全部自动不再中段弹出轮次上限",
