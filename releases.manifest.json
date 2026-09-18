@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.31",
+      "date": "2026-09-19",
+      "title": "批量建站领取修复与进度链接",
+      "notes": [
+        "批量建站 Worker 领取工单的 SQL 不再在 LIMIT 里引用表字段，排队中的站会真正开始执行",
+        "对话里的查看进度链接改回站内哈希 #/ai_tasks?view=campaigns&id=，不再跳到 https://主机/#/…",
+        "排队工单若领取失败，左侧列表显示错误原因，不再只写「排队」"
+      ]
+    },
+    {
       "version": "0.11.30",
       "date": "2026-09-19",
       "title": "批量建站可见进度与关键词入队",
