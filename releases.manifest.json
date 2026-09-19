@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.36",
+      "date": "2026-09-19",
+      "title": "建站任务本轮信息贴紧工单区",
+      "notes": [
+        "建站任务详情：「本轮」信息条移入看板，紧挨工单分栏上方，去掉与内容区的过大空隙",
+        "批次列表工具条与本轮信息条统一高度与内边距，视觉更齐",
+        "父级合页不再二次绑定 roundSummary，避免信息条与看板脱节"
+      ]
+    },
+    {
       "version": "0.11.35",
       "date": "2026-09-19",
       "title": "批量建站继承对话并行数",
