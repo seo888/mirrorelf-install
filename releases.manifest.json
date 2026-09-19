@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.32",
+      "date": "2026-09-19",
+      "title": "批量建站可删与进度对标对话框",
+      "notes": [
+        "批量建站支持删除整批；Worker 硬拒再入队，避免批量里再开批量死循环",
+        "进度线程按对话框 parts 时间线保留思考与正文，轮询不再闪没；列表改为瀑布流卡片，右上角 × 删除",
+        "Ai 任务表路径/来源列按内容宽度收缩；取消批量会清掉仍排队的工单"
+      ]
+    },
+    {
       "version": "0.11.31",
       "date": "2026-09-19",
       "title": "批量建站领取修复与进度链接",
