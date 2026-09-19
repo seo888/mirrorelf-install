@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.35",
+      "date": "2026-09-19",
+      "title": "批量建站继承对话并行数",
+      "notes": [
+        "Ai 对话「并行数」写入建站任务 payload；各 Worker headless Agent 继承同一 AI 工具并发上限（仅限制文生图等打 AI API 的工具）",
+        "聊天确认入队、策略页开始批量、以及 site_campaign_enqueue 未显式传参时均会带上当前并行数",
+        "并行数悬停说明补充：批量建站 Worker 继承此值"
+      ]
+    },
+    {
       "version": "0.11.34",
       "date": "2026-09-19",
       "title": "建站任务提示词对齐与确认入队",
