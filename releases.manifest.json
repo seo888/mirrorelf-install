@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.38",
+      "date": "2026-09-20",
+      "title": "静态站审计未通过不再当成工具失败",
+      "notes": [
+        "website_static_audit 在 pass=false 时仍返回完整报告，工具步骤显示为已完成；只有审计程序本身出错才标失败",
+        "栏目不足时的报错写明：顶层 categories 数组、file 必须对上 content_dir 下已有 HTML，并给出可照抄的示例",
+        "website-static-generate 补充同一约定，避免模型改用 content_categories 或把栏目嵌进 site"
+      ]
+    },
+    {
       "version": "0.11.37",
       "date": "2026-09-20",
       "title": "自动建站提示词与 skill 只建一站",
