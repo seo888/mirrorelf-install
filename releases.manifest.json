@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.39",
+      "date": "2026-09-20",
+      "title": "长会话继续保留任务，替换按行读取",
+      "notes": [
+        "新增 file_read：按行号读取一段（offset/limit），局部修改前从竖线后拷贝原文，不再凭整页 file_query 编标签",
+        "file_str_replace：多行仅少量属性差异且全文件只有一处明显更像时自动贴上；同一失败原文再次提交直接拒绝、不再刷失败",
+        "工具步数很长后再发「继续」时，请求仍带上第一条用户任务和最近一段可配对的工具结果，不再裁成只有「继续」"
+      ]
+    },
+    {
       "version": "0.11.38",
       "date": "2026-09-20",
       "title": "静态站审计未通过不再当成工具失败",
