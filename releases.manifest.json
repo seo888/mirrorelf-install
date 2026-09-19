@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.33",
+      "date": "2026-09-19",
+      "title": "批量建站详情卡死修复",
+      "notes": [
+        "修复进入批量建站详情后整页点击失灵（进度 sticky effect 对空详情反复写 null 触发更新死循环）",
+        "「AI 自动建站」在当前已是空对话时不再新开会话；删除确认可点遮罩关闭",
+        "已取消/已完成批次不再对排队工单空转轮询"
+      ]
+    },
+    {
       "version": "0.11.32",
       "date": "2026-09-19",
       "title": "批量建站可删与进度对标对话框",
