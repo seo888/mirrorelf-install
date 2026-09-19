@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.37",
+      "date": "2026-09-20",
+      "title": "自动建站提示词与 skill 只建一站",
+      "notes": [
+        "去掉 PINNED 重复块；对话框与批量建站共用同一段提示词，关键词、模式、工作流、账户只写一遍",
+        "business-expand 只描述当前这一站的注册/建站/解析；单站进对话还是多站入队由程序决定",
+        "批量 Worker 按同一模板展开，账户行与对话一致（注册商名 + account_index + 账户标识）"
+      ]
+    },
+    {
       "version": "0.11.36",
       "date": "2026-09-19",
       "title": "建站任务本轮信息贴紧工单区",
