@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.34",
+      "date": "2026-09-19",
+      "title": "建站任务提示词对齐与确认入队",
+      "notes": [
+        "任务合页「批量建站」改名为「建站任务」；战役卡片完成/失败等计数带图标分色展示",
+        "建站任务 Worker 与聊天「AI 自动建站 · 建站数=1」使用同一套展开提示词；流程以 business-expand skill 为准",
+        "建站数>1 点击「AI 自动建站」先确认再入队并打开进度；禁止再入队仍由后端硬拒"
+      ]
+    },
+    {
       "version": "0.11.33",
       "date": "2026-09-19",
       "title": "批量建站详情卡死修复",
