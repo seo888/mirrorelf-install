@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.41",
+      "date": "2026-09-20",
+      "title": "建站任务不再淹没本站关键词",
+      "notes": [
+        "headless 建站：# Task（关键词/工作流）放最前，并标明隔离会话，禁止续跑其它站",
+        "只预置 business-expand；website-static-generate 等改为按需 skills_load，避免约 150KB skill 正文把任务挤没",
+        "重试失败工单清空旧 detail；看板不再把旧工具时间线粘在新 prompt 下"
+      ]
+    },
+    {
       "version": "0.11.40",
       "date": "2026-09-20",
       "title": "自动建站统一走建站任务",
