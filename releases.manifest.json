@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.43",
+      "date": "2026-09-20",
+      "title": "Agent 写工具超时重试与建站跟帖保留",
+      "notes": [
+        "写工具（含替换片段）超时/瞬时失败自动重试，用尽后标失败，不再一直停在「执行中」；SSE 断流同样收尾失败",
+        "文件写入改 spawn_blocking，避免堵死异步运行时；确认接口过长无响应会中止报错",
+        "建站任务侧栏跟帖按工单本地持久化，切换工单/离开页面后再回来仍可看对话"
+      ]
+    },
+    {
       "version": "0.11.42",
       "date": "2026-09-20",
       "title": "自动建站走 TDK 提示词与工单展示",
