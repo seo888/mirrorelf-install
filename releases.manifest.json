@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.45",
+      "date": "2026-09-21",
+      "title": "建站任务跟帖改后端执行，长任务不再假死",
+      "notes": [
+        "建站任务侧栏跟帖改为后端 headless 续跑（follow_up API），不再走浏览器 SSE，关页面也不中断",
+        "等模型时侧栏显示「等待模型回复…」；模型调用 180s×3 重试，非流式 tools 请求超时回 120s",
+        "进度刷新会续租约，避免长建站被当成死锁重新领取"
+      ]
+    },
+    {
       "version": "0.11.44",
       "date": "2026-09-21",
       "title": "批量建站入队后只清已消耗关键词",
