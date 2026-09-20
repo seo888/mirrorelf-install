@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.42",
+      "date": "2026-09-20",
+      "title": "自动建站走 TDK 提示词与工单展示",
+      "notes": [
+        "建站前先扩写 keywords，再调 website_ai_tdk（prompt/tdk-kw）生成标题与描述，禁止随手编 TDK",
+        "建站任务左栏：上关键词、下完整域名（www./泛站）；「全部批次」带回退箭头；行悬停包住停止按钮",
+        "确认弹窗仅 1 站时可「对话建站」填入输入框；侧栏 Ai Agent 挪到任务列表上方；文案统一为 Ai 自动建站"
+      ]
+    },
+    {
       "version": "0.11.41",
       "date": "2026-09-20",
       "title": "建站任务不再淹没本站关键词",
