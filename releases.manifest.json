@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.46",
+      "date": "2026-09-21",
+      "title": "建站跟帖保留上下文，策略确认与 CF 工作流",
+      "notes": [
+        "建站任务跟帖从 job.detail 还原完整对话再续跑，不再只塞摘要导致失忆",
+        "策略「创建并开始」改走与聊天相同的确认建站弹窗（账户、可改关键词、入队/对话建站）",
+        "工作流新增「解析 → 建站 → 转入 Cloudflare」（resolve_create_cf）"
+      ]
+    },
+    {
       "version": "0.11.45",
       "date": "2026-09-21",
       "title": "建站任务跟帖改后端执行，长任务不再假死",
