@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.40",
+      "date": "2026-09-20",
+      "title": "自动建站统一走建站任务",
+      "notes": [
+        "「AI 自动建站」不论建站数=1 或 N：确认后一律入队 site_campaign，每站独立 headless Agent，不再往当前聊天塞提示词",
+        "去掉为串上下文加的聊天隔离逻辑；建站任务与普通 Agent 对话同一套提示词模板",
+        "文案：提示词设置说明改为「建站任务每站共用」，确认弹窗不再区分「批量」特例"
+      ]
+    },
+    {
       "version": "0.11.39",
       "date": "2026-09-20",
       "title": "长会话继续保留任务，替换按行读取",
