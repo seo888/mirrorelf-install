@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.49",
+      "date": "2026-09-21",
+      "title": "自动建站提示词关键词与域名分行",
+      "notes": [
+        "填自动建站提示词时强制拆分：关键词只留种子词，apex 只写在「域名：」，杜绝「关键词：范围 sdfijs.com」与字面量「域名：{domain}」",
+        "对话建站改用工单的 keyword/domain 字段；后端工单提示词同样回写并剥离混写域名",
+        "business-expand skill 明确关键词与域名分行约定"
+      ]
+    },
+    {
       "version": "0.11.48",
       "date": "2026-09-21",
       "title": "建站任务停止收尾与重启续跑",
