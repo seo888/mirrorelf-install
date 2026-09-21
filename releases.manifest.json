@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.51",
+      "date": "2026-09-22",
+      "title": "孤儿 chunk 清理防雪崩与禁爬路径",
+      "notes": [
+        "content_chunks 孤儿清理改为进程内单飞合并 + Postgres advisory lock，批量删目标/网站缓存不再并发全表扫打满 CPU",
+        "孤儿 DELETE 改为一次物化引用再反连接；缩小批次并批间休眠；与小时自动清理共用实现",
+        "新增禁爬路径 path_nocrawl（语法同封禁路径）；封禁/禁爬支持 {包含中文}、re: 正则，匹配前百分号解码",
+        "配置页禁爬提示补充具体路径示例"
+      ]
+    },
+    {
       "version": "0.11.50",
       "date": "2026-09-22",
       "title": "定时发文、任务列表入口与静态站加文收尾",
