@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.47",
+      "date": "2026-09-21",
+      "title": "建站跟帖用户气泡与域名账户搜索核实",
+      "notes": [
+        "建站任务跟帖拆成时间线中的用户气泡（不再显示「—— 跟帖 ——」或整坨钉在底部）",
+        "「解析 → 建站」核实域名是否在账户时，domain_dns_zones_list 必须 search=apex（等同 Domain DNS「搜索域名」），避免只翻第一页误判",
+        "建站任务域名链接改 http；Domain DNS 工具栏刷新会强制重拉解析记录角标"
+      ]
+    },
+    {
       "version": "0.11.46",
       "date": "2026-09-21",
       "title": "建站跟帖保留上下文，策略确认与 CF 工作流",
