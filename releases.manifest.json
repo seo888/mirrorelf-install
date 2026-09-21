@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.50",
+      "date": "2026-09-21",
+      "title": "静态站审计放宽与站间版式多元化",
+      "notes": [
+        "静态站审计支持多栏目文件夹（如 news/index.html）；去掉 content_dir 前缀硬拦；导航相对路径归一比对；正文厚度支持汉字/词数；缺 js 与 emoji 偏多为 warn",
+        "建站 skill 强调版式/分栏多元化、零 emoji、一次过审对照表；对话建站在已有消息时先开新对话再填提示词",
+        "Ai 任务表「路径/来源」列宽修复，不再被 table-layout:fixed + 1% 挤扁"
+      ]
+    },
+    {
       "version": "0.11.49",
       "date": "2026-09-21",
       "title": "自动建站提示词关键词与域名分行",
