@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.48",
+      "date": "2026-09-21",
+      "title": "建站任务停止收尾与重启续跑",
+      "notes": [
+        "停止工单后收尾仍在转的工具步骤，侧栏「已停止」时气泡不再显示执行中",
+        "进程重启后作废孤儿租约并按有效租约重领，建站任务可继续跑，不再空转",
+        "去掉伪造的 model「等待模型回复」工具步骤，等模型只更新摘要，避免乱闪占步数"
+      ]
+    },
+    {
       "version": "0.11.47",
       "date": "2026-09-21",
       "title": "建站跟帖用户气泡与域名账户搜索核实",
