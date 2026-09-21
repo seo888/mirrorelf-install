@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.52",
+      "date": "2026-09-22",
+      "title": "引用站点模式色、空态与 DNS 批量重试",
+      "notes": [
+        "Domain DNS「引用站点」弹窗域名按镜像/单页/静态着色，与网站列表、path-preview 标题一致",
+        "多页空态统一 HubEmptyState；缓存空态去掉位移动画避免滚动条闪动",
+        "图片连通性检测改走 images/generations；Domain DNS 批量日志带 IP，支持失败重试"
+      ]
+    },
+    {
       "version": "0.11.51",
       "date": "2026-09-22",
       "title": "孤儿 chunk 清理防雪崩与禁爬路径",
