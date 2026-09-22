@@ -144,7 +144,7 @@ resolve_install_dir() {
 				if [[ -d "$d" ]]; then
 					echo_prompt "未找到 $d/compose.hub.yml，请重新输入。" >&2
 				else
-					echo_prompt "目录不存在: $d，请填写安装时实际路径。" >&2
+					echo_prompt "目录不存在: ${d}，请填写安装时实际路径。" >&2
 				fi
 				continue
 			fi

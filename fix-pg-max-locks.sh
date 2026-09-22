@@ -52,7 +52,7 @@ resolve_home() {
       return
     fi
   fi
-  die "找不到 $COMPOSE_FILE_NAME（请设置 MIRRORELF_HOME=/path/to/mirrorelf）"
+  die "找不到 ${COMPOSE_FILE_NAME}（请设置 MIRRORELF_HOME=/path/to/mirrorelf）"
 }
 
 # 幂等改写 compose：postgres 段写入 shm_size + command 锁参数（纯 awk，无 python）
@@ -139,7 +139,7 @@ COMPOSE="$HOME_DIR/$COMPOSE_FILE_NAME"
 ENV_FILE="$HOME_DIR/$ENV_FILE_NAME"
 
 [[ -f "$COMPOSE" ]] || die "缺少 $COMPOSE"
-[[ -f "$ENV_FILE" ]] || die "缺少 $ENV_FILE（通常为 env.hub）"
+[[ -f "$ENV_FILE" ]] || die "缺少 ${ENV_FILE}（通常为 env.hub）"
 
 log "==> 安装目录: $HOME_DIR"
 log "==> 目标: max_locks_per_transaction=$LOCKS  shm_size=$SHM"
@@ -164,7 +164,7 @@ if docker ps --format '{{.Names}}' | grep -qx "$PG_CONTAINER"; then
     -c "ALTER SYSTEM SET max_pred_locks_per_transaction = ${PRED_LOCKS};" \
     || log "WARN: ALTER SYSTEM 跳过（容器未就绪时将依赖 compose command）"
 else
-  log "WARN: 未找到运行中的 $PG_CONTAINER，跳过 ALTER SYSTEM"
+  log "WARN: 未找到运行中的 ${PG_CONTAINER}，跳过 ALTER SYSTEM"
 fi
 
 log "==> 重建 postgres（短暂不可用）"
@@ -188,7 +188,7 @@ done
 
 got="$(docker exec "$PG_CONTAINER" psql -U postgres -tAc 'SHOW max_locks_per_transaction;' | tr -d '[:space:]')"
 log "==> max_locks_per_transaction=$got"
-[[ "$got" == "$LOCKS" ]] || die "期望 $LOCKS，实际 $got"
+[[ "$got" == "$LOCKS" ]] || die "期望 ${LOCKS}，实际 ${got}"
 
 log "==> 重启 app（重连连接池）"
 docker compose -f "$COMPOSE_FILE_NAME" --env-file "$ENV_FILE_NAME" up -d app
