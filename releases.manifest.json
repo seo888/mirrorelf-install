@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.60",
+      "date": "2026-09-23",
+      "title": "随机关键词走 linecache；批量 TDK 结果带详情",
+      "notes": [
+        "管理端「随机生成关键词」改走 `/_api_/random_keyword`（服务端 linecache.random_line），不再每次拉整份词库；批量随机关键词仍一次读库、站内前端抽行",
+        "批量「模板生成TDK / 模板关键词 / 随机关键词」结果列展示写入内容；模板 TDK 含标题｜关键词｜描述"
+      ]
+    },
+    {
       "version": "0.11.59",
       "date": "2026-09-23",
       "title": "修复静态站访问 get_merged_conf 500",
