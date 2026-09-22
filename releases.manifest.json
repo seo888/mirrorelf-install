@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.54",
+      "date": "2026-09-22",
+      "title": "SPA 流式加固与后台入队（生成/优化/替换词）",
+      "notes": [
+        "SPA/模板流式请求强制 Accept-Encoding: identity，上游中途掐断不再因 gzip 半包报 error decoding response body；已收到的 HTML 尽量 salvage",
+        "确认框「AI 生成 / 开始优化」与镜像「AI获取替换词」支持一体分割按钮后台入队（fa-magic），可关页面在 AI 任务里看进度",
+        "新增单页 SPA 后台优化任务；修复排队把 message 清空导致「优化说明不能为空」；任务列表 path 显示为 path-tag"
+      ]
+    },
+    {
       "version": "0.11.53",
       "date": "2026-09-22",
       "title": "静态站栏目目录 URL 与建站路径多元化",
