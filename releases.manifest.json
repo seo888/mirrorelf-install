@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.53",
+      "date": "2026-09-22",
+      "title": "静态站栏目目录 URL 与建站路径多元化",
+      "notes": [
+        "栏目页对外须为目录形态（/{cat}/ → {cat}/index.html），禁止栏目写成 /{cat}.html；文章页仍可用 .html",
+        "审计同步按磁盘重写 site-content.json：栏目 path 写目录 URL；扁平 .html 栏目记 category_should_be_directory warn",
+        "栏目文件夹名 / content_dir 站间须差异化，禁止批批站都用 news/guide；技能与审计示例同步改掉",
+        "Ai 生成静态站路径条可点开站点、按模式着色；单页生成窗口对齐静态站运行详情样式；静态站列表隐藏缓存角标",
+        "website-static-append 发文日期改用当天；skill description 长度限制修复"
+      ]
+    },
+    {
       "version": "0.11.52",
       "date": "2026-09-22",
       "title": "引用站点模式色、空态与 DNS 批量重试",
