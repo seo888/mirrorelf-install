@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.55",
+      "date": "2026-09-23",
+      "title": "备份含静态站文件；配置页导入导出",
+      "notes": [
+        "备份还原新增「静态站文件」scope（website/{root}/{full}/），默认勾选；「静态文件」改名为「回源静态资源」避免与静态站混淆",
+        "单页站需勾选网站缓存才能完整还原；导出时按库内站类型给出 tip",
+        "系统配置页 tab 栏支持按分类导出/导入 .yml（不含网站信息）"
+      ]
+    },
+    {
       "version": "0.11.54",
       "date": "2026-09-22",
       "title": "SPA 流式加固与后台入队（生成/优化/替换词）",
