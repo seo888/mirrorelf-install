@@ -208,7 +208,7 @@ if [[ ! -f "$ENV_FILE" ]]; then
 		echo "MIRRORELF_IMAGE=${DEFAULT_IMAGE}"
 		echo "MIRRORELF_PG_HOST_PORT=${PG_HOST_PORT}"
 	} >"$ENV_FILE"
-	echo "已写入 $ENV_FILE，可按需编辑后重新执行本脚本。"
+	echo "已写入 ${ENV_FILE}，可按需编辑后重新执行本脚本。"
 fi
 
 cd "$WORKDIR"
