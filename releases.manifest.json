@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.62",
+      "date": "2026-10-11",
+      "title": "SEO 情报：收录追踪、双引擎与序号列",
+      "notes": [
+        "SEO 情报新增收录追踪（site: + se_results_count / 首页是否进前排）；关键词研究与 SERP 支持 Google / Bing 引擎切换",
+        "排名追踪支持「*」仅关键词追踪；侧栏与各表格统一序号列；排名表全选列与关键词研究对齐；DataForSEO 配置说明精简",
+        "移除 SiteCheck「查收录」与 site_include 后端/Agent/MCP；SiteCheck 域名输入改为可展开文本框"
+      ]
+    },
+    {
       "version": "0.11.61",
       "date": "2026-10-11",
       "title": "SEO 情报：排名追踪、SERP/关键词研究与历史",
