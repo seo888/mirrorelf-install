@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.63",
+      "date": "2026-10-11",
+      "title": "SEO 情报：加载态、侧栏批量查询与删除确认",
+      "notes": [
+        "SEO 情报各 Tab 加载中显示「加载中…」，避免误显无数据；侧栏加宽并支持全选",
+        "排名/收录追踪支持批量查询（进度条可中途停止），查询中侧栏行显示旋转标识；收录追踪仅允许合法域名（不支持 *）",
+        "SEO 情报所有删除/归档操作增加确认弹窗；域名/筛选输入框单行占位改为短提示"
+      ]
+    },
+    {
       "version": "0.11.62",
       "date": "2026-10-11",
       "title": "SEO 情报：收录追踪、双引擎与序号列",
