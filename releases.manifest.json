@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.65",
+      "date": "2026-10-12",
+      "title": "SEO 情报：侧栏分页、刷新与批量查询体验",
+      "notes": [
+        "SEO 情报各侧栏支持每页 50/200/500/1000，翻页样式与文章列表对齐；「每页」靠左、翻页靠右",
+        "侧栏去掉「查询记录」标题，刷新图标置于全选行右侧，且仅刷新侧栏列表不重载主区",
+        "批量查询跳过无关键词域名，结果气泡显示总数/成功/失败/跳过及失败域名；运行中高亮与选中色区分；趋势图柱不再撑破容器"
+      ]
+    },
+    {
       "version": "0.11.64",
       "date": "2026-10-11",
       "title": "SEO 情报：外链追踪与统一加载动效",
