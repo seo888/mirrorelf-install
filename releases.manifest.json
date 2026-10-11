@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.64",
+      "date": "2026-10-11",
+      "title": "SEO 情报：外链追踪与统一加载动效",
+      "notes": [
+        "SEO 情报新增外链追踪（DataForSEO Backlinks）：域名概览、外链/引荐域/热门页面列表，筛选与历史侧栏对齐 OpenSEO 用法",
+        "SERP 结果支持域名跳转外链与地球图标；引荐域/外链中文展示；列表子 Tab 结果缓存避免重复请求",
+        "SEO 情报各处加载中统一为文章列表同款动态 busy 面板（转圈 + 同步提示）"
+      ]
+    },
+    {
       "version": "0.11.63",
       "date": "2026-10-11",
       "title": "SEO 情报：加载态、侧栏批量查询与删除确认",
