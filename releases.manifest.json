@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.66",
+      "date": "2026-10-12",
+      "title": "SEO 情报：SERP 联动、Labs 独立市场与排名计划",
+      "notes": [
+        "SERP：从排名跳转高亮对应域名行；元信息（结果数/PAA/相关搜索）移至表格下方；相关词可一键关键词研究；中文语言标签改为简体/繁体",
+        "关键词研究/域名概览使用独立 Labs 地区（与 SERP 解耦）；SERP 语言不匹配时以语言为准匹配地区（中文优先香港）",
+        "排名/收录：侧栏计划标签（每日绿/每周黄/每月橙）可点选；主区计划用下拉；支持批量改计划；主区去掉归档；Δ 对比窗口说明更清晰"
+      ]
+    },
+    {
       "version": "0.11.65",
       "date": "2026-10-12",
       "title": "SEO 情报：侧栏分页、刷新与批量查询体验",
