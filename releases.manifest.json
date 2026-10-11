@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.67",
+      "date": "2026-10-12",
+      "title": "SEO 情报：SERP 实时标题与批量查询收尾",
+      "notes": [
+        "SERP：域名列显示目标站 site_status 实时标题（可复制）；标题/URL 限宽换行；域名列移至最后；切换历史不再被标题探测堵住（限流+可中断）",
+        "收录：检查历史「查询时间」置末列并附 SERP 跳转；侧栏域名后显示引用站点徽章；地区短名（香港等）不再用 Intl 全称",
+        "排名/收录批量查询：失败自动重试一次；结束后成功项取消勾选、保留失败；查询中侧栏仅左侧绿竖线、不再铺绿底"
+      ]
+    },
+    {
       "version": "0.11.66",
       "date": "2026-10-12",
       "title": "SEO 情报：SERP 联动、Labs 独立市场与排名计划",
