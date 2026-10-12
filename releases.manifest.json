@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.68",
+      "date": "2026-10-13",
+      "title": "流式回源修正、无主目标缓存清理与排名侧栏展示",
+      "notes": [
+        "流式代理 /-/：回源保留全部 query；translate.goog 一律 HTTPS；失败占位写入站点目标域分区（path 为 /-/host…），不再按外链 host 滥建分区",
+        "启动时自动清理不在 target 表中的无主 target_cache 分区；目标缓存侧栏域名搜索改为包含匹配",
+        "SEO 排名追踪(关键词)：侧栏显示「有排名数/总域名数 排名[位次…]」；Bing SERP/市场与界面若干收尾"
+      ]
+    },
+    {
       "version": "0.11.67",
       "date": "2026-10-12",
       "title": "SEO 情报：SERP 实时标题与批量查询收尾",
