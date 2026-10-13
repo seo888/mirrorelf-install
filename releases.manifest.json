@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.69",
+      "date": "2026-10-13",
+      "title": "SEO 情报：足迹校验、绿标与界面间距收尾",
+      "notes": [
+        "足迹：广告文案过滤、URL 去重、批量校验与进度；SERP/收录/外链/排名等域名旁显示站点绿标",
+        "排名：趋势日期完整可换行；追踪/按词跳转图标与悬停跳转紧贴；标题区地区语言移至副行与上次检查对齐",
+        "按词排名标题悬停显示关键词研究；各 Tab 搜索条到下方内容间距统一为外链页标准"
+      ]
+    },
+    {
       "version": "0.11.68",
       "date": "2026-10-13",
       "title": "流式回源修正、无主目标缓存清理与排名侧栏展示",
