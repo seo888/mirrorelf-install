@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.70",
+      "date": "2026-10-14",
+      "title": "文件管理：解压、拖拽上传与工具栏布局收尾",
+      "notes": [
+        "文件：支持 ZIP 解压（防 zip-slip）与扩展名彩色徽章；拖拽上传目录/文件；二进制走 base64 避免文本通道损坏",
+        "列表工具栏：全选对齐、搜索占位完整显示、窄栏自动换行不撑出；根目录切换与应用强调色一致",
+        "编辑器关闭按钮移至右上；去掉列表底部分页栏多余「保存」（仍保留编辑器内保存）"
+      ]
+    },
+    {
       "version": "0.11.69",
       "date": "2026-10-13",
       "title": "SEO 情报：足迹校验、绿标与界面间距收尾",
