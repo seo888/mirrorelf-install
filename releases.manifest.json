@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.71",
+      "date": "2026-10-14",
+      "title": "文件管理：大文件上传与路径栏进度条",
+      "notes": [
+        "文件 create/update：包体上限放宽至 2GB，修复 base64 上传超默认 2MB 时返回 Failed to buffer… 导致前端 Unexpected token F",
+        "文件页路径栏下方显示上传进度（文件名、百分比、字节与进度条）；传输错误展示服务端原文而非 JSON 解析异常",
+        "列表工具栏按面板宽度换行；去掉底部分页栏多余「保存」"
+      ]
+    },
+    {
       "version": "0.11.70",
       "date": "2026-10-14",
       "title": "文件管理：解压、拖拽上传与工具栏布局收尾",
