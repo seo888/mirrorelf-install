@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.73",
+      "date": "2026-10-15",
+      "title": "目标缓存404窄表、命中统计与配额收紧",
+      "notes": [
+        "新增 target_cache_404：非200占位独立窄表；管理端「正常页/无效页」切换；无效页展示命中次数",
+        "同内容 chunks 配额 5→2；超额时更短 path 顶替更长；启动限速修剪存量",
+        "404 命中计数 + 配置「404缓存上限」TopK 清理（同命中优先短路径，留下清零）；管理端可手动清理并确认规则"
+      ]
+    },
+    {
       "version": "0.11.72",
       "date": "2026-10-14",
       "title": "网站 SEO 列表视图与附属域名批量管理",
