@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.72",
+      "date": "2026-10-14",
+      "title": "网站 SEO 列表视图与附属域名批量管理",
+      "notes": [
+        "网站列表新增 SEO 视图：收录/排名取已保存 SEO 情报（不自动查询）；单元格支持 Google site:、SERP、关键词与检查入口",
+        "SEO 排名心跳改为领取全部到期任务，不再限 10/20；常用文档文本框支持一键填充",
+        "附属域名：空态提示、折叠高度对齐「网站信息」；支持全选/批量复制/删除（弹窗确认）"
+      ]
+    },
+    {
       "version": "0.11.71",
       "date": "2026-10-14",
       "title": "文件管理：大文件上传与路径栏进度条",
