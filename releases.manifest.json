@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.74",
+      "date": "2026-10-16",
+      "title": "TDK 提示词定稿、静态备案规则与引用站探测浮层",
+      "notes": [
+        "TDK：标题结构/品牌/分隔符（仅 -|）与禁问号等改由 tdk-kw 提示词约束；去掉后端标题后处理改写",
+        "网站 TDK 字段：关键词标签点击热区与绿色圆点对齐；静态建站 skill 补充 ICP/公网安备模拟号生成规则",
+        "目标缓存侧栏「引用站点」浮层：展示探测点与页面标题，宽度不再受限侧栏列表，可伸入主区"
+      ]
+    },
+    {
       "version": "0.11.73",
       "date": "2026-10-15",
       "title": "目标缓存404窄表、命中统计与配额收紧",
