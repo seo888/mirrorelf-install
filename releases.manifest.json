@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.75",
+      "date": "2026-10-16",
+      "title": "网站 SEO 视图：外链列、批量检查与追踪跳转",
+      "notes": [
+        "SEO 列表新增「外链情况」列（已保存摘要）；表头可对选中站点批量查收录/排名/外链；检查按钮改细环忙碌态",
+        "收录/排名外链跳转进 SEO 情报对应追踪项；关键词行仍打开 SERP；简洁/SEO 视图也显示网站缓存分色角标",
+        "DataForSEO 无外链结果时落库为「暂无外链数据」并记录查询时间，不再一直停在「未查询」"
+      ]
+    },
+    {
       "version": "0.11.74",
       "date": "2026-10-16",
       "title": "TDK 提示词定稿、静态备案规则与引用站探测浮层",
