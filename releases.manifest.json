@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.76",
+      "date": "2026-10-16",
+      "title": "相关词投票：过滤规则、指标列与快捷操作",
+      "notes": [
+        "相关词投票：固定过滤规则（按项包含/不包含、字数区间、繁体/中文/英文/空格互斥）；过滤词库保存后收起面板，成功改气泡提示",
+        "表格得票前列搜索量/CPC/竞争度/机会/难度/意图并可排序；悬停可研究、收藏、加入过滤词库；选中文本右键写入词库或规则",
+        "未查过的相关词仅旁侧搜索图标查 SERP；同行可正常划选文字，跨行仍可拖选"
+      ]
+    },
+    {
       "version": "0.11.75",
       "date": "2026-10-16",
       "title": "网站 SEO 视图：外链列、批量检查与追踪跳转",
