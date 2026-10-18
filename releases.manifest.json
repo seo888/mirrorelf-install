@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.78",
+      "date": "2026-10-19",
+      "title": "排名(关键词) SERP 探索与批量改市场",
+      "notes": [
+        "排名(关键词)：SERP 回填改为批量查询，消除按词 N 次往返；侧栏「SERP 探索」可并入至少命中一个追踪域名的历史词（排除 site:）",
+        "已绑词/未加词域名标签；探索词旁标 SERP",
+        "排名追踪：侧栏选中后可「批量改地区语言」"
+      ]
+    },
+    {
       "version": "0.11.77",
       "date": "2026-10-19",
       "title": "SEO 情报侧栏布局统一与排名(关键词)表优化",
