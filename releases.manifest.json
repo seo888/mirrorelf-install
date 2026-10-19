@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.79",
+      "date": "2026-10-20",
+      "title": "相关词投票：视图、权重与批量关键词研究",
+      "notes": [
+        "相关词投票：来源列支持简洁/详细/聚合（详细表头为种子词）；得票后增加相关权重；切页不卸载，查询进度保留",
+        "外推留痕：状态筛选与验证进度；修复开始验证时数据库 RETURNING 歧义；SERP 历史可勾选是否包含 site: 查询",
+        "相关词可批量加入关键词研究：跳过已有搜索量的词，弹窗自选地区与语言，进行中可停止",
+        "网站 SEO 列表在关键词数据返回前显示「正在加载关键词数据」"
+      ]
+    },
+    {
       "version": "0.11.78",
       "date": "2026-10-19",
       "title": "排名(关键词) SERP 探索与批量改市场",
