@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.80",
+      "date": "2026-10-20",
+      "title": "域名可注册探测：扫描、WHOIS、筛选与复制",
+      "notes": [
+        "SEO 情报新增「域名可注册探测」：从已存谷歌 SERP 的域名、标题与描述收集候选，WHOIS 探测可注册状态并持久化",
+        "支持多选探测、域名集过滤与后缀规则（包含 OR / 不包含 AND）；状态中文标签与宽限期等阶段筛选提示",
+        "来源旁可打开对应 SERP；工具栏与行内可复制域名"
+      ]
+    },
+    {
       "version": "0.11.79",
       "date": "2026-10-20",
       "title": "相关词投票：视图、权重与批量关键词研究",
