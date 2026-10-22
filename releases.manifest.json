@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.82",
+      "date": "2026-10-23",
+      "title": "域名可注册跳转注册与相关词/列表细节",
+      "notes": [
+        "域名可注册：来源词后显示 SERP 名次；「可注册」旁「马上注册」、筛可选可注册且多选时「批量注册」跳转域名 DNS 预填注册弹层（不自动提交）",
+        "相关词投票：排除 site: 种子与相关词；导出 CSV 移到刷新前；引擎选择器图标圆角与列表一致",
+        "网站 SEO 列表：关键词前引擎搜索图标；名次/涨跌 tip；外链行不换行；引擎行与词行图标左缘对齐"
+      ]
+    },
+    {
       "version": "0.11.81",
       "date": "2026-10-22",
       "title": "排名追踪多引擎与网站列表关键词 UX",
