@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.86",
+      "date": "2026-10-24",
+      "title": "路径封禁启动清缓存与网站列表模式标识",
+      "notes": [
+        "路径封禁：内置规则始终生效；启动时分批永久删除命中封禁的 website_cache / target_cache / target_cache_404（路径斜杠过深一并清）",
+        "配置页：去掉内置封禁名单展示（规则仍生效）",
+        "网站列表：静态 AI 操作格与静态域名同色；镜像操作格图标与数字间显示「镜像」；分项缓存角标数字间竖线分隔"
+      ]
+    },
+    {
       "version": "0.11.85",
       "date": "2026-10-23",
       "title": "Sitemap 路径查询加速与登录日志",
