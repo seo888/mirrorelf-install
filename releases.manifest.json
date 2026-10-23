@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.83",
+      "date": "2026-10-23",
+      "title": "提示词合并为 prompt.md 与系统级内置",
+      "notes": [
+        "DIY 提示词：原 system.md + user.md 合并为单文件 prompt.md（# System / # User）；启动删除旧分文件残留，缺 prompt.md 才种子",
+        "系统级提示词（Agent / 自动建站 campaign / 运营助手 ai-operator）打进二进制，不落盘、不种子；运行时只读内置",
+        "运营助手策略页去掉「提示词设置」；内置文案由二进制维护，策略项仍可 DIY"
+      ]
+    },
+    {
       "version": "0.11.82",
       "date": "2026-10-23",
       "title": "域名可注册跳转注册与相关词/列表细节",
