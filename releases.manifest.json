@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.84",
+      "date": "2026-10-23",
+      "title": "附属域名表启动修复与网站列表复制菜单",
+      "notes": [
+        "网站列表：勾选后「复制域名」展开三项——复制根域名 / 复制域名 / 复制 URL",
+        "附属域名：列表接口恢复挂载 aliases；删站前级联清附属；启动时尽早 ensure website_domain_alias，init 失败打错误日志（避免缺表导致编辑报「查询附属域名失败」/query 500）",
+        "数据库初始化：website_domain_alias 建表挪到重迁移之前，避免 created_at 回填超时阻断建表"
+      ]
+    },
+    {
       "version": "0.11.83",
       "date": "2026-10-23",
       "title": "提示词合并为 prompt.md 与系统级内置",
