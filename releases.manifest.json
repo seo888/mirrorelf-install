@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.85",
+      "date": "2026-10-23",
+      "title": "Sitemap 路径查询加速与登录日志",
+      "notes": [
+        "Sitemap：路径/计数 SQL 可走索引（page_type 常量、去掉 trim）；部分索引 (page_type,path)；SITEMAP_MAX_PATHS 默认 20 万封顶；全局 DB 信号量与按域名建库锁；keyset 分页替代深 OFFSET，避免巨站拖垮连接池",
+        "站点日志：运行日志后新增「登录日志」（成功/失败/退出，进程内环形缓冲，含 IP/UA）"
+      ]
+    },
+    {
       "version": "0.11.84",
       "date": "2026-10-23",
       "title": "附属域名表启动修复与网站列表复制菜单",
