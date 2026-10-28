@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.87",
+      "date": "2026-10-28",
+      "title": "Agent 断线续跑与数据库清理审计",
+      "notes": [
+        "Ai Chat Agent：识别瞬时断线，自动续跑 1 次后可手动继续；服务端 run checkpoint 落盘，支持 run_id 续 SSE；启动扫描未完成轮次",
+        "站点日志新增「清理日志」：记录自动清理 / 限速清理 / 封禁路径 / 孤儿 chunk / 定时删库的条数与耗时",
+        "网站列表：*.domain.com 别名中的域名部分可点击打开；登录页文案对齐 AI 站群定位"
+      ]
+    },
+    {
       "version": "0.11.86",
       "date": "2026-10-24",
       "title": "路径封禁启动清缓存与网站列表模式标识",
