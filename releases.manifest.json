@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.88",
+      "date": "2026-10-30",
+      "title": "DIY 提示词产品化与多提示词池",
+      "notes": [
+        "DIY 提示词：按任务分区展示；官方内置（替换/友链/静态生成/Skill 建站/批量 SEO 等）打进二进制，启动可清盘上旧副本；作用域改为镜像站/单页站",
+        "非 Skill 任务支持多提示词池（配置 pools + 弹层点选）；Skill 侧栏显示磁盘文件名；去掉未使用的 YAML 翻译提示词",
+        "模板中心下载进度条；提示词 DIY 顶栏模板入口与池点选交互打磨"
+      ]
+    },
+    {
       "version": "0.11.87",
       "date": "2026-10-28",
       "title": "Agent 断线续跑与数据库清理审计",
