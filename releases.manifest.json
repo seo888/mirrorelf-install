@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.90",
+      "date": "2026-11-04",
+      "title": "apex→www 跳转保留入站 HTTPS",
+      "notes": [
+        "根域跳转 www：协议优先读 X-Forwarded-Proto（多级代理取首段），避免 WAF/反代终结 TLS 后 Location 落到 http://www.…",
+        "ReqState 入站 scheme 与跳转共用同一解析逻辑"
+      ]
+    },
+    {
       "version": "0.11.89",
       "date": "2026-11-04",
       "title": "访问日志内存封顶与 /-/ 回源域名校验",
