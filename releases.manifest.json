@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.89",
+      "date": "2026-11-04",
+      "title": "访问日志内存封顶与 /-/ 回源域名校验",
+      "notes": [
+        "访问日志：内存环按域名 LRU 上限 512×300；写盘队列有界 8192，积压满丢弃并限频告警，避免长期跑站撑爆 RSS",
+        "流式代理 /-/：回源前校验 host（须像域名/IP）；HTML 改写仅改合法外链，拒绝 ping 等垃圾单标签出站；路由 /-/{*url} 置于 catch-all 之前",
+        "修复 UA myself 提前放行未挂 ReqState 导致 website_config panic；metrics/website_config 缺状态时不再 unwrap 崩 worker"
+      ]
+    },
+    {
       "version": "0.11.88",
       "date": "2026-10-30",
       "title": "DIY 提示词产品化与多提示词池",
