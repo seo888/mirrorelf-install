@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.92",
+      "date": "2026-11-06",
+      "title": "管理后台多节点切换（CORS + 令牌）",
+      "notes": [
+        "顶栏「本机」可登记其它 MirrorElf 后台并一键切换；跨机需在设置「节点切换」配置允许连入地址与令牌",
+        "后端：管理 API CORS 白名单 + X-MirrorElf-Admin-Token（Fleet Token）鉴权；误贴 /_/admin 路径会自动剥掉"
+      ]
+    },
+    {
       "version": "0.11.91",
       "date": "2026-11-05",
       "title": "孤儿 content_chunks GC：物化 refs 后分批删除",
