@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.91",
+      "date": "2026-11-05",
+      "title": "孤儿 content_chunks GC：物化 refs 后分批删除",
+      "notes": [
+        "孤儿 chunk 清理：持锁会话内一次物化 website/target/回收站引用到 TEMP，再分批 DELETE，避免每批 UNNEST 全库打满 PG",
+        "节流：Lite debounce 30s、批间 1.5s；Lite 最多 3 批、小时 Full 最多 12 批；物化与删除分设 statement_timeout"
+      ]
+    },
+    {
       "version": "0.11.90",
       "date": "2026-11-04",
       "title": "apex→www 跳转保留入站 HTTPS",
