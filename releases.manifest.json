@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.93",
+      "date": "2026-11-06",
+      "title": "Telegram 节点监控与多节点切换打磨",
+      "notes": [
+        "Telegram：新增「节点监控」，服务端定时探活管理节点列表，仅掉线/恢复时推送；未启用 Telegram 时隐藏 Token/Chat 表单",
+        "多节点：设置页独立「节点切换」区块；令牌一键复制；下拉显示备注；地址示例与无协议默认改为 http"
+      ]
+    },
+    {
       "version": "0.11.92",
       "date": "2026-11-06",
       "title": "管理后台多节点切换（CORS + 令牌）",
