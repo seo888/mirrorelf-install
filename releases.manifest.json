@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.96",
+      "date": "2026-11-08",
+      "title": "品牌与网站列表：ELF 主题 Logo、操作时间列",
+      "notes": [
+        "品牌：侧栏/登录随浅色·深色主题切换 logo-light / logo-dark；tagline 中 Elf 高亮；favicon 由 logo-dark 生成圆角 128px",
+        "网站列表：操作列前新增「操作时间」，上创建下修改，日期后附 [N天]；侧栏略加宽至 248px",
+        "清理：移除未使用 icons.svg 与临时 logo/image 素材"
+      ]
+    },
+    {
       "version": "0.11.95",
       "date": "2026-11-08",
       "title": "回源合并加固：落库后再 Done、stream/preload 同键、防泄漏",
