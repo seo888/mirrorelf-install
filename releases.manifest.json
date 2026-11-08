@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.97",
+      "date": "2026-11-09",
+      "title": "静态站 Skill 强化 + 标题搜索菜单 / Prompt DIY",
+      "notes": [
+        "静态站 generate/append Skill：正文自然插入首页核心词锚链；页脚地址/电话/邮箱与备案地域一致；文章作者署名；全站 Schema.org JSON-LD 升硬约束",
+        "网站列表：标题搜索引擎图标右键菜单（第一个关键词 / 带引号完整标题）；Prompt DIY「重置为预设」需确认；Skill 标签统一「Skill：静态站发文」",
+        "仪表盘：站点规模图例/色条略压暗，减少过艳观感"
+      ]
+    },
+    {
       "version": "0.11.96",
       "date": "2026-11-08",
       "title": "品牌与网站列表：ELF 主题 Logo、操作时间列",
