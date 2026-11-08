@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.95",
+      "date": "2026-11-08",
+      "title": "回源合并加固：落库后再 Done、stream/preload 同键、防泄漏",
+      "notes": [
+        "回源：HTML/静态 miss 均同步写库成功后再 coalesce Done；`/-/` 只合并到 status，pipe body 前卸 Guard；preload 与主站共用 coalesce_key（Waiter 跳过）",
+        "超时与闸门：coalesce_wait 22s、出站仍 15s；mirror HTML 许可最多等 5s 后 503；Hub compose 默认 ORIGIN 48 / PRELOAD 16 / MIRROR_HTML 48 / PG_POOL 96",
+        "管理端：本机节点名不随远端切换改写；测试连接可自动填远端程序名；Prompt DIY「重置为预设」仅内容不一致时可点；SeoIntel 走 Host 鉴权；内存分解补文案",
+        "Skill：静态站增量发文汇报须用完整 https 网址；定时任务 stale 默认 30 分钟"
+      ]
+    },
+    {
       "version": "0.11.94",
       "date": "2026-11-08",
       "title": "回源雪崩防护：并发闸门 + miss 合并 + 负缓存",
