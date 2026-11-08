@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.94",
+      "date": "2026-11-08",
+      "title": "回源雪崩防护：并发闸门 + miss 合并 + 负缓存",
+      "notes": [
+        "回源：ORIGIN_FETCH_CONCURRENCY 默认 96，满则软拒绝；同 path singleflight；网络失败 60s 负缓存；出站超时 15s 并恢复连接复用",
+        "写库：静态资源异步写走有界队列；preload/recheck 共用回源闸门并 Drop 回收 in-flight，避免 ESTAB/PG 被 miss 风暴拖死",
+        "仪表盘：趋势图标题更清晰、说明同行右对齐；站点/缓存图例配色提亮"
+      ]
+    },
+    {
       "version": "0.11.93",
       "date": "2026-11-06",
       "title": "Telegram 节点监控与多节点切换打磨",
