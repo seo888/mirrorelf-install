@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.99",
+      "date": "2026-11-10",
+      "title": "静态站提示词分层 + 管理端交互与 Prompt DIY 收尾",
+      "notes": [
+        "静态站：内容/设计写入 prompt/website-static（DIY）；generate/append Skill 只跑工作流，并带「提示词优先、未写则默认」兜底（备案、绝对 URL 首页锚链、作者、Schema 等）",
+        "Prompt DIY：全屏按钮回到编辑器标题行最右；去掉 syncHash 避免 F5 误进 DIY",
+        "管理端：建站看板滚动与卡片网格；AI 对话/营收/静态生成线程顶栏渐隐；模板中心全屏 AI 层级、设备切换与样式栏宽度/箭头重叠修复；确认框模型选择与取消同排"
+      ]
+    },
+    {
       "version": "0.11.98",
       "date": "2026-11-09",
       "title": "Prompt DIY 实测/AI 改写体验 + 全屏对比与分栏",
