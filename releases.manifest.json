@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.11.98",
+      "date": "2026-11-09",
+      "title": "Prompt DIY 提示词打磨 + 静态站栏目/原型库扩容",
+      "notes": [
+        "站点 TDK（tdk-kw）：单/多词 keywords 规则、品牌推演回退核心词、Title/Description 各 20+ 写法；去掉无用的 site_kind/variant_angle/run_nonce 注入",
+        "Prompt DIY：内页/文章/单页落地页 User 统一「一行一变量」；Markdown 预览保留单换行与数字区间 ~；DIY 官方稿启动自动重置为预设",
+        "静态站内容提示词：设计品味改由 prompt 必载；栏目硬下限 ≥5（按站型/关键词上调）；版式原型库 100 种；审计 categories≥5、articles≥10"
+      ]
+    },
+    {
       "version": "0.11.97",
       "date": "2026-11-09",
       "title": "静态站 Skill 强化 + 标题搜索菜单 / Prompt DIY",
