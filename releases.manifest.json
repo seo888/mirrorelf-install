@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.1",
+      "date": "2026-11-10",
+      "title": "正文链回首页提示词澄清 + 复制/Tip/密钥栏修整",
+      "notes": [
+        "静态站 DIY：将易被误读的「首页锚链」改为「正文链回首页」（正文关键词锚文本 + 绝对 URL）；generate/append Skill 默认表同步",
+        "节点管理：本页地址复制改走 copyText（含 HTTP 非安全上下文回退），气泡显示「已复制」而非网址本身",
+        "管理端：拖拽手柄 tip 不再因 :hover 钉死残留；AI 模型 API Key 输入列最小宽度 9.5rem"
+      ]
+    },
+    {
       "version": "0.12.0",
       "date": "2026-11-10",
       "title": "静态站内容提示词程序注入 + 管理端可读性与表格收尾",
