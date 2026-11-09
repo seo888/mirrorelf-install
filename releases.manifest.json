@@ -5,11 +5,11 @@
     {
       "version": "0.11.98",
       "date": "2026-11-09",
-      "title": "Prompt DIY 提示词打磨 + 静态站栏目/原型库扩容",
+      "title": "Prompt DIY 实测/AI 改写体验 + 全屏对比与分栏",
       "notes": [
-        "站点 TDK（tdk-kw）：单/多词 keywords 规则、品牌推演回退核心词、Title/Description 各 20+ 写法；去掉无用的 site_kind/variant_angle/run_nonce 注入",
-        "Prompt DIY：内页/文章/单页落地页 User 统一「一行一变量」；Markdown 预览保留单换行与数字区间 ~；DIY 官方稿启动自动重置为预设",
-        "静态站内容提示词：设计品味改由 prompt 必载；栏目硬下限 ≥5（按站型/关键词上调）；版式原型库 100 种；审计 categories≥5、articles≥10"
+        "Prompt DIY：生成参数按种类填变量；{keyword} 只保留词库抽词，{title}/{keywords} 排序与 TDK 一致；官方稿启动强制对齐内置预设",
+        "AI 改写：点开始即进对比窗右侧流式写入；可贴底跟滚/上拖停跟；取消/写入编辑器；全文走 system 规避 12000 字 user 上限；diff 词级红绿高亮",
+        "落地页实测与模板中心：全屏铺满且进出保持分栏比例；浅色主题悬停提示改为深色浮层，toast 对比加强"
       ]
     },
     {
