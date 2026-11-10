@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.3",
+      "date": "2026-11-11",
+      "title": "静态站 DIY Sticky System + Ai Chat 官方 Markdown",
+      "notes": [
+        "静态站：Prompt DIY website-static 改为 Conditional/Sticky System（工作流期间挂到 Agent system 全文）；skills_load 只返回工作流正文，不再双份注入 content_prompt",
+        "Skill generate/append 与 agent/operator 文案同步：内容规则见会话 system DIY；未写主题才用默认兜底；禁止 file_read prompt/website-static",
+        "Ai Chat：回复渲染改走官方 Markdown（含 DIY marked/smd 样式）"
+      ]
+    },
+    {
       "version": "0.12.2",
       "date": "2026-11-10",
       "title": "自动建站单 Agent 阶段条 + 工具摘要与跳过态修整",
