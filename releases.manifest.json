@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.5",
+      "date": "2026-11-11",
+      "title": "正文锚链绝对 URL 强化 + 管理端动效与 DIY 图标",
+      "notes": [
+        "静态站：正文关键词回首页链禁止 href=\"/\"（正反例写入 DIY）；generate/append Skill 明确唯独该链须 https 绝对 URL；审计 article_no_home_keyword_link 仍挡相对路径",
+        "Prompt DIY：全部 DIY 官方稿继续 include_str 打进预设；website-static 等与 admin-ui/prompt 镜像同步",
+        "管理端：建站阶段状态条文案动效；DIY 编辑/预览分段加图标；网站列表与任务看板体验小修"
+      ]
+    },
+    {
       "version": "0.12.4",
       "date": "2026-11-11",
       "title": "建站阶段点亮修正 + 正文锚链硬门槛",
