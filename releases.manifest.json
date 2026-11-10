@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.4",
+      "date": "2026-11-11",
+      "title": "建站阶段点亮修正 + 正文锚链硬门槛",
+      "notes": [
+        "自动建站阶段条：注册商 accounts/register 不再误点亮「解析」；阶段对话按工具切片；未跑过的解析/CF 收尾不再假点亮",
+        "静态站 Prompt DIY：正文关键词锚链回首页升为硬门槛；审计新增 article_no_home_keyword_link（缺则 pass=false）；DIY system 不再写 skills_load design-taste",
+        "域名解析表：状态/分组等短列按内容收窄；清理无用前端页与弃用启停脚本"
+      ]
+    },
+    {
       "version": "0.12.3",
       "date": "2026-11-11",
       "title": "静态站 DIY Sticky System + Ai Chat 官方 Markdown",
