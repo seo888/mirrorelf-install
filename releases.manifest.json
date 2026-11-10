@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.2",
+      "date": "2026-11-10",
+      "title": "自动建站单 Agent 阶段条 + 工具摘要与跳过态修整",
+      "notes": [
+        "自动建站：去掉多岗 crew，单 Agent 写入阶段进度；阶段条为注册→建站→质检→解析→转入（出口并入解析），跳过态去掉删除线、避免误标",
+        "Ai Chat / 建站看板：工具步骤摘要更贴工具名与路径；空阶段壳隐藏；实时状态改 Fluent 进度条",
+        "文案与兼容：清理「多岗建站/交班」残留；旧 crew detail 只读兼容"
+      ]
+    },
+    {
       "version": "0.12.1",
       "date": "2026-11-10",
       "title": "正文链回首页提示词澄清 + 复制/Tip/密钥栏修整",
