@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.10",
+      "date": "2026-11-12",
+      "title": "节点管理弹窗 + HTTPS 校验 + 任务看板体验",
+      "notes": [
+        "节点管理：弹窗头/底对齐批量操作窗；本机连入设置区无滚动条，允许连入地址框撑满剩余高度；添加/编辑节点仅允许 https://，测试连接与保存均校验",
+        "任务中心：工具条操作区右对齐；建站看板默认日视图；进入工单列表不再闪一下空态",
+        "网站列表：站点状态探测并发回落到约 4；Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.9",
       "date": "2026-11-12",
       "title": "建站词库比对 + 回收站覆盖确认 + 到期页官网风",
