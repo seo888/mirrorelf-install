@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.7",
+      "date": "2026-11-11",
+      "title": "静态站锚链铁律 + Prompt DIY 实测/改写/编辑器",
+      "notes": [
+        "静态站 DIY：正文关键词回首页链强化「相对 vs 绝对」区分与正反例；唯独该链必须 https://域名/，禁止 href=\"/\"；官方稿 include_str 打进预设并与 admin-ui/prompt 同步",
+        "Prompt DIY：站点标题与描述实测「生成参数」只抽词库+AI 域名（keywords 作输入不调 TDK）；AI 改写等待态展示改写要求；全屏对比可正常关闭；CodeMirror 主题随亮暗切换且浅色保留 oneDark 语法色",
+        "建站看板：阶段条状态行按步骤展示细节（步骤·handoff·工具摘要）；出口探测不占对话区；网站编辑按 root_domain 查询加速"
+      ]
+    },
+    {
       "version": "0.12.6",
       "date": "2026-11-11",
       "title": "Agent 任务合并 + 建站队列修复 + 看板月/日视图",
