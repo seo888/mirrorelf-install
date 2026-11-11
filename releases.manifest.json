@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.8",
+      "date": "2026-11-11",
+      "title": "建站看板与文件管理体验 + 绝对路径跟请求协议",
+      "notes": [
+        "建站看板：侧栏选中/运行态区分、完成绿点失败红点；排队/执行中空态说明与队列位置；日视图卡片取消态中性灰、状态贴标题右侧",
+        "SEO「绝对路径」：相对链改为 https?/域名/路径，协议跟本次请求（含 X-Forwarded-Proto），不再写 //域名/",
+        "文件管理：可编辑路径栏、HTML「预览编辑」且保存后回刷；目录/文件元信息图标同行；Prompt DIY 官方稿继续 include_str 打进预设"
+      ]
+    },
+    {
       "version": "0.12.7",
       "date": "2026-11-11",
       "title": "静态站锚链铁律 + Prompt DIY 实测/改写/编辑器",
