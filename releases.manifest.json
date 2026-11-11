@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.6",
+      "date": "2026-11-11",
+      "title": "Agent 任务合并 + 建站队列修复 + 看板月/日视图",
+      "notes": [
+        "Ai 任务：发文并入「Agent 任务」看板；定时发文预设排在自动建站之后；Prompt DIY 官方稿继续 include_str 打进预设",
+        "建站队列：修复 active_runs 泄漏导致一直排队；follow-up 不占新建并发；claim/lease 与 panic 安全",
+        "管理端：任务列表月视图/日视图切换；月组面板与侧栏宽度/溢出修整"
+      ]
+    },
+    {
       "version": "0.12.5",
       "date": "2026-11-11",
       "title": "正文锚链绝对 URL 强化 + 管理端动效与 DIY 图标",
