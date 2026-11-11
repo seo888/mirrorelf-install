@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.9",
+      "date": "2026-11-12",
+      "title": "建站词库比对 + 回收站覆盖确认 + 到期页官网风",
+      "notes": [
+        "建站词库比对：侧栏聚合关键词×站点；比对弹窗区分已用/未用；未建站词覆盖写入前把旧文件进回收站（含种子词库）",
+        "回收站：文件恢复遇同名弹窗确认覆盖；网站列表中文不显语言角标，「更新」挪到复制域名前；仪表盘亮色色条对齐暗色",
+        "许可证到期页对齐 www.mirrorelf.com；词库模式浮层贴右向左展开；Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.8",
       "date": "2026-11-11",
       "title": "建站看板与文件管理体验 + 绝对路径跟请求协议",
