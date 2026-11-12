@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.11",
+      "date": "2026-11-12",
+      "title": "节点拖拽排序/同步名称 + 建站提示词精简",
+      "notes": [
+        "节点管理：远程节点可拖拽排序（本机置顶）；本机行可「同步名称」批量拉取 program_name；编辑保存保持原位；同步/添加按钮上下叠放并带图标",
+        "Ai 自动建站：用户气泡只保留本轮参数（建站数/模式/工作流/关键词/域名/账户），细则留在 business-expand skill；对话用户气泡略加宽",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.10",
       "date": "2026-11-12",
       "title": "节点管理弹窗 + HTTPS 校验 + 任务看板体验",
