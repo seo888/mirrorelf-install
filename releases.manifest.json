@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.14",
+      "date": "2026-11-12",
+      "title": "部署告警文案点名问题点",
+      "notes": [
+        "部署健康横幅：按告警分别写清问题点（缺 ./website:/app/website 挂载；install schema 戳缺失/过旧并显示当前与要求）；说明重跑远程官方 install 对齐本机 compose，不暗示「更新 install 脚本本身」",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.13",
       "date": "2026-11-12",
       "title": "仪表盘窄屏 QPS 并排 + 部署告警顶栏按节点",
