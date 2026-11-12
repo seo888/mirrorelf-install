@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.15",
+      "date": "2026-11-13",
+      "title": "模板中心画布 AI 改区与样式栏",
+      "notes": [
+        "模板中心：AI 修改说明可内联插入/拖拽代码块；样式栏收窄并改色阶；撤销不记选区展开且清幽灵蓝框；预览链可点、图裂占位",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.14",
       "date": "2026-11-12",
       "title": "部署告警文案点名问题点",
