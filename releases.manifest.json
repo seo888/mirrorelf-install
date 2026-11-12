@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.13",
+      "date": "2026-11-12",
+      "title": "仪表盘窄屏 QPS 并排 + 部署告警顶栏按节点",
+      "notes": [
+        "仪表盘：图表区容器查询与高度滚动修正（宽屏无多余滚动、窄屏堆叠可滚）；QPS 入口/出口在窄屏左右并排，极窄再上下叠",
+        "部署健康：顶栏强告警按当前节点刷新/收起；切节点拉 /_api_/deploy/health；站点状态探测并发约 24",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.12",
       "date": "2026-11-12",
       "title": "部署编排强告警（website 挂载 / install schema）",
