@@ -56,7 +56,7 @@
 - Per-engine spider policies (Baidu, Sogou, 360, ByteDance, Bing, Google, etc.); SSE live access logs
 - **Site logs hub**: access logs, runtime logs, daily site reports
 - **Site query**: batch HTTP checks, search-engine indexing, WHOIS
-- **Data collection**: title generator, keyword combiner, article collector
+- **Keyword → domains**: pinyin / initials / English candidates + WHOIS
 - **Backup & restore**: granular `.mefbackup` export/import (SSE progress); **recycle bin** soft delete & restore
 - UA/IP ban, forced domain binding, ad redirects, global code injection, Telegram notifications
 
@@ -81,7 +81,7 @@ Open `http://<host>:16888/_/admin/` (hash routing; zh/en UI, light/dark theme)
 | Templates | HTML/CSS/JS/images; AI generation; image editor |
 | Tag docs | Embedded TDK / friend-link tag syntax reference |
 | Site query | Batch status/indexing/WHOIS; TSV export |
-| Data collection | Title generator, keyword combiner, article collector |
+| Keyword → domains | Pinyin / initials / English candidates + WHOIS |
 | AI tasks | Cache task queue, parallelism, conversation details |
 | AI link wheel | Friend-link graph, ++/-- batch edits, AI analysis |
 | AI CHAT | Multi-session chat, attachments, image generation |
@@ -158,6 +158,8 @@ All paths are **bind-mounted on the host** under the install directory:
 | `website/` | Static site files (`website/{root}/{full}/`); **must be mounted** or Watchtower image updates wipe them |
 | `pgdata/` | PostgreSQL data files |
 | `_static/` | User static assets (`js/`, `images/`, etc.) |
+
+> If the admin UI shows a “deploy out of date” banner, re-run `install.sh` once in the install directory (backs up compose; does not wipe data). The script stamps `data/.mirrorelf_install_schema`.
 
 > The admin UI at `/_/admin` is synced from the image entrypoint on startup and is **not overwritten**.  
 > App directories are owned by **uid 10001** (`install.sh` runs `chown` automatically).

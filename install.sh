@@ -84,12 +84,23 @@ detect_primary_ip() {
 	printf '%s' "$ip"
 }
 
+# 与镜像内 REQUIRED_INSTALL_SCHEMA（src/functions/deploy_health.rs）同号；变更 compose 模板时递增两边。
+INSTALL_SCHEMA_VERSION=1
+
 ensure_data_dirs() {
 	mkdir -p "$WORKDIR"/{config,log,data,doc,templates,prompt,website,pgdata,_static/js,_static/images}
 	# 与 Dockerfile 中 mirrorelf 用户 uid/gid 一致（10001）；Postgres 为 999
 	if [[ "$(uname -s 2>/dev/null)" == Linux ]] && command -v chown >/dev/null 2>&1; then
 		chown -R 10001:10001 "$WORKDIR"/{config,log,data,doc,templates,prompt,website,_static} 2>/dev/null || true
 		chown -R 999:999 "$WORKDIR/pgdata" 2>/dev/null || true
+	fi
+}
+
+write_install_schema() {
+	mkdir -p "$WORKDIR/data"
+	printf '%s\n' "$INSTALL_SCHEMA_VERSION" >"$WORKDIR/data/.mirrorelf_install_schema"
+	if [[ "$(uname -s 2>/dev/null)" == Linux ]] && command -v chown >/dev/null 2>&1; then
+		chown 10001:10001 "$WORKDIR/data/.mirrorelf_install_schema" 2>/dev/null || true
 	fi
 }
 
@@ -208,7 +219,7 @@ if [[ ! -f "$ENV_FILE" ]]; then
 		echo "MIRRORELF_IMAGE=${DEFAULT_IMAGE}"
 		echo "MIRRORELF_PG_HOST_PORT=${PG_HOST_PORT}"
 	} >"$ENV_FILE"
-	echo "已写入 ${ENV_FILE}，可按需编辑后重新执行本脚本。"
+	echo "已写入 $ENV_FILE，可按需编辑后重新执行本脚本。"
 fi
 
 cd "$WORKDIR"
@@ -226,6 +237,7 @@ else
 fi
 "${COMPOSE_BASE[@]}" "${COMPOSE_PROFILE[@]}" pull
 "${COMPOSE_BASE[@]}" "${COMPOSE_PROFILE[@]}" up -d
+write_install_schema
 
 HOST_IP="$(detect_primary_ip)"
 echo

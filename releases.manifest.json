@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.12",
+      "date": "2026-11-12",
+      "title": "部署编排强告警（website 挂载 / install schema）",
+      "notes": [
+        "管理端：Docker 部署检测 website 宿主机挂载与 install schema；未对齐时侧栏强告警，提示重跑官方 install.sh（Watchtower 只换镜像不改 compose）",
+        "install.sh：写入 data/.mirrorelf_install_schema；启动日志同步告警；Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.11",
       "date": "2026-11-12",
       "title": "节点拖拽排序/同步名称 + 建站提示词精简",
