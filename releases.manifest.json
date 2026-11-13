@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.16",
+      "date": "2026-11-14",
+      "title": "静态站审计熔断与可执行修复指引",
+      "notes": [
+        "静态站审计：去掉 article_no_home_keyword_link 硬门槛（改由 DIY 写作约束）；失败返回 seo_error_by_kind/how_to_fix 与 fix_plan；高原 stall 熔断，禁止空转审计",
+        "Skill/schema：按 fix_plan 同 kind 批量修、最多约 5 轮；服从 stall；Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步",
+        "管理端：Ai Chat Telegram 气泡尖角；版本日志实心白底；设置页面板/输入框浅色纯白"
+      ]
+    },
+    {
       "version": "0.12.15",
       "date": "2026-11-13",
       "title": "模板中心画布 AI 改区与样式栏",
