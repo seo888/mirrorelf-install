@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.17",
+      "date": "2026-11-16",
+      "title": "Yandex 站长平台 MVP + 必应绑定修正",
+      "notes": [
+        "站长平台：必应页签后接入 Yandex Webmaster（粘贴 OAuth token；资源列表、近两周点击/展示、Sitemap 提交、DNS TXT 域名绑定）；平台页签 localStorage 持久化",
+        "必应域名绑定：Verify 使用 DnsVerificationCode 写 CNAME（指向 verify.bing.com），避免 AuthenticationCode 导致验证失败",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.16",
       "date": "2026-11-14",
       "title": "静态站审计熔断与可执行修复指引",
