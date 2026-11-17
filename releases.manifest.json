@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.18",
+      "date": "2026-11-18",
+      "title": "友链自然植入加固 + 链轮布局",
+      "notes": [
+        "友链自然植入：插入提前到 SEO 改写前，避免锚点被混淆后回退 </body>；禁止编造未出现 class/容器；漏写 {} 自动补全；抽样附真实锚点与已有 class",
+        "链轮：胶囊 AABB 防重叠；力导向间距略收；序号点后去掉空格",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.17",
       "date": "2026-11-16",
       "title": "Yandex 站长平台 MVP + 必应绑定修正",
