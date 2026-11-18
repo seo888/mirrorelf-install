@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.20",
+      "date": "2026-11-18",
+      "title": "链轮半球标签 + 建站反模板味",
+      "notes": [
+        "链轮 3D：面向相机的半球标签显示、背面隐藏；启动页只保留 Logo 与 MirrorElf 标题",
+        "design-taste-frontend 收成静态站版：5 行方向 + 版式 Design Read、换名测试；website-static DIY 收口写法，generate skill 不再写正文锚链/设计细则",
+        "website_static_audit 新增 slop_* 模板味 warn（渐变字/紫渐变/transition:all/循环动画/口号词等），不挡 pass",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.19",
       "date": "2026-11-18",
       "title": "链轮 3D 箭镞与投影文案",
