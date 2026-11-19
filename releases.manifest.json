@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.21",
+      "date": "2026-11-20",
+      "title": "多节点友链 Agent 写库 + 探测标题铁律",
+      "notes": [
+        "友链优化多节点：入队带 fleetHosts；Agent 用 fleet_host_id 读写远程站 friend_links（token 不进模型）",
+        "探测与本页分析对齐：须比对 conf 标题；页面 title 为空或 conf 标题为空一律不算正常",
+        "任务合页：友链优化进行中进度只显示一处，避免域名行与 meta 重复",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.20",
       "date": "2026-11-18",
       "title": "链轮半球标签 + 建站反模板味",
