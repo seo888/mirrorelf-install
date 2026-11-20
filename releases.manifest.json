@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.24",
+      "date": "2026-11-21",
+      "title": "备份按站点类型筛选 + 友链位置自动生成 + MCP 补齐",
+      "notes": [
+        "备份还原：导出/还原分段；站点类型芯片（所有站点/镜像/单页/静态）带数量；左右分栏筛选",
+        "友链优化策略：写入友链段下增加「自动生成友链位置」；空 location/wrap 时先跑 Ai 生成再落库",
+        "MCP：backup page_modes、ai_cache kind、link_wheel_natural_placement、static_append / prompt_diy 等控制面工具",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.23",
       "date": "2026-11-21",
       "title": "友链自然植入默认化 + Ai 按钮尺寸统一",
