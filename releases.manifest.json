@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.22",
+      "date": "2026-11-20",
+      "title": "友链关系筛选对齐 + 外站可开关联视图",
+      "notes": [
+        "友链关系：所有站点/外部站点分段；镜像|静态|单页与友链|互链|单向|外部|孤岛|无友链可点筛；标题开关进站点列；芯片/徽章亮暗统一；外部节点可开关联视图",
+        "节点友链：顶栏筛选/统计与本站对齐；展开画布副标签底贴齐画布；外部行可展开关联",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.21",
       "date": "2026-11-20",
       "title": "多节点友链 Agent 写库 + 探测标题铁律",
