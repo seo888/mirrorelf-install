@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.23",
+      "date": "2026-11-21",
+      "title": "友链自然植入默认化 + Ai 按钮尺寸统一",
+      "notes": [
+        "友情链接：去掉固定/自然展示模式开关；未填插入位置/外层模板时按固定默认注入，输入框空态显示默认值",
+        "「Ai 生成友链位置」移到友链标题旁；Ai 工具条按钮统一 sect-ai-btn 尺寸并保留原有蓝色主按钮",
+        "批量操作增加 Ai 生成友链位置；登录日志 IP 下展示归属地",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.22",
       "date": "2026-11-20",
       "title": "友链关系筛选对齐 + 外站可开关联视图",
