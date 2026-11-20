@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.25",
+      "date": "2026-11-21",
+      "title": "友链优化入队 Agent 任务 + 策略库实读 + 禁止误建站",
+      "notes": [
+        "Ai 定时优化友链：定时/立即均入队 site_campaign，出现在 Agent 任务合页；开跑读策略库当前值（非 job.payload 快照）",
+        "友链落库：preserve_website_cache 禁止新建站；按 host_id 锚定节点；更新时强制保留 daily_append 等运维开关",
+        "定时任务表：名称旁齿轮打开策略窗；去掉多余「动作」列；名称完整展示",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.24",
       "date": "2026-11-21",
       "title": "备份按站点类型筛选 + 友链位置自动生成 + MCP 补齐",
