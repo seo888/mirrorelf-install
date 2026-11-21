@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.29",
+      "date": "2026-11-22",
+      "title": "静态站 Ai 生成入队 Agent 任务 + 看板同步流式窗",
+      "notes": [
+        "Website「Ai 生成静态网站」入队 site_campaign（taskKind=static_generate），与 Ai 建站同轨出现在 Agent 任务",
+        "确认后打开 Camp Live 流式窗（直播条/打开看板），列表星星按钮转圈同步工单状态",
+        "新增 POST /_api_/static_generate/enqueue；批量静态生成同样入队并打开看板",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.28",
       "date": "2026-11-22",
       "title": "修复 Agent gap_meta.json 坏 JSON 导致建站任务 panic 卡死",
