@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.27",
+      "date": "2026-11-21",
+      "title": "SERP/收录面包屑纠域 + 建站质检循环进度",
+      "notes": [
+        "SEO 情报 SERP：域名优先从面包屑解析（google.com/goto 不再误显示为 google.com）",
+        "收录追踪：首位前新增面包屑列；goto 链按面包屑判断是否首页",
+        "自动建站阶段条：按工具执行先后推进；建站↔质检循环箭头；审计未过回到建站；对话区按时间线展示",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.26",
       "date": "2026-11-21",
       "title": "静态站首页 TDK 对齐配置 + 词库分析核心词 + 友链探测标题比对",
