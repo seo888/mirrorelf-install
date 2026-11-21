@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.28",
+      "date": "2026-11-22",
+      "title": "修复 Agent gap_meta.json 坏 JSON 导致建站任务 panic 卡死",
+      "notes": [
+        "修复 src/agent/gap_meta.json 缺逗号：Worker 列工具时 panic，自动建站/对话建站表现为一直卡在「注册」",
+        "gap_meta / gap_schemas 解析失败改为降级空表并打错误日志，避免拖死全部 Agent 任务",
+        "补齐友链优化入队 / 静态加文 / Prompt DIY 写工具的 risk 与摘要元数据"
+      ]
+    },
+    {
       "version": "0.12.27",
       "date": "2026-11-21",
       "title": "SERP/收录面包屑纠域 + 建站质检循环进度",
