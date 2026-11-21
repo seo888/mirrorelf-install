@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.26",
+      "date": "2026-11-21",
+      "title": "静态站首页 TDK 对齐配置 + 词库分析核心词 + 友链探测标题比对",
+      "notes": [
+        "静态站：website-static-generate / 审计要求首页 title/keywords/description 与 conf.website_info 原样一致（home_tdk_mismatch）",
+        "词库分析：关键词/核心词分段（核心词=各站 keywords 首词）；筛选改为精确匹配关键词",
+        "友链优化探测：禁止 message 文案兜底；API success 且 conf 与页面 title 完全一致才可用；domains 缺 title 时从库补全",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.25",
       "date": "2026-11-21",
       "title": "友链优化入队 Agent 任务 + 策略库实读 + 禁止误建站",
