@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.31",
+      "date": "2026-11-23",
+      "title": "Prompt DIY 改名/新建体验 + 静态站审计反馈",
+      "notes": [
+        "Prompt DIY：自定义模板选中后再点名称行内改名（下划线编辑）；PATCH 重命名并同步启用池",
+        "Prompt DIY：新建默认「自定义N」、从当前提示词复制并 Ai 改写（优化/微调/完全重写预设）；「+」与「参与生成」样式统一",
+        "静态站审计：侧栏链接计数与失败说明更清晰；home_blocks_few 允许带 role 的分区容器",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.30",
       "date": "2026-11-23",
       "title": "检查历史友链 + 友链页卡死修复 + 分隔/样式默认值",
