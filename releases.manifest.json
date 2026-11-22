@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.30",
+      "date": "2026-11-23",
+      "title": "检查历史友链 + 友链页卡死修复 + 分隔/样式默认值",
+      "notes": [
+        "优化策略新增「检查历史友链」：探测正常后校验友链锚文本/title 与目标站 TDK，过期锚链落库时刷新为当前标题",
+        "修复友情链接页 $derived 内写 store（state_unsafe_mutation）导致栏目/登录卡死；策略说明改用统一 data-ui-tip",
+        "节点友链标题移到本站/外站筛选前并优化样式；舰队表模式徽章与本机表对齐",
+        "友链分隔默认改为 \\n；样式空时默认「title 属性[关键词]+第一个关键词」；Config 空字段用 placeholder 展示默认值",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.29",
       "date": "2026-11-22",
       "title": "静态站 Ai 生成入队 Agent 任务 + 看板同步流式窗",
