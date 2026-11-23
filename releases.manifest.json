@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.32",
+      "date": "2026-11-23",
+      "title": "建站工具卡死根治 + AI 探测超时 + Agent 端点叙述",
+      "notes": [
+        "建站 Agent：file_str_replace / file_read 等盘 IO 改 spawn_blocking，写工具 60s 硬超时不再重试，避免同步读盘拖死任务",
+        "建站安全网：运行中工具步骤超过约 25 分钟无进度自动失败并封口；取消时一并封口 crew 嵌套 agent",
+        "AI 模型「检测」：后端探测与前端 Abort 加超时，避免一直转圈；Agent 叙述展示实际调用端点",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.31",
       "date": "2026-11-23",
       "title": "Prompt DIY 改名/新建体验 + 静态站审计反馈",
