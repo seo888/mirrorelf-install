@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.33",
+      "date": "2026-11-23",
+      "title": "建站直播跟帖修复 + 未完成工作流不再假完成",
+      "notes": [
+        "Ai 对话建站直播：compose 发送改为工单 follow_up（不再误走 SSE）；执行中可停止工单，完成后可跟帖续跑",
+        "建站收尾：静态审计未通过或 DNS/Cloudflare 仍 pending 时不再标成完成，改为失败并提示跟帖",
+        "finalize_ok：无站点目录可复审时，若工具侧已报审计未通过则保持质检失败，避免假点亮",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.32",
       "date": "2026-11-23",
       "title": "建站工具卡死根治 + AI 探测超时 + Agent 端点叙述",
