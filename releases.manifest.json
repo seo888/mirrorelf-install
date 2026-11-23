@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.35",
+      "date": "2026-11-23",
+      "title": "跟帖续跑不再冲掉建站时间线",
+      "notes": [
+        "跟帖：flatten 优先用 crew.agent 完整时间线；仅 prompt 空壳不可 resume，避免「继续」只剩 expand 重开",
+        "写库：detail / detailArchive 按工具与阶段丰富度保留更完整一份，禁止短 JSON 盖掉历史备份",
+        "看板 / AiChat 直播：展示更丰富的 detailArchive；变短帧（含 ok）粘住上一屏",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.34",
       "date": "2026-11-23",
       "title": "建站进度防冲掉 + Worker 资源泄漏修补",
