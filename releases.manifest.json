@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.34",
+      "date": "2026-11-23",
+      "title": "建站进度防冲掉 + Worker 资源泄漏修补",
+      "notes": [
+        "建站：有进度时租约重领/失败回队改为跟帖续跑，禁止整站重开冲掉时间线；不完整收尾与跟帖成功均走终态 fail（no_retry）",
+        "领取：attempt 已满的 running 租约过期仍可重领，避免永久卡死",
+        "Worker：进度通道改 watch 只留最新帧；cancel 表 RAII 必清；跟帖不占新建站 active_runs，避免槽位误校正",
+        "前端：AiChat 卸载 abort 流；跟帖 mem 缓存与磁盘同上限；pending 会话 get 清理过期项",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.33",
       "date": "2026-11-23",
       "title": "建站直播跟帖修复 + 未完成工作流不再假完成",
