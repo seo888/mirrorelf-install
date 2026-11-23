@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.36",
+      "date": "2026-11-23",
+      "title": "AI 网关中断恢复自动续跑",
+      "notes": [
+        "建站 / 跟帖：AI 网关瞬时失败（请求失败、超时等）回 pending 自动续跑；有进度时按跟帖续跑，不整站冲掉时间线",
+        "跟帖瞬时失败：先清 followUpMessage 再入队，避免误判为终态；工作流 incomplete（DNS/CF/审计未完成）仍 no_retry",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.35",
       "date": "2026-11-23",
       "title": "跟帖续跑不再冲掉建站时间线",
