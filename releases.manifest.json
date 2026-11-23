@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.37",
+      "date": "2026-11-23",
+      "title": "Prompt DIY Agent Skills 可自建",
+      "notes": [
+        "Prompt DIY：Agent Skills 侧栏支持「+」新建自定义 Skill（prompt/agent/skills/<名>/SKILL.md）；官方项显示名称 +「官方」标签",
+        "Prompt DIY：Skill 隐藏应用范围与单文件提示条；名称与目录相同时不重复显示文件名",
+        "静态站审计放宽：首页模块≥4、栏目≥3；官方 website-static / design-taste / generate·append skill 文案同步",
+        "建站看板：finish_ok 同步清理 detailArchive，避免 Cloudflare「正在转入」粘住",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.36",
       "date": "2026-11-23",
       "title": "AI 网关中断恢复自动续跑",
