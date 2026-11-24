@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.39",
+      "date": "2026-11-24",
+      "title": "修复 Docker 健康检查导致生产启动失败",
+      "notes": [
+        "Docker HEALTHCHECK 改为探测 /_/admin/：原先 curl /robots.txt 在未配置 Host 时被 banlist 回 444，curl -f 失败 → 容器 unhealthy，Watchtower 换镜像后生产端无法稳定就绪",
+        "发版镜像关闭 provenance/sbom attestation，避免部分环境拉 OCI index（unknown/unknown）异常",
+        "Prompt DIY 0.12.38 能力保留"
+      ]
+    },
+    {
       "version": "0.12.38",
       "date": "2026-11-24",
       "title": "Prompt DIY 启用池与 Skill 改名",
