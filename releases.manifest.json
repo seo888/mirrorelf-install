@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.42",
+      "date": "2026-11-24",
+      "title": "静态站 DIY / Design Read 精简对齐",
+      "notes": [
+        "Prompt DIY website-static / design-taste：Design Read 去掉「与上站差异」空话，改为反模板要点；剔除与审计重复的门槛条文",
+        "website-static-generate 审计对照表与代码硬门槛对齐（含 pass 公式），便于一次过审",
+        "官方 DIY 预设 include_str 与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.41",
       "date": "2026-11-24",
       "title": "静态站审计对照表与代码对齐",
