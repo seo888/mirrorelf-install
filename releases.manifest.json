@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.41",
+      "date": "2026-11-24",
+      "title": "静态站审计对照表与代码对齐",
+      "notes": [
+        "website-static-generate：一次过审对照表与代码硬门槛对齐（首页分区≥4、categories≥3 等），并写明 pass 公式，便于 AI 第一次过审",
+        "website-static DIY / append 同步强调写站前按审计对照表自检",
+        "继承 0.12.40 entrypoint 冲突文件兼容"
+      ]
+    },
+    {
       "version": "0.12.40",
       "date": "2026-11-24",
       "title": "entrypoint 兼容误放的 skill 文件",
