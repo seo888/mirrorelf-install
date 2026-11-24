@@ -3,6 +3,15 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.40",
+      "date": "2026-11-24",
+      "title": "entrypoint 兼容误放的 skill 文件",
+      "notes": [
+        "修复：卷上若存在 prompt/agent/skills/<官方名> 文件（非目录），entrypoint mkdir 失败导致容器 Restarting(1)；同步官方 skill 前自动挪开冲突文件",
+        "继承 0.12.39：HEALTHCHECK 改探 /_/admin/；镜像关闭 provenance/sbom"
+      ]
+    },
+    {
       "version": "0.12.39",
       "date": "2026-11-24",
       "title": "修复 Docker 健康检查导致生产启动失败",
