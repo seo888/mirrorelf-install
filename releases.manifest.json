@@ -3,6 +3,18 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.38",
+      "date": "2026-11-24",
+      "title": "Prompt DIY 启用池与 Skill 改名",
+      "notes": [
+        "Prompt DIY：新建自定义模板后启用池仅保留该模板；圆点开关参与生成；禁止 button 嵌套导致前端挂掉",
+        "Prompt DIY：自建 Skill 可选中后再点改名；侧栏/标题统一显示 Skill 目录名；官方保留「官方」角标",
+        "静态站：DIY sticky 标明抽中的模板 id；自定义读失败不再静默回落官方种子；DIY 写明的 skills_load 名必须原样执行",
+        "Ai 改写全屏：右侧模型名与「处理中…」靠右对齐",
+        "Prompt DIY 官方稿继续 include_str 打进预设并与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.37",
       "date": "2026-11-23",
       "title": "Prompt DIY Agent Skills 可自建",
