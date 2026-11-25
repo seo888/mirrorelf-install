@@ -3,6 +3,16 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.43",
+      "date": "2026-11-25",
+      "title": "静态站参考仿站与运营开关",
+      "notes": [
+        "静态站 Ai 生成：参考模式 off/urls/search；web_search（核心词）+ web_page_inspect；首页优先，内页跟进 2～5",
+        "urls 已给参考站时禁止 web_search；search 结果每域一条并归一首页；Design Read 有参考时不 load 设计 skill",
+        "运营策略 / 入队确认：定时发文更新、自动获取参考站开关；官方 DIY 预设 include_str 与 admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.42",
       "date": "2026-11-24",
       "title": "静态站 DIY / Design Read 精简对齐",
