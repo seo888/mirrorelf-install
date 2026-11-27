@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.44",
+      "date": "2026-11-27",
+      "title": "网站管理合页与后台导航体验",
+      "notes": [
+        "网站管理合页：顶栏/侧栏直接切 站点列表·网站缓存·目标缓存·文章内容·CMS管理；旧 /website_cache、/articles 自动跳转",
+        "侧栏合页父项：已打开页签时切回并恢复记忆中的二级 view，不再强制落到第一个子项",
+        "站点列表工具栏：当前筛选芯片（含仅主站）+ 清除筛选；文件管理根目录单行；上传菜单左对齐；CMS 同步态居中",
+        "官方 Prompt DIY 预设继续 include_str 打进二进制，与 prompt/、admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.43",
       "date": "2026-11-25",
       "title": "静态站参考仿站与运营开关",
