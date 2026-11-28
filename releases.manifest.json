@@ -3,6 +3,17 @@
   "remote_manifest_url": "https://raw.githubusercontent.com/seo888/mirrorelf-install/main/releases.manifest.json",
   "releases": [
     {
+      "version": "0.12.45",
+      "date": "2026-11-28",
+      "title": "CMS/友链类型图标与后台列表体验",
+      "notes": [
+        "CMS 主题与泛目录列表样式对齐；路径叶子普通文本；嵌套站链展示站点类型色与模式图标",
+        "网站管理 / 友链轮 / SEO 情报 / 备份：站点类型含 CMS；模式分段与域名着色带图标",
+        "备份导出 page_modes 支持 cms；Ai Hub 合页导航",
+        "官方 Prompt DIY 预设继续 include_str 打进二进制，与 prompt/、admin-ui/prompt 同步"
+      ]
+    },
+    {
       "version": "0.12.44",
       "date": "2026-11-27",
       "title": "网站管理合页与后台导航体验",
